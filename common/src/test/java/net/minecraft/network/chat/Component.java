@@ -3,6 +3,10 @@ package net.minecraft.network.chat;
 import net.minecraft.ChatFormatting;
 
 public interface Component {
+    static MutableComponent empty() {
+        return new MutableComponent("");
+    }
+
     static MutableComponent literal(String text) {
         return new MutableComponent(text);
     }

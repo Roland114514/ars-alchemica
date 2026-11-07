@@ -11,9 +11,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 
 import java.util.ArrayList;
@@ -23,6 +26,7 @@ public abstract class Level implements LevelReader {
     public boolean isClientSide = false;
     private long gameTime = 0L;
     private final DamageSources damageSources = new DamageSources();
+    private final List<Entity> entities = new ArrayList<>();
 
     public boolean isClientSide() { return isClientSide; }
     public long getGameTime() { return gameTime; }
@@ -40,6 +44,21 @@ public abstract class Level implements LevelReader {
     @Override public boolean canSeeSky(BlockPos pos) { return true; }
     @Override public boolean hasChunkAt(BlockPos pos) { return true; }
 
+    @Override
+    public BlockEntity getBlockEntity(BlockPos pos) {
+        return null;
+    }
+
+    @Override
+    public BlockState getBlockState(BlockPos pos) {
+        return Blocks.AIR.defaultBlockState();
+    }
+
+    @Override
+    public FluidState getFluidState(BlockPos pos) {
+        return Fluids.EMPTY.defaultFluidState();
+    }
+
     public boolean setBlock(BlockPos pos, BlockState state, int flags) { return true; }
     public boolean setBlockAndUpdate(BlockPos pos, BlockState state) { return setBlock(pos, state, 3); }
     public boolean destroyBlock(BlockPos pos, boolean drop) { return true; }
@@ -47,7 +66,27 @@ public abstract class Level implements LevelReader {
     public void playSound(Player player, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch) {}
     public void sendBlockUpdated(BlockPos pos, BlockState oldState, BlockState newState, int flags) {}
 
+    public boolean addFreshEntity(Entity entity) {
+        if (entity != null) {
+            entity.level = this;
+            entities.add(entity);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
+
+    @SuppressWarnings("unchecked")
     public <T extends Entity> List<T> getEntitiesOfClass(Class<T> clazz, AABB aabb) {
-        return new ArrayList<>();
+        List<T> list = new ArrayList<>();
+        for (Entity e : entities) {
+            if (clazz.isInstance(e)) {
+                list.add((T) e);
+            }
+        }
+        return list;
     }
 }

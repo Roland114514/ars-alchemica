@@ -38,5 +38,30 @@
 
   "block.ars_alchemica.mortar": "黑曜石研磨石臼",
   "block.ars_alchemica.herb_press": "重型螺旋杠杆压榨台",
-  "block.ars_alchemica.drying_rack": "杉木通风风干架"
+  "block.ars_alchemica.drying_rack": "杉木通风风干架",
+
+  "item.ars_alchemica.alchemical_elixir": "复合炼金灵药",
+  "item.ars_alchemica.alchemical_incense": "炼金挥发熏香",
+  "item.ars_alchemica.blade_oil": "猎魔炼金剑油",
+
+  "toxicity.ars_alchemica.state.safe": "代谢平衡 (安全期)",
+  "toxicity.ars_alchemica.state.caution": "以太沉积 (警觉期)",
+  "toxicity.ars_alchemica.state.danger": "经脉淤毒 (中毒期)",
+  "toxicity.ars_alchemica.state.overdose": "灵质崩解 (毒性过载！)",
+
+  "tooltip.ars_alchemica.potion.inert": "惰性馏分（无活性以太源质）",
+  "tooltip.ars_alchemica.potion.purity": "灵药纯度：%s",
+  "tooltip.ars_alchemica.potion.toxicity": "毒性负荷：%s",
+
+  "tooltip.ars_alchemica.oil.bane.necrophage": "死灵与腐尸特攻（银刃灼烧）",
+  "tooltip.ars_alchemica.oil.bane.insectoid": "节肢与甲壳破除（神经麻痹）",
+  "tooltip.ars_alchemica.oil.bane.humanoid": "类人生物特攻（动脉流血）",
+  "tooltip.ars_alchemica.oil.bane.draconid": "龙裔与首领特攻（奥术穿透）",
+  "tooltip.ars_alchemica.oil.damage": "种群克制附加伤害：%s",
+  "tooltip.ars_alchemica.oil.charges": "剑油涂层次数：%s / %s 次命中",
+  "tooltip.ars_alchemica.weapon.coated": "已涂抹：%s (%s/%s)",
+
+  "message.ars_alchemica.oil.invalid_weapon": "请在另一只手中持有近战兵刃以涂抹剑油。",
+  "message.ars_alchemica.oil.applied": "已将炼金剑油均匀涂抹于 %s。",
+  "message.ars_alchemica.oil.depleted": "兵刃上的炼金剑油已消耗殆尽。"
 }

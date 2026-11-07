@@ -6,6 +6,12 @@ import java.util.Map;
 public class CompoundTag {
     private final Map<String, Object> tags = new HashMap<>();
 
+    public void putFloat(String key, float value) { tags.put(key, value); }
+    public float getFloat(String key) {
+        Object val = tags.get(key);
+        return val instanceof Number n ? n.floatValue() : 0.0f;
+    }
+
     public void putDouble(String key, double value) { tags.put(key, value); }
     public double getDouble(String key) {
         Object val = tags.get(key);
@@ -44,6 +50,7 @@ public class CompoundTag {
 
     public boolean contains(String key) { return tags.containsKey(key); }
     public boolean contains(String key, int tagType) { return tags.containsKey(key); }
+    public void remove(String key) { tags.remove(key); }
     public boolean isEmpty() { return tags.isEmpty(); }
 
     public CompoundTag copy() {

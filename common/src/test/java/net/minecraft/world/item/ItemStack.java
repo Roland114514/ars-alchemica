@@ -50,6 +50,22 @@ public class ItemStack {
     public int getCount() { return count; }
     public void setCount(int count) { this.count = count; }
 
+    public CompoundTag getTag() { return tag; }
+    public boolean hasTag() { return tag != null && !tag.isEmpty(); }
+
+    public CompoundTag getOrCreateTag() {
+        if (tag == null) tag = new CompoundTag();
+        return tag;
+    }
+
+    public void shrink(int amount) {
+        this.count = Math.max(0, this.count - amount);
+    }
+
+    public void grow(int amount) {
+        this.count += amount;
+    }
+
     public ItemStack copyWithCount(int count) {
         if (isEmpty()) return EMPTY;
         ItemStack copy = new ItemStack(this.item, count);

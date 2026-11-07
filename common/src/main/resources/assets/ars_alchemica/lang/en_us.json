@@ -38,5 +38,30 @@
 
   "block.ars_alchemica.mortar": "Obsidian Mortar",
   "block.ars_alchemica.herb_press": "Heavy Lever Herb Press",
-  "block.ars_alchemica.drying_rack": "Ventilated Drying Rack"
+  "block.ars_alchemica.drying_rack": "Ventilated Drying Rack",
+
+  "item.ars_alchemica.alchemical_elixir": "Alchemical Elixir",
+  "item.ars_alchemica.alchemical_incense": "Alchemical Incense",
+  "item.ars_alchemica.blade_oil": "Witcher's Blade Oil",
+
+  "toxicity.ars_alchemica.state.safe": "Metabolic Equilibrium (Safe)",
+  "toxicity.ars_alchemica.state.caution": "Aetherial Saturation (Caution)",
+  "toxicity.ars_alchemica.state.danger": "Alchemical Intoxication (Danger)",
+  "toxicity.ars_alchemica.state.overdose": "Systemic Collapse (Overdose!)",
+
+  "tooltip.ars_alchemica.potion.inert": "Inert Distillate (No Active Aspects)",
+  "tooltip.ars_alchemica.potion.purity": "Alchemical Purity: %s",
+  "tooltip.ars_alchemica.potion.toxicity": "Toxicity Load: %s",
+
+  "tooltip.ars_alchemica.oil.bane.necrophage": "Necrophage & Undead Bane",
+  "tooltip.ars_alchemica.oil.bane.insectoid": "Insectoid Carapace Breaker",
+  "tooltip.ars_alchemica.oil.bane.humanoid": "Humanoid Hemorrhage Toxin",
+  "tooltip.ars_alchemica.oil.bane.draconid": "Draconid & Arch-Entity Bane",
+  "tooltip.ars_alchemica.oil.damage": "Specialized Bane Damage: %s",
+  "tooltip.ars_alchemica.oil.charges": "Coating Durability: %s / %s Hits",
+  "tooltip.ars_alchemica.weapon.coated": "Coated: %s (%s/%s)",
+
+  "message.ars_alchemica.oil.invalid_weapon": "Hold a melee blade in your other hand to apply oil.",
+  "message.ars_alchemica.oil.applied": "Coated %s with Alchemical Blade Oil.",
+  "message.ars_alchemica.oil.depleted": "The alchemical oil on your blade has worn off."
 }
