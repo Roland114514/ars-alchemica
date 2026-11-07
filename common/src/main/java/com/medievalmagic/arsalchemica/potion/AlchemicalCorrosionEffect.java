@@ -1,7 +1,9 @@
 package com.medievalmagic.arsalchemica.potion;
 
 import com.medievalmagic.arsalchemica.api.toxicity.ToxicityThreshold;
+import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
@@ -29,7 +31,7 @@ public class AlchemicalCorrosionEffect extends MobEffect {
     public static final int CORROSION_COLOR = 0x3A0E4C; // 暗夜以太暗紫带幽绿偏光
 
     public AlchemicalCorrosionEffect() {
-        super(EffectCategory.HARMFUL, CORROSION_COLOR);
+        super(MobEffectCategory.HARMFUL, CORROSION_COLOR);
     }
 
     @Override
@@ -47,15 +49,18 @@ public class AlchemicalCorrosionEffect extends MobEffect {
         // 伤害梯度：基础 1.0f (半颗心)，每级增幅 +0.5f
         float damage = 1.0f + (amplifier * 0.5f);
 
+        DamageSource source = AlchemicalDamageSources.corrosion(entity.level());
+        if (source == null) return;
+
         if (!isLethal) {
             // 常规中毒模仿：保留最后 1.0 点生命值（半颗心）
             if (entity.getHealth() > 1.0f) {
                 float safeDamage = Math.min(damage, entity.getHealth() - 1.0f);
-                entity.hurt(AlchemicalDamageSources.corrosion(entity.level()), safeDamage);
+                entity.hurt(source, safeDamage);
             }
         } else {
             // 毒性过载 / 高阶毒蚀：直击本源，致死反噬
-            entity.hurt(AlchemicalDamageSources.corrosion(entity.level()), damage);
+            entity.hurt(source, damage);
         }
     }
 

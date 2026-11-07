@@ -14,8 +14,8 @@ public class MobEffect {
         this.descriptionId = descriptionId;
     }
 
-    public MobEffect(EffectCategory category, int color) {
-        this.beneficial = (category == EffectCategory.BENEFICIAL);
+    public MobEffect(MobEffectCategory category, int color) {
+        this.beneficial = (category == MobEffectCategory.BENEFICIAL);
         this.color = color;
         this.descriptionId = "effect.ars_alchemica.custom";
     }

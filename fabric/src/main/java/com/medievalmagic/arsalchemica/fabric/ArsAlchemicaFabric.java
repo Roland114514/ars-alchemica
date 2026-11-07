@@ -21,6 +21,7 @@ import com.medievalmagic.arsalchemica.registry.ModBlocks;
 import com.medievalmagic.arsalchemica.registry.ModEffects;
 import com.medievalmagic.arsalchemica.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.BlockItem;
@@ -126,8 +127,11 @@ public class ArsAlchemicaFabric implements ModInitializer {
         );
 
         // --- 4. Block Entities 注册 ---
-        BlockEntityType<AlchemicalCauldronBlockEntity> cauldronBe = (BlockEntityType<AlchemicalCauldronBlockEntity>) (Object) new BlockEntityType<>();
-        Registry.register(BuiltInRegistries.BLOCK_ENTITY_TYPE, ArsAlchemica.id("alchemical_cauldron"), cauldronBe);
+        BlockEntityType<AlchemicalCauldronBlockEntity> cauldronBe = Registry.register(
+                BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                ArsAlchemica.id("alchemical_cauldron"),
+                FabricBlockEntityTypeBuilder.create(AlchemicalCauldronBlockEntity::new, cauldronBlock).build()
+        );
 
         // --- 5. MobEffects 注册 ---
         AlchemicalCorrosionEffect corrosionEffect = Registry.register(

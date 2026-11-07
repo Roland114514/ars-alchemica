@@ -1,12 +1,13 @@
 plugins {
-    id 'java-library'
+    id 'fabric-loom'
 }
 
 dependencies {
-    // Pure common dependencies - platform agnostic
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.0'
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modCompileOnly "net.fabricmc:fabric-loader:0.15.11"
 }
 
-test {
-    useJUnitPlatform()
+loom {
+    splitEnvironmentSourceSets()
 }

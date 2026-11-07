@@ -23,6 +23,6 @@ public final class AlchemicalDamageSources {
         if (level != null && level.damageSources() != null) {
             return level.damageSources().magic();
         }
-        return new DamageSource();
+        return null;
     }
 }

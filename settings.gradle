@@ -1,5 +1,9 @@
 pluginManagement {
     repositories {
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
         mavenCentral()
         gradlePluginPortal()
     }
@@ -7,4 +11,5 @@ pluginManagement {
 
 rootProject.name = 'ars_alchemica'
 include 'common'
+include 'fabric'
 include 'forge'
