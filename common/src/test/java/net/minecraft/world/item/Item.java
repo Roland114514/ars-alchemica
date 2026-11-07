@@ -45,5 +45,15 @@ public class Item {
     }
 
     public static class Properties {
+        private int maxStackSize = 64;
+
+        public Properties stacksTo(int maxStackSize) {
+            this.maxStackSize = maxStackSize;
+            return this;
+        }
+
+        public int getMaxStackSize() {
+            return maxStackSize;
+        }
     }
 }

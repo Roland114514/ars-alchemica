@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "ars_alchemica",
+  "version": "0.6.0",
+  "name": "Ars Alchemica",
+  "description": "A large dark medieval magic and alchemy mod featuring 12-dimensional aetheric vectors, alchemical cauldron physics, herbalism, and lost ancient relics.",
+  "authors": [
+    "MedievalMagic Team"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Roland114514/ars-alchemica",
+    "sources": "https://github.com/Roland114514/ars-alchemica",
+    "issues": "https://github.com/Roland114514/ars-alchemica/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/ars_alchemica/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.medievalmagic.arsalchemica.fabric.ArsAlchemicaFabric"
+    ],
+    "client": [
+      "com.medievalmagic.arsalchemica.fabric.client.ArsAlchemicaFabricClient"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.21",
+    "minecraft": "~1.20.1",
+    "java": ">=17"
+  }
+}

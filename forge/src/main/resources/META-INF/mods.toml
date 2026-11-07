@@ -1,0 +1,31 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="MIT"
+issueTrackerURL="https://github.com/Roland114514/ars-alchemica/issues"
+
+[[mods]]
+modId="ars_alchemica"
+version="0.6.0"
+displayName="Ars Alchemica"
+updateJSONURL="https://raw.githubusercontent.com/Roland114514/ars-alchemica/main/update.json"
+displayURL="https://github.com/Roland114514/ars-alchemica"
+logoFile="assets/ars_alchemica/icon.png"
+credits="Created with love for dark fantasy magic and alchemical immersion."
+authors="MedievalMagic Team"
+description='''
+A large dark medieval magic and alchemy mod featuring 12-dimensional aetheric vectors, alchemical cauldron physics, herbalism, and lost ancient relics.
+'''
+
+[[dependencies.ars_alchemica]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.ars_alchemica]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
