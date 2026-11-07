@@ -30,6 +30,12 @@ public class CompoundTag {
         return val instanceof Boolean b && b;
     }
 
+    public void putIntArray(String key, int[] array) { tags.put(key, array); }
+    public int[] getIntArray(String key) {
+        Object val = tags.get(key);
+        return val instanceof int[] arr ? arr : new int[0];
+    }
+
     public void put(String key, CompoundTag tag) { tags.put(key, tag); }
     public CompoundTag getCompound(String key) {
         Object val = tags.get(key);
@@ -37,5 +43,18 @@ public class CompoundTag {
     }
 
     public boolean contains(String key) { return tags.containsKey(key); }
+    public boolean contains(String key, int tagType) { return tags.containsKey(key); }
     public boolean isEmpty() { return tags.isEmpty(); }
+
+    public CompoundTag copy() {
+        CompoundTag copy = new CompoundTag();
+        for (Map.Entry<String, Object> entry : tags.entrySet()) {
+            if (entry.getValue() instanceof CompoundTag ct) {
+                copy.tags.put(entry.getKey(), ct.copy());
+            } else {
+                copy.tags.put(entry.getKey(), entry.getValue());
+            }
+        }
+        return copy;
+    }
 }

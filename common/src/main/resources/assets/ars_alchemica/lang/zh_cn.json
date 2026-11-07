@@ -1,0 +1,42 @@
+{
+  "itemGroup.ars_alchemica.main": "深奥炼金：草药与秘术",
+
+  "aspect.ars_alchemica.ignis": "火之相 (Ignis)",
+  "aspect.ars_alchemica.aqua": "水之相 (Aqua)",
+  "aspect.ars_alchemica.terra": "地之相 (Terra)",
+  "aspect.ars_alchemica.aer": "风之相 (Aer)",
+  "aspect.ars_alchemica.sulfur": "原质·硫 (Sulfur)",
+  "aspect.ars_alchemica.mercurius": "原质·汞 (Mercurius)",
+  "aspect.ars_alchemica.sal": "原质·盐 (Sal)",
+  "aspect.ars_alchemica.aether": "星界以太 (Aether)",
+  "aspect.ars_alchemica.vita": "生机律动 (Vita)",
+  "aspect.ars_alchemica.mortis": "死寂凋零 (Mortis)",
+  "aspect.ars_alchemica.ordo": "恒常秩序 (Ordo)",
+  "aspect.ars_alchemica.chaos": "熵增混沌 (Chaos)",
+
+  "herb.ars_alchemica.cinder_thistle": "灰烬血蓟",
+  "herb.ars_alchemica.abyssal_lumina_mint": "深渊幽光薄荷",
+  "herb.ars_alchemica.screaming_mandragora": "哀嚎曼陀罗",
+  "herb.ars_alchemica.frostvein_orchid": "凝霜幽兰",
+  "herb.ars_alchemica.moonveil_belladonna": "月影颠茄",
+  "herb.ars_alchemica.carrion_bogmoss": "腐水食腐苔",
+  "herb.ars_alchemica.storm_marigold": "避雷金盏花",
+
+  "item.ars_alchemica.herb_form.raw": "%s (新鲜采摘)",
+  "item.ars_alchemica.herb_form.milled_coarse": "%s 粗粉",
+  "item.ars_alchemica.herb_form.milled_fine": "%s 超细微粉",
+  "item.ars_alchemica.herb_form.pressed_oil": "%s 浓缩精油",
+  "item.ars_alchemica.herb_form.dried": "%s (阴干标本)",
+  "item.ars_alchemica.charred_slag": "碳化药渣",
+
+  "tooltip.ars_alchemica.form.raw": "原生形态：未经处理的自然鲜草，保持原始活性与水分。",
+  "tooltip.ars_alchemica.form.milled_coarse": "粗磨颗粒：经石臼捣碎破坏细胞壁，元素挥发加快。",
+  "tooltip.ars_alchemica.form.milled_fine": "超细微粉：粒径极小，比表面积大，溶解极为迅速。",
+  "tooltip.ars_alchemica.form.pressed_oil": "浓缩精油：冷压萃取的脂溶性精华，极适合用于调制剑油。",
+  "tooltip.ars_alchemica.form.dried": "阴干标本：脱水除杂后的草药，性质温和且挥发性大幅降低。",
+  "tooltip.ars_alchemica.herb.dew_inherited": "✦ 晨露精粹加成 (+15% 纯度)",
+
+  "block.ars_alchemica.mortar": "黑曜石研磨石臼",
+  "block.ars_alchemica.herb_press": "重型螺旋杠杆压榨台",
+  "block.ars_alchemica.drying_rack": "杉木通风风干架"
+}

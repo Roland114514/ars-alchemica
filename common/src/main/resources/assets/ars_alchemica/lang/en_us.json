@@ -1,0 +1,42 @@
+{
+  "itemGroup.ars_alchemica.main": "Ars Alchemica: Herbology & Arcana",
+
+  "aspect.ars_alchemica.ignis": "Ignis (Fire)",
+  "aspect.ars_alchemica.aqua": "Aqua (Water)",
+  "aspect.ars_alchemica.terra": "Terra (Earth)",
+  "aspect.ars_alchemica.aer": "Aer (Air)",
+  "aspect.ars_alchemica.sulfur": "Sulfur (Brimstone)",
+  "aspect.ars_alchemica.mercurius": "Mercurius (Quicksilver)",
+  "aspect.ars_alchemica.sal": "Sal (Salt)",
+  "aspect.ars_alchemica.aether": "Aether (Quintessence)",
+  "aspect.ars_alchemica.vita": "Vita (Life)",
+  "aspect.ars_alchemica.mortis": "Mortis (Death)",
+  "aspect.ars_alchemica.ordo": "Ordo (Order)",
+  "aspect.ars_alchemica.chaos": "Chaos (Entropy)",
+
+  "herb.ars_alchemica.cinder_thistle": "Cinder Thistle",
+  "herb.ars_alchemica.abyssal_lumina_mint": "Abyssal Lumina Mint",
+  "herb.ars_alchemica.screaming_mandragora": "Screaming Mandragora",
+  "herb.ars_alchemica.frostvein_orchid": "Frostvein Orchid",
+  "herb.ars_alchemica.moonveil_belladonna": "Moonveil Belladonna",
+  "herb.ars_alchemica.carrion_bogmoss": "Carrion Bogmoss",
+  "herb.ars_alchemica.storm_marigold": "Storm Marigold",
+
+  "item.ars_alchemica.herb_form.raw": "%s (Fresh)",
+  "item.ars_alchemica.herb_form.milled_coarse": "%s Coarse Powder",
+  "item.ars_alchemica.herb_form.milled_fine": "%s Fine Dust",
+  "item.ars_alchemica.herb_form.pressed_oil": "%s Essential Oil",
+  "item.ars_alchemica.herb_form.dried": "%s (Dried)",
+  "item.ars_alchemica.charred_slag": "Charred Alchemical Slag",
+
+  "tooltip.ars_alchemica.form.raw": "Raw form: freshly harvested, high moisture, volatile.",
+  "tooltip.ars_alchemica.form.milled_coarse": "Coarsely ground: ruptured cell walls, increased dispersion rate.",
+  "tooltip.ars_alchemica.form.milled_fine": "Fine dust: maximum surface area, instant dissolution.",
+  "tooltip.ars_alchemica.form.pressed_oil": "Cold-pressed essential oil: concentrated lipid essence, ideal for blade oils.",
+  "tooltip.ars_alchemica.form.dried": "Dried specimen: dehydrated, low volatility, long-term preservation.",
+  "tooltip.ars_alchemica.herb.dew_inherited": "✦ Morning Dew Bonus (+15% Purity)",
+
+  "block.ars_alchemica.mortar": "Obsidian Mortar",
+  "block.ars_alchemica.herb_press": "Heavy Lever Herb Press",
+  "block.ars_alchemica.drying_rack": "Ventilated Drying Rack"
+}
