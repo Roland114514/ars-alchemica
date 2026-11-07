@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ars_alchemica:block/cinder_thistle"
+      }
+    }
+  ]
+}

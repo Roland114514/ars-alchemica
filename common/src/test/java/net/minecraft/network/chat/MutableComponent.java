@@ -15,6 +15,10 @@ public class MutableComponent implements Component {
         return this;
     }
 
+    public MutableComponent withStyle(ChatFormatting formatting) {
+        return this;
+    }
+
     public MutableComponent withStyle(ChatFormatting... formattings) {
         return this;
     }

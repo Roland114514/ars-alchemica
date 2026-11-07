@@ -120,6 +120,21 @@ public abstract class AlchemicalHerbBlock extends BushBlock {
         }
 
         @Override
+        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+            return super.mayPlaceOn(state, level, pos)
+                    || state.is(Blocks.NETHERRACK)
+                    || state.is(Blocks.SOUL_SAND)
+                    || state.is(Blocks.SOUL_SOIL)
+                    || state.is(Blocks.BLACKSTONE)
+                    || state.is(Blocks.BASALT)
+                    || state.is(Blocks.CRIMSON_NYLIUM)
+                    || state.is(Blocks.WARPED_NYLIUM)
+                    || state.is(Blocks.SAND)
+                    || state.is(Blocks.RED_SAND)
+                    || state.is(Blocks.TERRACOTTA);
+        }
+
+        @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
             if (entity instanceof LivingEntity living && !entity.fireImmune()) {
                 living.setSecondsOnFire(4);
@@ -321,7 +336,7 @@ public abstract class AlchemicalHerbBlock extends BushBlock {
             FluidState fluidState = level.getFluidState(pos);
             FluidState fluidAbove = level.getFluidState(pos.above());
             boolean isStillWater = fluidState.getType() == Fluids.WATER && fluidAbove.getType() == Fluids.EMPTY;
-            return isStillWater || state.is(Blocks.MUD) || state.is(Blocks.MUDDY_MANGROVE_ROOTS);
+            return super.mayPlaceOn(state, level, pos) || isStillWater || state.is(Blocks.MUD) || state.is(Blocks.MUDDY_MANGROVE_ROOTS) || state.is(Blocks.CLAY);
         }
 
         @Override
@@ -349,6 +364,16 @@ public abstract class AlchemicalHerbBlock extends BushBlock {
         public StormMarigoldBlock(Properties properties) {
             super(properties.lightLevel(state -> state.getValue(CHARGED) ? 10 : 0), () -> HerbRegistry.STORM_MARIGOLD);
             this.registerDefaultState(this.defaultBlockState().setValue(CHARGED, false));
+        }
+
+        @Override
+        protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+            return super.mayPlaceOn(state, level, pos)
+                    || state.is(Blocks.STONE)
+                    || state.is(Blocks.ANDESITE)
+                    || state.is(Blocks.DIORITE)
+                    || state.is(Blocks.GRANITE)
+                    || state.is(Blocks.GRAVEL);
         }
 
         @Override

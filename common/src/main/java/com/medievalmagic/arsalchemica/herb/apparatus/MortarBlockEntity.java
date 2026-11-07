@@ -2,7 +2,10 @@ package com.medievalmagic.arsalchemica.herb.apparatus;
 
 import com.medievalmagic.arsalchemica.herb.HerbRegistry;
 import com.medievalmagic.arsalchemica.herb.IAlchemicalHerb.ProcessingForm;
+import com.medievalmagic.arsalchemica.herb.item.AlchemicalHerbItem;
 import com.medievalmagic.arsalchemica.registry.ModBlockEntities;
+import com.medievalmagic.arsalchemica.registry.ModItems;
+import net.minecraft.world.item.Item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -58,6 +61,9 @@ public class MortarBlockEntity extends BlockEntity {
             ProcessingForm form = herbItem.getForm(stack);
             return form == ProcessingForm.RAW || form == ProcessingForm.DRIED || form == ProcessingForm.MILLED_COARSE;
         }
+        if (stack.getItem() instanceof AlchemicalHerbItem) {
+            return true;
+        }
         return false;
     }
 
@@ -103,11 +109,24 @@ public class MortarBlockEntity extends BlockEntity {
         if (Math.abs(gameTime - this.lastGrindTick) < 4L) return false; // 0.2s 物理冷却
         this.lastGrindTick = gameTime;
 
-        if (!(this.content.getItem() instanceof ProcessedHerbItem herbItem)) return false;
+        HerbRegistry herb;
+        double baseQuality;
+        Item targetItem;
+        boolean isSlag = false;
+        if (this.content.getItem() instanceof ProcessedHerbItem herbItem) {
+            herb = herbItem.getHerb(this.content);
+            baseQuality = herbItem.getQuality(this.content);
+            targetItem = herbItem;
+            isSlag = herbItem.isSlag(this.content);
+        } else if (this.content.getItem() instanceof AlchemicalHerbItem herbBlockItem) {
+            herb = herbBlockItem.getHerb();
+            baseQuality = 1.0;
+            targetItem = ModItems.getProcessedHerb() != null ? ModItems.getProcessedHerb() : this.content.getItem();
+        } else {
+            return false;
+        }
 
         this.grindCount++;
-        HerbRegistry herb = herbItem.getHerb(this.content);
-        double baseQuality = herbItem.getQuality(this.content);
 
         ServerLevel serverLevel = (ServerLevel) this.level;
         double px = this.worldPosition.getX() + 0.5D;
@@ -121,20 +140,20 @@ public class MortarBlockEntity extends BlockEntity {
 
         if (this.grindCount >= 1 && this.grindCount <= 3) {
             double progressBonus = 0.90 + (this.grindCount * 0.04);
-            this.content = ProcessedHerbItem.create(herbItem, herb, ProcessingForm.MILLED_COARSE, baseQuality * progressBonus);
+            this.content = ProcessedHerbItem.create(targetItem, herb, ProcessingForm.MILLED_COARSE, baseQuality * progressBonus);
 
         } else if (this.grindCount >= 4 && this.grindCount <= 6) {
             double fineBonus = 1.0 + ((this.grindCount - 4) * 0.05);
-            this.content = ProcessedHerbItem.create(herbItem, herb, ProcessingForm.MILLED_FINE, baseQuality * fineBonus);
+            this.content = ProcessedHerbItem.create(targetItem, herb, ProcessingForm.MILLED_FINE, baseQuality * fineBonus);
             serverLevel.sendParticles(ParticleTypes.HAPPY_VILLAGER, px, py + 0.1D, pz, 2, 0.1D, 0.05D, 0.1D, 0.0D);
 
         } else if (this.grindCount == 7 || this.grindCount == 8) {
-            this.content = ProcessedHerbItem.create(herbItem, herb, ProcessingForm.MILLED_FINE, baseQuality * 0.75);
+            this.content = ProcessedHerbItem.create(targetItem, herb, ProcessingForm.MILLED_FINE, baseQuality * 0.75);
             serverLevel.sendParticles(ParticleTypes.SMOKE, px, py + 0.1D, pz, 6, 0.08D, 0.05D, 0.08D, 0.01D);
 
         } else if (this.grindCount > 8) {
-            if (!herbItem.isSlag(this.content)) {
-                this.content = ProcessedHerbItem.createSlag(herbItem, herb);
+            if (!isSlag) {
+                this.content = ProcessedHerbItem.createSlag(targetItem, herb);
                 serverLevel.sendParticles(ParticleTypes.LARGE_SMOKE, px, py + 0.1D, pz, 15, 0.15D, 0.1D, 0.15D, 0.02D);
                 serverLevel.playSound(null, this.worldPosition, SoundEvents.GENERIC_BURN, SoundSource.BLOCKS, 0.9f, 0.8f);
             }

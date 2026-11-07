@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.state.properties.Property;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StateDefinition<O, S> {
+public class StateDefinition<O, S extends StateHolder<O, S>> {
     private final S any;
 
     public StateDefinition(S any) {

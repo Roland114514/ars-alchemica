@@ -4,6 +4,8 @@ import com.medievalmagic.arsalchemica.cauldron.AlchemicalStirringRodItem;
 import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSlagItem;
 import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSludgeItem;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
+import com.medievalmagic.arsalchemica.herb.apparatus.ProcessedHerbItem;
+import com.medievalmagic.arsalchemica.herb.item.AlchemicalHerbItem;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
 import com.medievalmagic.arsalchemica.recipe.item.AncientParchmentItem;
@@ -37,6 +39,38 @@ public final class ModItems {
     private static Supplier<ScholiaFragmentItem> SCHOLIA_FRAGMENT = () -> null;
     private static Supplier<AlchemicalSlagItem> SLAG = () -> null;
     private static Supplier<AlchemicalSludgeItem> SLUDGE = () -> null;
+
+    // 7 大草药植株物品
+    private static Supplier<AlchemicalHerbItem> CINDER_THISTLE = () -> null;
+    private static Supplier<AlchemicalHerbItem> FROSTVEIN_ORCHID = () -> null;
+    private static Supplier<AlchemicalHerbItem> STORM_MARIGOLD = () -> null;
+    private static Supplier<AlchemicalHerbItem> ABYSSAL_LUMINA_MINT = () -> null;
+    private static Supplier<AlchemicalHerbItem> SCREAMING_MANDRAGORA = () -> null;
+    private static Supplier<AlchemicalHerbItem> MOONVEIL_BELLADONNA = () -> null;
+    private static Supplier<AlchemicalHerbItem> CARRION_BOGMOSS = () -> null;
+
+    // 统一草药加工产物载体
+    private static Supplier<ProcessedHerbItem> PROCESSED_HERB = () -> null;
+
+    public static void bindHerbs(
+            Supplier<AlchemicalHerbItem> cinderThistle,
+            Supplier<AlchemicalHerbItem> frostveinOrchid,
+            Supplier<AlchemicalHerbItem> stormMarigold,
+            Supplier<AlchemicalHerbItem> abyssalMint,
+            Supplier<AlchemicalHerbItem> mandragora,
+            Supplier<AlchemicalHerbItem> belladonna,
+            Supplier<AlchemicalHerbItem> bogmoss,
+            Supplier<ProcessedHerbItem> processedHerb
+    ) {
+        CINDER_THISTLE = Objects.requireNonNull(cinderThistle, "Cinder thistle item supplier cannot be null");
+        FROSTVEIN_ORCHID = Objects.requireNonNull(frostveinOrchid, "Frostvein orchid item supplier cannot be null");
+        STORM_MARIGOLD = Objects.requireNonNull(stormMarigold, "Storm marigold item supplier cannot be null");
+        ABYSSAL_LUMINA_MINT = Objects.requireNonNull(abyssalMint, "Abyssal mint item supplier cannot be null");
+        SCREAMING_MANDRAGORA = Objects.requireNonNull(mandragora, "Mandragora item supplier cannot be null");
+        MOONVEIL_BELLADONNA = Objects.requireNonNull(belladonna, "Belladonna item supplier cannot be null");
+        CARRION_BOGMOSS = Objects.requireNonNull(bogmoss, "Bogmoss item supplier cannot be null");
+        PROCESSED_HERB = Objects.requireNonNull(processedHerb, "Processed herb item supplier cannot be null");
+    }
 
     public static void bindPotions(
             Supplier<AlchemicalPotionItem> elixirSupplier,
@@ -113,4 +147,13 @@ public final class ModItems {
     public static AlchemicalSludgeItem getSludge() {
         return SLUDGE.get();
     }
+
+    public static AlchemicalHerbItem getCinderThistle() { return CINDER_THISTLE.get(); }
+    public static AlchemicalHerbItem getFrostveinOrchid() { return FROSTVEIN_ORCHID.get(); }
+    public static AlchemicalHerbItem getStormMarigold() { return STORM_MARIGOLD.get(); }
+    public static AlchemicalHerbItem getAbyssalLuminaMint() { return ABYSSAL_LUMINA_MINT.get(); }
+    public static AlchemicalHerbItem getScreamingMandragora() { return SCREAMING_MANDRAGORA.get(); }
+    public static AlchemicalHerbItem getMoonveilBelladonna() { return MOONVEIL_BELLADONNA.get(); }
+    public static AlchemicalHerbItem getCarrionBogmoss() { return CARRION_BOGMOSS.get(); }
+    public static ProcessedHerbItem getProcessedHerb() { return PROCESSED_HERB.get(); }
 }

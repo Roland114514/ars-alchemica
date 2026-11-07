@@ -71,7 +71,9 @@ public abstract class Level implements LevelReader {
     public void playSound(Player player, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch) {}
     public void sendBlockUpdated(BlockPos pos, BlockState oldState, BlockState newState, int flags) {}
 
-    public void explode(Entity source, double x, double y, double z, float radius, ExplosionInteraction interaction) {}
+    public Explosion explode(Entity source, double x, double y, double z, float radius, ExplosionInteraction interaction) {
+        return new Explosion();
+    }
 
     public boolean addFreshEntity(Entity entity) {
         if (entity != null) {

@@ -2,7 +2,10 @@ package com.medievalmagic.arsalchemica.herb.apparatus;
 
 import com.medievalmagic.arsalchemica.herb.HerbRegistry;
 import com.medievalmagic.arsalchemica.herb.IAlchemicalHerb.ProcessingForm;
+import com.medievalmagic.arsalchemica.herb.item.AlchemicalHerbItem;
 import com.medievalmagic.arsalchemica.registry.ModBlockEntities;
+import com.medievalmagic.arsalchemica.registry.ModItems;
+import net.minecraft.world.item.Item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -49,8 +52,11 @@ public class DryingRackBlockEntity extends BlockEntity {
     }
 
     public boolean canHangHerb(ItemStack stack) {
-        if (!(stack.getItem() instanceof ProcessedHerbItem herbItem)) return false;
-        if (herbItem.isSlag(stack) || herbItem.getForm(stack) != ProcessingForm.RAW) return false;
+        if (stack.getItem() instanceof ProcessedHerbItem herbItem) {
+            if (herbItem.isSlag(stack) || herbItem.getForm(stack) != ProcessingForm.RAW) return false;
+        } else if (!(stack.getItem() instanceof AlchemicalHerbItem)) {
+            return false;
+        }
 
         for (ItemStack slot : items) {
             if (slot.isEmpty()) return true;
@@ -129,14 +135,23 @@ public class DryingRackBlockEntity extends BlockEntity {
         boolean changed = false;
         for (int i = 0; i < SLOT_COUNT; i++) {
             ItemStack stack = items.get(i);
-            if (!stack.isEmpty() && stack.getItem() instanceof ProcessedHerbItem herbItem) {
-                if (herbItem.getForm(stack) == ProcessingForm.RAW) {
+            if (!stack.isEmpty()) {
+                if (stack.getItem() instanceof ProcessedHerbItem herbItem && herbItem.getForm(stack) == ProcessingForm.RAW) {
                     dryingProgress[i] += rateBonus;
                     if (dryingProgress[i] >= REQUIRED_DRYING_TICKS) {
-                        // 蜕变为阴干形态 (DRIED)，继承原有基础品质并赋予 1.15x 通风增益
                         HerbRegistry herb = herbItem.getHerb(stack);
                         double quality = herbItem.getQuality(stack) * 1.15;
-                        items.set(i, ProcessedHerbItem.create(herbItem, herb, ProcessingForm.DRIED, quality));
+                        Item targetItem = ModItems.getProcessedHerb() != null ? ModItems.getProcessedHerb() : stack.getItem();
+                        items.set(i, ProcessedHerbItem.create(targetItem, herb, ProcessingForm.DRIED, quality));
+                        changed = true;
+                    }
+                } else if (stack.getItem() instanceof AlchemicalHerbItem herbBlockItem) {
+                    dryingProgress[i] += rateBonus;
+                    if (dryingProgress[i] >= REQUIRED_DRYING_TICKS) {
+                        HerbRegistry herb = herbBlockItem.getHerb();
+                        double quality = 1.0 * 1.15;
+                        Item targetItem = ModItems.getProcessedHerb() != null ? ModItems.getProcessedHerb() : stack.getItem();
+                        items.set(i, ProcessedHerbItem.create(targetItem, herb, ProcessingForm.DRIED, quality));
                         changed = true;
                     }
                 }

@@ -7,7 +7,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BushBlock extends Block {
-    public BushBlock(Properties properties) {
+    public BushBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties properties) {
         super(properties);
     }
 

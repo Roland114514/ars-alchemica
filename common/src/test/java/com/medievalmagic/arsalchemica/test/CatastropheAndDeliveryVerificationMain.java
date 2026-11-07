@@ -405,8 +405,9 @@ public class CatastropheAndDeliveryVerificationMain {
         }
 
         @Override
-        public void explode(Entity source, double x, double y, double z, float radius, ExplosionInteraction interaction) {
+        public net.minecraft.world.level.Explosion explode(Entity source, double x, double y, double z, float radius, ExplosionInteraction interaction) {
             this.explosionTriggered = true;
+            return new net.minecraft.world.level.Explosion();
         }
 
         public boolean wasExplosionTriggered() { return explosionTriggered; }

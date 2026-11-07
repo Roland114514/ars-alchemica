@@ -10,7 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class Item {
+public class Item implements net.minecraft.world.level.ItemLike {
+    @Override
+    public Item asItem() {
+        return this;
+    }
     private final String descriptionId;
 
     public Item(Properties properties) {

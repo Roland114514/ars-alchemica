@@ -2,7 +2,10 @@ package com.medievalmagic.arsalchemica.herb.apparatus;
 
 import com.medievalmagic.arsalchemica.herb.HerbRegistry;
 import com.medievalmagic.arsalchemica.herb.IAlchemicalHerb.ProcessingForm;
+import com.medievalmagic.arsalchemica.herb.item.AlchemicalHerbItem;
 import com.medievalmagic.arsalchemica.registry.ModBlockEntities;
+import com.medievalmagic.arsalchemica.registry.ModItems;
+import net.minecraft.world.item.Item;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -58,6 +61,9 @@ public class HerbPressBlockEntity extends BlockEntity {
         if (stack.getItem() instanceof ProcessedHerbItem herbItem && !herbItem.isSlag(stack)) {
             return herbItem.getForm(stack) == ProcessingForm.RAW;
         }
+        if (stack.getItem() instanceof AlchemicalHerbItem) {
+            return true;
+        }
         return false;
     }
 
@@ -81,7 +87,21 @@ public class HerbPressBlockEntity extends BlockEntity {
 
     public void activateLeverPress(BlockState state) {
         if (this.level == null || this.level.isClientSide() || !canActivatePress()) return;
-        if (!(this.herbSlot.getItem() instanceof ProcessedHerbItem herbItem)) return;
+
+        HerbRegistry herb;
+        double quality;
+        Item targetItem;
+        if (this.herbSlot.getItem() instanceof ProcessedHerbItem herbItem) {
+            herb = herbItem.getHerb(this.herbSlot);
+            quality = herbItem.getQuality(this.herbSlot);
+            targetItem = herbItem;
+        } else if (this.herbSlot.getItem() instanceof AlchemicalHerbItem herbBlockItem) {
+            herb = herbBlockItem.getHerb();
+            quality = 1.0;
+            targetItem = ModItems.getProcessedHerb() != null ? ModItems.getProcessedHerb() : this.herbSlot.getItem();
+        } else {
+            return;
+        }
 
         ServerLevel serverLevel = (ServerLevel) this.level;
         this.pressStage++;
@@ -95,14 +115,11 @@ public class HerbPressBlockEntity extends BlockEntity {
             serverLevel.playSound(null, this.worldPosition, SoundEvents.SLIME_SQUISH, SoundSource.BLOCKS, 0.6f, 0.8f);
             serverLevel.sendParticles(ParticleTypes.DRIPPING_WATER, px, py, pz, 6, 0.15D, 0.05D, 0.15D, 0.0D);
         } else if (this.pressStage >= 2) {
-            HerbRegistry herb = herbItem.getHerb(this.herbSlot);
-            double quality = herbItem.getQuality(this.herbSlot);
-
             // 转化为浓缩精油瓶（继承原生草药品质）
-            this.vialSlot = ProcessedHerbItem.create(herbItem, herb, ProcessingForm.PRESSED_OIL, quality);
+            this.vialSlot = ProcessedHerbItem.create(targetItem, herb, ProcessingForm.PRESSED_OIL, quality);
 
             // 弹出残渣
-            ItemStack defattedSlag = ProcessedHerbItem.createSlag(herbItem, herb);
+            ItemStack defattedSlag = ProcessedHerbItem.createSlag(targetItem, herb);
             this.herbSlot = ItemStack.EMPTY;
             this.pressStage = 0;
 

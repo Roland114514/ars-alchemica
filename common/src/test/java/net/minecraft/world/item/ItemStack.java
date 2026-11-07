@@ -13,6 +13,14 @@ public class ItemStack {
     private int count;
     private CompoundTag tag;
 
+    public ItemStack(net.minecraft.world.level.ItemLike itemLike) {
+        this(itemLike != null ? itemLike.asItem() : null, 1);
+    }
+
+    public ItemStack(net.minecraft.world.level.ItemLike itemLike, int count) {
+        this(itemLike != null ? itemLike.asItem() : null, count);
+    }
+
     public ItemStack(Item item) {
         this(item, 1);
     }
@@ -109,7 +117,7 @@ public class ItemStack {
         return false;
     }
 
-    public void hurtAndBreak(int amount, Player player, Consumer<Player> onBreak) {
+    public <T extends net.minecraft.world.entity.LivingEntity> void hurtAndBreak(int amount, T entity, Consumer<T> onBreak) {
     }
 
     public Component getHoverName() {

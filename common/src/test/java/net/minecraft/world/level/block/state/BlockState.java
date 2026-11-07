@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class BlockState {
+public class BlockState extends StateHolder<Block, BlockState> {
     private final Block block;
     private final Map<Property<?>, Comparable<?>> values = new HashMap<>();
 
@@ -18,7 +18,7 @@ public class BlockState {
     public Block getBlock() { return block; }
     public boolean is(Block other) { return this.block == other; }
     public boolean isAir() { return this.block == net.minecraft.world.level.block.Blocks.AIR; }
-    public boolean isSolidRender(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos) { return !isAir(); }
+    public boolean isSolidRender(net.minecraft.world.level.BlockGetter level, net.minecraft.core.BlockPos pos) { return !isAir(); }
     public boolean isSolid() { return !isAir(); }
 
     public boolean hasProperty(Property<?> property) {

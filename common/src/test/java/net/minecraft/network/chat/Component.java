@@ -11,6 +11,10 @@ public interface Component {
         return new MutableComponent(text);
     }
 
+    static MutableComponent translatable(String key) {
+        return new MutableComponent(key);
+    }
+
     static MutableComponent translatable(String key, Object... args) {
         StringBuilder sb = new StringBuilder(key);
         for (Object arg : args) {

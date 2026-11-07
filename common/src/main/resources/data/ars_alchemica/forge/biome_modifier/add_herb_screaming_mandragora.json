@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/screaming_mandragora",
+  "features": "ars_alchemica:patch_herb_screaming_mandragora",
+  "step": "vegetal_decoration"
+}

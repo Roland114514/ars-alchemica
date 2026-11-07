@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/frostvein_orchid",
+  "features": "ars_alchemica:patch_herb_frostvein_orchid",
+  "step": "vegetal_decoration"
+}

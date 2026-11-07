@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/moonveil_belladonna",
+  "features": "ars_alchemica:patch_herb_moonveil_belladonna",
+  "step": "vegetal_decoration"
+}

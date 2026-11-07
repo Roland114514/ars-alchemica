@@ -1,6 +1,5 @@
 {
   "itemGroup.ars_alchemica.main": "Ars Alchemica: Herbology & Arcana",
-
   "aspect.ars_alchemica.ignis": "Ignis (Fire)",
   "aspect.ars_alchemica.aqua": "Aqua (Water)",
   "aspect.ars_alchemica.terra": "Terra (Earth)",
@@ -13,7 +12,6 @@
   "aspect.ars_alchemica.mortis": "Mortis (Death)",
   "aspect.ars_alchemica.ordo": "Ordo (Order)",
   "aspect.ars_alchemica.chaos": "Chaos (Entropy)",
-
   "herb.ars_alchemica.cinder_thistle": "Cinder Thistle",
   "herb.ars_alchemica.abyssal_lumina_mint": "Abyssal Lumina Mint",
   "herb.ars_alchemica.screaming_mandragora": "Screaming Mandragora",
@@ -21,38 +19,31 @@
   "herb.ars_alchemica.moonveil_belladonna": "Moonveil Belladonna",
   "herb.ars_alchemica.carrion_bogmoss": "Carrion Bogmoss",
   "herb.ars_alchemica.storm_marigold": "Storm Marigold",
-
   "item.ars_alchemica.herb_form.raw": "%s (Fresh)",
   "item.ars_alchemica.herb_form.milled_coarse": "%s Coarse Powder",
   "item.ars_alchemica.herb_form.milled_fine": "%s Fine Dust",
   "item.ars_alchemica.herb_form.pressed_oil": "%s Essential Oil",
   "item.ars_alchemica.herb_form.dried": "%s (Dried)",
   "item.ars_alchemica.charred_slag": "Charred Alchemical Slag",
-
   "tooltip.ars_alchemica.form.raw": "Raw form: freshly harvested, high moisture, volatile.",
   "tooltip.ars_alchemica.form.milled_coarse": "Coarsely ground: ruptured cell walls, increased dispersion rate.",
   "tooltip.ars_alchemica.form.milled_fine": "Fine dust: maximum surface area, instant dissolution.",
   "tooltip.ars_alchemica.form.pressed_oil": "Cold-pressed essential oil: concentrated lipid essence, ideal for blade oils.",
   "tooltip.ars_alchemica.form.dried": "Dried specimen: dehydrated, low volatility, long-term preservation.",
   "tooltip.ars_alchemica.herb.dew_inherited": "✦ Morning Dew Bonus (+15% Purity)",
-
   "block.ars_alchemica.mortar": "Obsidian Mortar",
   "block.ars_alchemica.herb_press": "Heavy Lever Herb Press",
   "block.ars_alchemica.drying_rack": "Ventilated Drying Rack",
-
   "item.ars_alchemica.alchemical_elixir": "Alchemical Elixir",
   "item.ars_alchemica.alchemical_incense": "Alchemical Incense",
   "item.ars_alchemica.blade_oil": "Witcher's Blade Oil",
-
   "toxicity.ars_alchemica.state.safe": "Metabolic Equilibrium (Safe)",
   "toxicity.ars_alchemica.state.caution": "Aetherial Saturation (Caution)",
   "toxicity.ars_alchemica.state.danger": "Alchemical Intoxication (Danger)",
   "toxicity.ars_alchemica.state.overdose": "Systemic Collapse (Overdose!)",
-
   "tooltip.ars_alchemica.potion.inert": "Inert Distillate (No Active Aspects)",
   "tooltip.ars_alchemica.potion.purity": "Alchemical Purity: %s",
   "tooltip.ars_alchemica.potion.toxicity": "Toxicity Load: %s",
-
   "tooltip.ars_alchemica.oil.bane.necrophage": "Necrophage & Undead Bane",
   "tooltip.ars_alchemica.oil.bane.insectoid": "Insectoid Carapace Breaker",
   "tooltip.ars_alchemica.oil.bane.humanoid": "Humanoid Hemorrhage Toxin",
@@ -60,25 +51,20 @@
   "tooltip.ars_alchemica.oil.damage": "Specialized Bane Damage: %s",
   "tooltip.ars_alchemica.oil.charges": "Coating Durability: %s / %s Hits",
   "tooltip.ars_alchemica.weapon.coated": "Coated: %s (%s/%s)",
-
   "message.ars_alchemica.oil.invalid_weapon": "Hold a melee blade in your other hand to apply oil.",
   "message.ars_alchemica.oil.applied": "Coated %s with Alchemical Blade Oil.",
   "message.ars_alchemica.oil.depleted": "The alchemical oil on your blade has worn off.",
-
   "effect.ars_alchemica.alchemical_corrosion": "Alchemical Corrosion",
   "death.attack.ars_alchemica.corrosion": "%1$s collapsed from severe alchemical corrosion",
   "death.attack.ars_alchemica.corrosion.player": "%1$s was dissolved by %2$s's alchemical corrosion",
-
   "block.ars_alchemica.alchemical_cauldron": "Alchemical Crucible",
   "item.ars_alchemica.stirring_rod": "Hardwood Stirring Rod",
   "item.ars_alchemica.alchemical_journal": "Arcane Scholar's Grimoire",
-
   "tooltip.ars_alchemica.stirring_rod.desc": "Hydrodynamic manipulation instrument for guiding ethereal flux in cauldrons.",
   "tooltip.ars_alchemica.stirring_rod.clockwise": "Clockwise (Right-Click): Centripetal vortex, calms aetherial agitation and reduces instability",
   "tooltip.ars_alchemica.stirring_rod.counter_clockwise": "Counter-Clockwise (Shift + Right-Click): Centrifugal shear, precipitates slag and reduces turbidity",
   "tooltip.ars_alchemica.journal.desc": "Scholarly tome recording ancient alchemical procedures and herb reactions.",
   "tooltip.ars_alchemica.journal.dual_wield": "Hold in off-hand while gazing at a crucible to activate Scholar's Intuition HUD",
-
   "hud.ars_alchemica.intuition.title": "Scholar's Intuition: Thermodynamic Vision",
   "hud.ars_alchemica.intuition.empty": "Crucible Dormant",
   "hud.ars_alchemica.intuition.water_level": "Fluid Level: %s / %s Portions",
@@ -87,7 +73,6 @@
   "hud.ars_alchemica.intuition.instability": "Instability: %s",
   "hud.ars_alchemica.intuition.stirring": "Hydrodynamic Turns: ↻ %s / ↺ %s",
   "hud.ars_alchemica.intuition.guidance": "Procedure Advice: %s",
-
   "step.ars_alchemica.empty_cauldron": "Unfilled (Fill with water bucket)",
   "step.ars_alchemica.fill_water": "Fill with fresh water",
   "step.ars_alchemica.preheat": "Kindle bottom heat source to reach reaction temperature",
@@ -95,11 +80,9 @@
   "step.ars_alchemica.stirring": "Stir with rod clockwise/counter-clockwise to integrate",
   "step.ars_alchemica.stabilize": "High instability, stir clockwise to calm aether",
   "step.ars_alchemica.extract": "Concoction stabilized, extract with glass bottle",
-
   "item.ars_alchemica.recipe_scroll": "Alchemical Recipe Scroll",
   "item.ars_alchemica.ancient_parchment": "Lost Ancient Parchment",
   "item.ars_alchemica.scholia_fragment": "Ancient Scholia Fragment",
-
   "recipe.ars_alchemica.draught_of_vitality": "Draught of Vitality",
   "recipe.ars_alchemica.cat_eyes_elixir": "Cat's Eyes Elixir",
   "recipe.ars_alchemica.swift_step_elixir": "Swift Step Elixir",
@@ -107,28 +90,23 @@
   "recipe.ars_alchemica.necro_bane_oil": "Necrophage Oil",
   "recipe.ars_alchemica.phoenix_rebirth_elixir": "Phoenix Rebirth Elixir",
   "recipe.ars_alchemica.void_strike_oil": "Void Strike Blade Oil",
-
   "rarity.ars_alchemica.common": "Common",
   "rarity.ars_alchemica.uncommon": "Uncommon",
   "rarity.ars_alchemica.rare": "Rare",
   "rarity.ars_alchemica.legendary": "Mythic Ancient",
-
   "tooltip.ars_alchemica.scroll.recipe": "Recorded Recipe: %s",
   "tooltip.ars_alchemica.scroll.rarity": "Tier: %s",
   "tooltip.ars_alchemica.scroll.blank": "Blank Parchment",
   "tooltip.ars_alchemica.scroll.use_hint": "Right-click to study: Permanently records into Scholar's Grimoire",
-
   "tooltip.ars_alchemica.ancient_parchment.desc": "Lost ancient parchment unearthed from the depths of primeval ruins.",
   "tooltip.ars_alchemica.ancient_parchment.target": "Cipher Mystery: %s",
   "tooltip.ars_alchemica.ancient_parchment.deciphered": "Status: Fully Deciphered (100%)",
   "tooltip.ars_alchemica.ancient_parchment.progress": "Decipher Progress: %s%%",
   "tooltip.ars_alchemica.ancient_parchment.hint": "Right-click to study and decipher cryptic ancient runes",
-
   "tooltip.ars_alchemica.scholia.desc": "Scholarly annotations and critical notes on ancient mythic recipes.",
   "tooltip.ars_alchemica.scholia.target": "Target Recipe: %s",
   "tooltip.ars_alchemica.scholia.benefit": "Study Benefit: Permanently increases concoction success rate by %s",
   "tooltip.ars_alchemica.scholia.use_hint": "Right-click to advance scholarly mastery (up to Tier 5)",
-
   "message.ars_alchemica.recipe_already_known": "You have already recorded and mastered this recipe in your grimoire.",
   "message.ars_alchemica.recipe_learned": "✦ Eureka! Successfully studied and recorded recipe [%s]!",
   "message.ars_alchemica.ancient_already_deciphered": "This ancient parchment [%s] has already been deciphered.",
@@ -139,28 +117,44 @@
   "message.ars_alchemica.ancient_craft_failed": "⚠ Severe Instability! Ancient concoction [%s] collapsed into an arcane explosion!",
   "message.ars_alchemica.ancient_craft_success": "★ Mythic Crystallization: Successfully awakened lost ancient recipe [%s]!",
   "message.ars_alchemica.eureka_discovery": "✦ Eureka Discovery: Unveiled new recipe [%s] through physical crucible experimentation!",
-
   "hud.ars_alchemica.intuition.map_coord": "Aether Map Coord: (%s)",
   "hud.ars_alchemica.intuition.nearby_recipe": "Resonance Sensing: Approaching [%s]",
-
   "entity.minecraft.villager.ars_alchemica.apothecary": "Apothecary",
-
   "item.ars_alchemica.alchemical_slag": "Alchemical Slag",
   "item.ars_alchemica.alchemical_sludge": "Alchemical Sludge",
-
   "tooltip.ars_alchemica.slag.desc": "Twisted metal fragments from a crucible shattered by an aetherial explosion.",
   "tooltip.ars_alchemica.slag.hint": "The ethereal manifold has collapsed; can be smelted for trace iron.",
   "tooltip.ars_alchemica.sludge.desc": "Foul corrosive mud cleared from a ruined cauldron.",
   "tooltip.ars_alchemica.sludge.use": "Right-click to throw: Spawns miniature corrosive miasma on impact (Slowness & Corrosion)",
-
   "hud.ars_alchemica.intuition.dry_boil_warn": "⚠ Extreme Danger: Crucible dry-boiling (%s/%s Ticks)! Meltdown imminent!",
   "hud.ars_alchemica.intuition.sludge_warn": "⚠ Concoction Ruined: Solution coagulated into sludge! Clear with a shovel!",
-
   "mishap.ars_alchemica.none": "Stable",
   "mishap.ars_alchemica.success": "Annealing Succeeded",
   "mishap.ars_alchemica.toxic_miasma": "Toxic Miasma Outbreak",
   "mishap.ars_alchemica.conflagration": "Infernal Conflagration",
   "mishap.ars_alchemica.sludge": "Sludge Coagulation",
   "mishap.ars_alchemica.arcane_detonation": "Arcane Detonation",
-  "mishap.ars_alchemica.dry_boil_meltdown": "Dry-Boil Meltdown"
+  "mishap.ars_alchemica.dry_boil_meltdown": "Dry-Boil Meltdown",
+  "block.ars_alchemica.cinder_thistle": "Cinder Thistle",
+  "item.ars_alchemica.cinder_thistle": "Cinder Thistle",
+  "tooltip.ars_alchemica.herb.cinder_thistle.desc": "A crimson briar thriving upon cinder soils and volcanic beds, its thorns seething with latent embers.",
+  "block.ars_alchemica.frostvein_orchid": "Frostvein Orchid",
+  "item.ars_alchemica.frostvein_orchid": "Frostvein Orchid",
+  "tooltip.ars_alchemica.herb.frostvein_orchid.desc": "A rare glacial orchid crystallizing frozen mana, its gossamer ice petals fragile under warmth.",
+  "block.ars_alchemica.storm_marigold": "Storm Marigold",
+  "item.ars_alchemica.storm_marigold": "Storm Marigold",
+  "tooltip.ars_alchemica.herb.storm_marigold.desc": "A resilient alpine flower clinging to windswept peaks, channeling lightning bolts through jagged petals.",
+  "block.ars_alchemica.abyssal_lumina_mint": "Abyssal Lumina Mint",
+  "item.ars_alchemica.abyssal_lumina_mint": "Abyssal Lumina Mint",
+  "tooltip.ars_alchemica.herb.abyssal_lumina_mint.desc": "A subterranean bioluminescent mint dwelling in sculk depths, withering swiftly under solar glare.",
+  "block.ars_alchemica.screaming_mandragora": "Screaming Mandragora",
+  "item.ars_alchemica.screaming_mandragora": "Screaming Mandragora",
+  "tooltip.ars_alchemica.herb.screaming_mandragora.desc": "A grotesque tuber whose contorted visage unleashes a deafening acoustic shriek when roughly uprooted.",
+  "block.ars_alchemica.moonveil_belladonna": "Moonveil Belladonna",
+  "item.ars_alchemica.moonveil_belladonna": "Moonveil Belladonna",
+  "tooltip.ars_alchemica.herb.moonveil_belladonna.desc": "A midnight-blooming shade flora bearing glistening venomous berries, blooming in lunar syzygy.",
+  "block.ars_alchemica.carrion_bogmoss": "Carrion Bogmoss",
+  "item.ars_alchemica.carrion_bogmoss": "Carrion Bogmoss",
+  "tooltip.ars_alchemica.herb.carrion_bogmoss.desc": "A spongy saprophytic moss spreading across stagnant marshes, renowned for absorbing systemic toxicity.",
+  "item.ars_alchemica.processed_herb": "Processed Herb Extract"
 }

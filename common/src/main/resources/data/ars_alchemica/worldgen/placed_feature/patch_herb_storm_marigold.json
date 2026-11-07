@@ -1,0 +1,31 @@
+{
+  "feature": "ars_alchemica:patch_herb_storm_marigold",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 14
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:heightmap",
+      "heightmap": "MOTION_BLOCKING_NO_LEAVES"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": {
+          "absolute": 95
+        },
+        "max_inclusive": {
+          "absolute": 256
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

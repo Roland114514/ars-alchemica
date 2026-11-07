@@ -7,12 +7,17 @@ import com.medievalmagic.arsalchemica.cauldron.AlchemicalStirringRodItem;
 import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSlagItem;
 import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSludgeItem;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
+import com.medievalmagic.arsalchemica.herb.AlchemicalHerbBlock;
+import com.medievalmagic.arsalchemica.herb.HerbRegistry;
+import com.medievalmagic.arsalchemica.herb.IAlchemicalHerb;
 import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlock;
 import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlock;
 import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlock;
 import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlockEntity;
+import com.medievalmagic.arsalchemica.herb.apparatus.ProcessedHerbItem;
+import com.medievalmagic.arsalchemica.herb.item.AlchemicalHerbItem;
 import com.medievalmagic.arsalchemica.potion.AlchemicalCorrosionEffect;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
@@ -32,6 +37,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
@@ -76,6 +82,22 @@ public class ArsAlchemicaForge {
     public static final RegistryObject<DryingRackBlock> DRYING_RACK_BLOCK =
             BLOCKS.register("drying_rack", () -> new DryingRackBlock(Block.Properties.of()));
 
+    // --- 7 大草药方块 ---
+    public static final RegistryObject<AlchemicalHerbBlock.CinderThistleBlock> CINDER_THISTLE_BLOCK =
+            BLOCKS.register("cinder_thistle", () -> new AlchemicalHerbBlock.CinderThistleBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+    public static final RegistryObject<AlchemicalHerbBlock.FrostveinOrchidBlock> FROSTVEIN_ORCHID_BLOCK =
+            BLOCKS.register("frostvein_orchid", () -> new AlchemicalHerbBlock.FrostveinOrchidBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+    public static final RegistryObject<AlchemicalHerbBlock.StormMarigoldBlock> STORM_MARIGOLD_BLOCK =
+            BLOCKS.register("storm_marigold", () -> new AlchemicalHerbBlock.StormMarigoldBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+    public static final RegistryObject<AlchemicalHerbBlock.AbyssalLuminaMintBlock> ABYSSAL_LUMINA_MINT_BLOCK =
+            BLOCKS.register("abyssal_lumina_mint", () -> new AlchemicalHerbBlock.AbyssalLuminaMintBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+    public static final RegistryObject<AlchemicalHerbBlock.ScreamingMandragoraBlock> SCREAMING_MANDRAGORA_BLOCK =
+            BLOCKS.register("screaming_mandragora", () -> new AlchemicalHerbBlock.ScreamingMandragoraBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+    public static final RegistryObject<AlchemicalHerbBlock.MoonveilBelladonnaBlock> MOONVEIL_BELLADONNA_BLOCK =
+            BLOCKS.register("moonveil_belladonna", () -> new AlchemicalHerbBlock.MoonveilBelladonnaBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+    public static final RegistryObject<AlchemicalHerbBlock.CarrionBogmossBlock> CARRION_BOGMOSS_BLOCK =
+            BLOCKS.register("carrion_bogmoss", () -> new AlchemicalHerbBlock.CarrionBogmossBlock(Block.Properties.of().instabreak().sound(SoundType.GRASS).noOcclusion()));
+
     // --- Block Items ---
     public static final RegistryObject<Item> CAULDRON_ITEM =
             ITEMS.register("alchemical_cauldron", () -> new BlockItem(CAULDRON_BLOCK.get(), new Item.Properties()));
@@ -85,6 +107,26 @@ public class ArsAlchemicaForge {
             ITEMS.register("herb_press", () -> new BlockItem(HERB_PRESS_BLOCK.get(), new Item.Properties()));
     public static final RegistryObject<Item> DRYING_RACK_ITEM =
             ITEMS.register("drying_rack", () -> new BlockItem(DRYING_RACK_BLOCK.get(), new Item.Properties()));
+
+    // --- 7 大草药植株物品 (BlockItem) ---
+    public static final RegistryObject<AlchemicalHerbItem> CINDER_THISTLE_ITEM =
+            ITEMS.register("cinder_thistle", () -> new AlchemicalHerbItem(CINDER_THISTLE_BLOCK.get(), new Item.Properties(), HerbRegistry.CINDER_THISTLE));
+    public static final RegistryObject<AlchemicalHerbItem> FROSTVEIN_ORCHID_ITEM =
+            ITEMS.register("frostvein_orchid", () -> new AlchemicalHerbItem(FROSTVEIN_ORCHID_BLOCK.get(), new Item.Properties(), HerbRegistry.FROSTVEIN_ORCHID));
+    public static final RegistryObject<AlchemicalHerbItem> STORM_MARIGOLD_ITEM =
+            ITEMS.register("storm_marigold", () -> new AlchemicalHerbItem(STORM_MARIGOLD_BLOCK.get(), new Item.Properties(), HerbRegistry.STORM_MARIGOLD));
+    public static final RegistryObject<AlchemicalHerbItem> ABYSSAL_LUMINA_MINT_ITEM =
+            ITEMS.register("abyssal_lumina_mint", () -> new AlchemicalHerbItem(ABYSSAL_LUMINA_MINT_BLOCK.get(), new Item.Properties(), HerbRegistry.ABYSSAL_LUMINA_MINT));
+    public static final RegistryObject<AlchemicalHerbItem> SCREAMING_MANDRAGORA_ITEM =
+            ITEMS.register("screaming_mandragora", () -> new AlchemicalHerbItem(SCREAMING_MANDRAGORA_BLOCK.get(), new Item.Properties(), HerbRegistry.SCREAMING_MANDRAGORA));
+    public static final RegistryObject<AlchemicalHerbItem> MOONVEIL_BELLADONNA_ITEM =
+            ITEMS.register("moonveil_belladonna", () -> new AlchemicalHerbItem(MOONVEIL_BELLADONNA_BLOCK.get(), new Item.Properties(), HerbRegistry.MOONVEIL_BELLADONNA));
+    public static final RegistryObject<AlchemicalHerbItem> CARRION_BOGMOSS_ITEM =
+            ITEMS.register("carrion_bogmoss", () -> new AlchemicalHerbItem(CARRION_BOGMOSS_BLOCK.get(), new Item.Properties(), HerbRegistry.CARRION_BOGMOSS));
+
+    // --- 统一草药加工产物 ---
+    public static final RegistryObject<ProcessedHerbItem> PROCESSED_HERB_ITEM =
+            ITEMS.register("processed_herb", () -> new ProcessedHerbItem(new Item.Properties().stacksTo(64), HerbRegistry.CINDER_THISTLE, IAlchemicalHerb.ProcessingForm.RAW));
 
     // --- Apparatus & Grimoire Items ---
     public static final RegistryObject<AlchemicalStirringRodItem> STIRRING_ROD =
@@ -143,6 +185,14 @@ public class ArsAlchemicaForge {
                         output.accept(MORTAR_ITEM.get());
                         output.accept(HERB_PRESS_ITEM.get());
                         output.accept(DRYING_RACK_ITEM.get());
+                        output.accept(CINDER_THISTLE_ITEM.get());
+                        output.accept(FROSTVEIN_ORCHID_ITEM.get());
+                        output.accept(STORM_MARIGOLD_ITEM.get());
+                        output.accept(ABYSSAL_LUMINA_MINT_ITEM.get());
+                        output.accept(SCREAMING_MANDRAGORA_ITEM.get());
+                        output.accept(MOONVEIL_BELLADONNA_ITEM.get());
+                        output.accept(CARRION_BOGMOSS_ITEM.get());
+                        output.accept(PROCESSED_HERB_ITEM.get());
                         output.accept(STIRRING_ROD.get());
                         output.accept(JOURNAL.get());
                         output.accept(RECIPE_SCROLL.get());
@@ -169,12 +219,31 @@ public class ArsAlchemicaForge {
         // 绑定 Common 跨平台中心
         ModBlocks.bindCauldron(CAULDRON_BLOCK::get);
         ModBlocks.bindApparatus(MORTAR_BLOCK::get, HERB_PRESS_BLOCK::get, DRYING_RACK_BLOCK::get);
+        ModBlocks.bindHerbs(
+                CINDER_THISTLE_BLOCK::get,
+                FROSTVEIN_ORCHID_BLOCK::get,
+                STORM_MARIGOLD_BLOCK::get,
+                ABYSSAL_LUMINA_MINT_BLOCK::get,
+                SCREAMING_MANDRAGORA_BLOCK::get,
+                MOONVEIL_BELLADONNA_BLOCK::get,
+                CARRION_BOGMOSS_BLOCK::get
+        );
         ModBlockEntities.bindCauldron(CAULDRON_BE::get);
         ModBlockEntities.bind(MORTAR_BE::get, HERB_PRESS_BE::get, DRYING_RACK_BE::get);
         ModItems.bindApparatusItems(STIRRING_ROD::get, JOURNAL::get);
         ModItems.bindExplorationItems(RECIPE_SCROLL::get, ANCIENT_PARCHMENT::get, SCHOLIA_FRAGMENT::get);
         ModItems.bindMishapItems(SLAG::get, SLUDGE::get);
         ModItems.bindPotions(ELIXIR::get, INCENSE::get, BLADE_OIL::get);
+        ModItems.bindHerbs(
+                CINDER_THISTLE_ITEM::get,
+                FROSTVEIN_ORCHID_ITEM::get,
+                STORM_MARIGOLD_ITEM::get,
+                ABYSSAL_LUMINA_MINT_ITEM::get,
+                SCREAMING_MANDRAGORA_ITEM::get,
+                MOONVEIL_BELLADONNA_ITEM::get,
+                CARRION_BOGMOSS_ITEM::get,
+                PROCESSED_HERB_ITEM::get
+        );
         ModEffects.bindCorrosion(CORROSION_EFFECT::get);
 
         // 注册全局玩家事件监听

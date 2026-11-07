@@ -3,7 +3,7 @@ package net.minecraft.nbt;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CompoundTag {
+public class CompoundTag implements Tag {
     private final Map<String, Object> tags = new HashMap<>();
 
     public void putFloat(String key, float value) { tags.put(key, value); }
@@ -42,7 +42,10 @@ public class CompoundTag {
         return val instanceof int[] arr ? arr : new int[0];
     }
 
-    public void put(String key, CompoundTag tag) { tags.put(key, tag); }
+    public Tag put(String key, Tag tag) {
+        tags.put(key, tag);
+        return tag;
+    }
     public CompoundTag getCompound(String key) {
         Object val = tags.get(key);
         return val instanceof CompoundTag ct ? ct : new CompoundTag();

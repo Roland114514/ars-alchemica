@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/abyssal_lumina_mint",
+  "features": "ars_alchemica:patch_herb_abyssal_lumina_mint",
+  "step": "underground_decoration"
+}

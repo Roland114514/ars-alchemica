@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/storm_marigold",
+  "features": "ars_alchemica:patch_herb_storm_marigold",
+  "step": "vegetal_decoration"
+}

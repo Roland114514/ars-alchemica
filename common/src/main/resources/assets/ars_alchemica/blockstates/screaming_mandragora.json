@@ -1,0 +1,9 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "ars_alchemica:block/screaming_mandragora"
+      }
+    }
+  ]
+}

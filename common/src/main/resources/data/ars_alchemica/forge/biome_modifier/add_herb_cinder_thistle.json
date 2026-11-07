@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/cinder_thistle",
+  "features": "ars_alchemica:patch_herb_cinder_thistle",
+  "step": "vegetal_decoration"
+}

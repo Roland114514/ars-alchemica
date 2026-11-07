@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class BaseEntityBlock extends Block implements EntityBlock {
-    protected BaseEntityBlock(Properties properties) {
+    public BaseEntityBlock(net.minecraft.world.level.block.state.BlockBehaviour.Properties properties) {
         super(properties);
     }
 

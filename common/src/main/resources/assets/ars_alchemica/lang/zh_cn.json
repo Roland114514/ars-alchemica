@@ -1,6 +1,5 @@
 {
   "itemGroup.ars_alchemica.main": "深奥炼金：草药与秘术",
-
   "aspect.ars_alchemica.ignis": "火之相 (Ignis)",
   "aspect.ars_alchemica.aqua": "水之相 (Aqua)",
   "aspect.ars_alchemica.terra": "地之相 (Terra)",
@@ -13,7 +12,6 @@
   "aspect.ars_alchemica.mortis": "死寂凋零 (Mortis)",
   "aspect.ars_alchemica.ordo": "恒常秩序 (Ordo)",
   "aspect.ars_alchemica.chaos": "熵增混沌 (Chaos)",
-
   "herb.ars_alchemica.cinder_thistle": "灰烬血蓟",
   "herb.ars_alchemica.abyssal_lumina_mint": "深渊幽光薄荷",
   "herb.ars_alchemica.screaming_mandragora": "哀嚎曼陀罗",
@@ -21,38 +19,31 @@
   "herb.ars_alchemica.moonveil_belladonna": "月影颠茄",
   "herb.ars_alchemica.carrion_bogmoss": "腐水食腐苔",
   "herb.ars_alchemica.storm_marigold": "避雷金盏花",
-
   "item.ars_alchemica.herb_form.raw": "%s (新鲜采摘)",
   "item.ars_alchemica.herb_form.milled_coarse": "%s 粗粉",
   "item.ars_alchemica.herb_form.milled_fine": "%s 超细微粉",
   "item.ars_alchemica.herb_form.pressed_oil": "%s 浓缩精油",
   "item.ars_alchemica.herb_form.dried": "%s (阴干标本)",
   "item.ars_alchemica.charred_slag": "碳化药渣",
-
   "tooltip.ars_alchemica.form.raw": "原生形态：未经处理的自然鲜草，保持原始活性与水分。",
   "tooltip.ars_alchemica.form.milled_coarse": "粗磨颗粒：经石臼捣碎破坏细胞壁，元素挥发加快。",
   "tooltip.ars_alchemica.form.milled_fine": "超细微粉：粒径极小，比表面积大，溶解极为迅速。",
   "tooltip.ars_alchemica.form.pressed_oil": "浓缩精油：冷压萃取的脂溶性精华，极适合用于调制剑油。",
   "tooltip.ars_alchemica.form.dried": "阴干标本：脱水除杂后的草药，性质温和且挥发性大幅降低。",
   "tooltip.ars_alchemica.herb.dew_inherited": "✦ 晨露精粹加成 (+15% 纯度)",
-
   "block.ars_alchemica.mortar": "黑曜石研磨石臼",
   "block.ars_alchemica.herb_press": "重型螺旋杠杆压榨台",
   "block.ars_alchemica.drying_rack": "杉木通风风干架",
-
   "item.ars_alchemica.alchemical_elixir": "复合炼金灵药",
   "item.ars_alchemica.alchemical_incense": "炼金挥发熏香",
   "item.ars_alchemica.blade_oil": "猎魔炼金剑油",
-
   "toxicity.ars_alchemica.state.safe": "代谢平衡 (安全期)",
   "toxicity.ars_alchemica.state.caution": "以太沉积 (警觉期)",
   "toxicity.ars_alchemica.state.danger": "经脉淤毒 (中毒期)",
   "toxicity.ars_alchemica.state.overdose": "灵质崩解 (毒性过载！)",
-
   "tooltip.ars_alchemica.potion.inert": "惰性馏分（无活性以太源质）",
   "tooltip.ars_alchemica.potion.purity": "灵药纯度：%s",
   "tooltip.ars_alchemica.potion.toxicity": "毒性负荷：%s",
-
   "tooltip.ars_alchemica.oil.bane.necrophage": "死灵与腐尸特攻（银刃灼烧）",
   "tooltip.ars_alchemica.oil.bane.insectoid": "节肢与甲壳破除（神经麻痹）",
   "tooltip.ars_alchemica.oil.bane.humanoid": "类人生物特攻（动脉流血）",
@@ -60,25 +51,20 @@
   "tooltip.ars_alchemica.oil.damage": "种群克制附加伤害：%s",
   "tooltip.ars_alchemica.oil.charges": "剑油涂层次数：%s / %s 次命中",
   "tooltip.ars_alchemica.weapon.coated": "已涂抹：%s (%s/%s)",
-
   "message.ars_alchemica.oil.invalid_weapon": "请在另一只手中持有近战兵刃以涂抹剑油。",
   "message.ars_alchemica.oil.applied": "已将炼金剑油均匀涂抹于 %s。",
   "message.ars_alchemica.oil.depleted": "兵刃上的炼金剑油已消耗殆尽。",
-
   "effect.ars_alchemica.alchemical_corrosion": "以太毒蚀",
   "death.attack.ars_alchemica.corrosion": "%1$s 的经脉被以太毒素彻底融蚀崩解",
   "death.attack.ars_alchemica.corrosion.player": "%1$s 倒在 %2$s 调配的致命炼金剧毒之下",
-
   "block.ars_alchemica.alchemical_cauldron": "多态温控炼金大坩埚",
   "item.ars_alchemica.stirring_rod": "硬木炼金搅拌棒",
   "item.ars_alchemica.alchemical_journal": "秘术学者手记",
-
   "tooltip.ars_alchemica.stirring_rod.desc": "流体水动力学操控器具，用于调控坩埚内以太能量流向。",
   "tooltip.ars_alchemica.stirring_rod.clockwise": "顺时针旋转 (右键)：激发生理向心流，平复以太躁动，降低失稳度",
   "tooltip.ars_alchemica.stirring_rod.counter_clockwise": "逆时针旋转 (Shift+右键)：离心剪切排杂，分离杂质沉淀，降低浑浊度",
   "tooltip.ars_alchemica.journal.desc": "记录失传炼金工序与草药微观反应的学者典籍。",
   "tooltip.ars_alchemica.journal.dual_wield": "副手装备时凝视炼金坩埚，开启【学者直觉】微观热力学透视视界",
-
   "hud.ars_alchemica.intuition.title": "学者直觉：坩埚热力学透视",
   "hud.ars_alchemica.intuition.empty": "坩埚处于休眠状态",
   "hud.ars_alchemica.intuition.water_level": "液面刻度：%s / %s 份",
@@ -87,7 +73,6 @@
   "hud.ars_alchemica.intuition.instability": "失稳蓄积：%s",
   "hud.ars_alchemica.intuition.stirring": "水动力学搅拌：顺时针 %s 圈 / 逆时针 %s 圈",
   "hud.ars_alchemica.intuition.guidance": "当前工序建议：%s",
-
   "step.ars_alchemica.empty_cauldron": "未注水（请使用水桶注入清水）",
   "step.ars_alchemica.fill_water": "注入清水",
   "step.ars_alchemica.preheat": "点燃底部热源预热至反应温区",
@@ -95,11 +80,9 @@
   "step.ars_alchemica.stirring": "使用搅拌棒顺时针/逆时针搅拌促进融合",
   "step.ars_alchemica.stabilize": "失稳度偏高，顺时针搅拌平息以太躁动",
   "step.ars_alchemica.extract": "药力定型，手持空玻璃瓶萃取灵药",
-
   "item.ars_alchemica.recipe_scroll": "炼金手稿配方卷轴",
   "item.ars_alchemica.ancient_parchment": "失传古代残卷羊皮纸",
   "item.ars_alchemica.scholia_fragment": "古代学术注脚残页",
-
   "recipe.ars_alchemica.draught_of_vitality": "生机灵药",
   "recipe.ars_alchemica.cat_eyes_elixir": "猫眼夜视灵药",
   "recipe.ars_alchemica.swift_step_elixir": "迅疾灵药",
@@ -107,28 +90,23 @@
   "recipe.ars_alchemica.necro_bane_oil": "尸鬼特攻剑油",
   "recipe.ars_alchemica.phoenix_rebirth_elixir": "凤凰涅槃秘药",
   "recipe.ars_alchemica.void_strike_oil": "虚空穿刺剑油",
-
   "rarity.ars_alchemica.common": "普通",
   "rarity.ars_alchemica.uncommon": "罕见",
   "rarity.ars_alchemica.rare": "稀有",
   "rarity.ars_alchemica.legendary": "神话古代",
-
   "tooltip.ars_alchemica.scroll.recipe": "记载配方：%s",
   "tooltip.ars_alchemica.scroll.rarity": "工艺等阶：%s",
   "tooltip.ars_alchemica.scroll.blank": "空白手稿",
   "tooltip.ars_alchemica.scroll.use_hint": "手持右键研读：永久收录入副手《学者手记》",
-
   "tooltip.ars_alchemica.ancient_parchment.desc": "从远古遗迹深处出土的失传神话秘方残卷。",
   "tooltip.ars_alchemica.ancient_parchment.target": "推演秘方：%s",
   "tooltip.ars_alchemica.ancient_parchment.deciphered": "破译状态：已完全破译 (100%)",
   "tooltip.ars_alchemica.ancient_parchment.progress": "破译进度：%s%%",
   "tooltip.ars_alchemica.ancient_parchment.hint": "手持右键潜心研读以逐步破译古代密语",
-
   "tooltip.ars_alchemica.scholia.desc": "针对古代神话秘药的深度学术批注与校勘笔记。",
   "tooltip.ars_alchemica.scholia.target": "指定配方：%s",
   "tooltip.ars_alchemica.scholia.benefit": "研读效果：永久提升该古代配方炼成成功率 %s",
   "tooltip.ars_alchemica.scholia.use_hint": "手持右键阅读以精进学者造诣 (最高 5 阶)",
-
   "message.ars_alchemica.recipe_already_known": "你已在《学者手记》中收录并掌握此配方。",
   "message.ars_alchemica.recipe_learned": "✦ 灵光闪现：成功研读并收录配方【%s】！",
   "message.ars_alchemica.ancient_already_deciphered": "该古代残卷【%s】已被彻底破译收录。",
@@ -139,28 +117,44 @@
   "message.ars_alchemica.ancient_craft_failed": "⚠ 极度失稳！古代秘方【%s】调配失败，以太反噬殉爆！",
   "message.ars_alchemica.ancient_craft_success": "★ 神话定型：成功唤醒失传古代传奇秘方【%s】！",
   "message.ars_alchemica.eureka_discovery": "✦ 顿悟探索：通过物理实验自发发现全新配方【%s】！",
-
   "hud.ars_alchemica.intuition.map_coord": "以太星图坐标：(%s)",
   "hud.ars_alchemica.intuition.nearby_recipe": "共鸣前瞻：接近【%s】共鸣区",
-
   "entity.minecraft.villager.ars_alchemica.apothecary": "药剂师",
-
   "item.ars_alchemica.alchemical_slag": "炼金铁渣",
   "item.ars_alchemica.alchemical_sludge": "炼金败物腐蚀黑泥",
-
   "tooltip.ars_alchemica.slag.desc": "坩埚因以太失控爆裂后崩落的扭曲金属残块。",
   "tooltip.ars_alchemica.slag.hint": "以太流形已崩溃，可熔炼回收微量铁质。",
   "tooltip.ars_alchemica.sludge.desc": "从反应失控凝固的坩埚中清理出的恶臭有毒淤泥。",
   "tooltip.ars_alchemica.sludge.use": "手持右键投掷：在着弹点释放微型腐蚀滞留毒雾 (减速与以太毒蚀)",
-
   "hud.ars_alchemica.intuition.dry_boil_warn": "⚠ 极度危险：坩埚正处于干烧状态 (%s/%s Ticks)！即将爆裂！",
   "hud.ars_alchemica.intuition.sludge_warn": "⚠ 反应报废：溶液已彻底凝结为炼金败物黑泥！请使用铁铲清理！",
-
   "mishap.ars_alchemica.none": "反应平稳",
   "mishap.ars_alchemica.success": "退火定型成功",
   "mishap.ars_alchemica.toxic_miasma": "以太剧毒瘴气爆发",
   "mishap.ars_alchemica.conflagration": "炼狱烈焰蔓延",
   "mishap.ars_alchemica.sludge": "炼金败物黑泥凝固",
   "mishap.ars_alchemica.arcane_detonation": "以太裂解大殉爆",
-  "mishap.ars_alchemica.dry_boil_meltdown": "干烧过热爆裂熔毁"
+  "mishap.ars_alchemica.dry_boil_meltdown": "干烧过热爆裂熔毁",
+  "block.ars_alchemica.cinder_thistle": "灰烬血蓟",
+  "item.ars_alchemica.cinder_thistle": "灰烬血蓟",
+  "tooltip.ars_alchemica.herb.cinder_thistle.desc": "汲取熔岩与烬土生长的赤红荆棘，茎叶覆满烈焰火刺。",
+  "block.ars_alchemica.frostvein_orchid": "凝霜幽兰",
+  "item.ars_alchemica.frostvein_orchid": "凝霜幽兰",
+  "tooltip.ars_alchemica.herb.frostvein_orchid.desc": "凝结万年玄冰灵气的极地幽兰，花瓣薄如冰晶，畏惧高温。",
+  "block.ars_alchemica.storm_marigold": "避雷金盏花",
+  "item.ars_alchemica.storm_marigold": "避雷金盏花",
+  "tooltip.ars_alchemica.herb.storm_marigold.desc": "傲立于高山危崖的坚韧金盏，雷暴天引雷充能，绽放耀眼电弧。",
+  "block.ars_alchemica.abyssal_lumina_mint": "深渊幽光薄荷",
+  "item.ars_alchemica.abyssal_lumina_mint": "深渊幽光薄荷",
+  "tooltip.ars_alchemica.herb.abyssal_lumina_mint.desc": "隐匿于幽匿深渊的冷光草药，厌恶强光，在漆黑中散发幽蓝光泽。",
+  "block.ars_alchemica.screaming_mandragora": "哀嚎曼陀罗",
+  "item.ars_alchemica.screaming_mandragora": "哀嚎曼陀罗",
+  "tooltip.ars_alchemica.herb.screaming_mandragora.desc": "根茎具人形怪诞面庞的魔性植物，徒手拔起会引发生理失调的刺耳尖叫。",
+  "block.ars_alchemica.moonveil_belladonna": "月影颠茄",
+  "item.ars_alchemica.moonveil_belladonna": "月影颠茄",
+  "tooltip.ars_alchemica.herb.moonveil_belladonna.desc": "暗夜林下盛开的剧毒幽花，于满月与新月之夜受月华滋润绽放。",
+  "block.ars_alchemica.carrion_bogmoss": "腐水食腐苔",
+  "item.ars_alchemica.carrion_bogmoss": "腐水食腐苔",
+  "tooltip.ars_alchemica.herb.carrion_bogmoss.desc": "滋生于泥沼死水之上的吸毒藓类，能吸附体内沉积的烈性炼金毒素。",
+  "item.ars_alchemica.processed_herb": "炼金草药提取物"
 }

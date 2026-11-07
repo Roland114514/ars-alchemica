@@ -19,14 +19,18 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.ToIntFunction;
 
-public class Block {
+public class Block extends net.minecraft.world.level.block.state.BlockBehaviour implements net.minecraft.world.level.ItemLike {
+    @Override
+    public net.minecraft.world.item.Item asItem() {
+        return new net.minecraft.world.item.BlockItem(this, new net.minecraft.world.item.Item.Properties());
+    }
     public static final int UPDATE_ALL = 3;
     public static final int UPDATE_CLIENTS = 2;
 
     protected final StateDefinition<Block, BlockState> stateDefinition;
     private BlockState defaultBlockState;
 
-    public Block(Properties properties) {
+    public Block(net.minecraft.world.level.block.state.BlockBehaviour.Properties properties) {
         this.stateDefinition = new StateDefinition<>(new BlockState(this));
         this.defaultBlockState = this.stateDefinition.any();
     }
@@ -72,10 +76,7 @@ public class Block {
         return InteractionResult.PASS;
     }
 
-    public static class Properties {
+    public static class Properties extends net.minecraft.world.level.block.state.BlockBehaviour.Properties {
         public static Properties of() { return new Properties(); }
-        public Properties randomTicks() { return this; }
-        public Properties noCollission() { return this; }
-        public Properties lightLevel(ToIntFunction<BlockState> light) { return this; }
     }
 }

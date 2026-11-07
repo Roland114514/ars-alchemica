@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#ars_alchemica:has_herb/carrion_bogmoss",
+  "features": "ars_alchemica:patch_herb_carrion_bogmoss",
+  "step": "vegetal_decoration"
+}
