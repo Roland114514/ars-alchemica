@@ -106,9 +106,9 @@ public class ArsAlchemicaForge {
             ITEMS.register("blade_oil", () -> new BladeOilItem(new Item.Properties().stacksTo(1)));
 
     // --- Block Entities ---
-    @SuppressWarnings("unchecked")
     public static final RegistryObject<BlockEntityType<AlchemicalCauldronBlockEntity>> CAULDRON_BE =
-            BLOCK_ENTITY_TYPES.register("alchemical_cauldron", () -> (BlockEntityType<AlchemicalCauldronBlockEntity>) (Object) new BlockEntityType<>());
+            BLOCK_ENTITY_TYPES.register("alchemical_cauldron", () ->
+                    BlockEntityType.Builder.of(AlchemicalCauldronBlockEntity::new, CAULDRON_BLOCK.get()).build(null));
 
     // --- Effects ---
     public static final RegistryObject<AlchemicalCorrosionEffect> CORROSION_EFFECT =

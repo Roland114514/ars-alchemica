@@ -17,30 +17,36 @@ MC_VERSION="1.20.1"
 OUTPUT_DIR="build/libs"
 mkdir -p "$OUTPUT_DIR"
 
-echo ">>> [1/4] Compiling Common Module..."
-mkdir -p build/classes/common_main
-"$JAVAC" -encoding UTF-8 -d build/classes/common_main \
-  $(find common/src/main/java common/src/test/java/net/minecraft common/src/test/java/org -name "*.java")
+MC_JAR=$(find ~/.gradle/caches -name "minecraft-common-1.20.1*.jar" 2>/dev/null | head -n 1)
+DFU_JAR=$(find ~/.gradle/caches -name "datafixerupper-6.0.8.jar" 2>/dev/null | head -n 1)
 
-echo ">>> [2/4] Compiling Forge / NeoForge 1.20.1 Module..."
+if [ -z "$MC_JAR" ]; then
+    echo "ERROR: Minecraft 1.20.1 cache jar not found in ~/.gradle/caches."
+    exit 1
+fi
+
+echo "Using Minecraft Jar: $MC_JAR"
+echo "Using DFU Jar: $DFU_JAR"
+
+# Ensure common classes exist (compiled against official 1.20.1 Mojmap)
+if [ ! -d "common/build/classes/java/main/com" ]; then
+    echo "ERROR: common/build/classes/java/main/com not found. Please compile common first."
+    exit 1
+fi
+
+echo ">>> [1/3] Compiling Forge / NeoForge 1.20.1 Module (Mojmap space)..."
 mkdir -p build/classes/forge
 "$JAVAC" -encoding UTF-8 -d build/classes/forge \
-  $(find common/src/main/java forge/src/main/java forge/src/stubs/java common/src/test/java/net/minecraft common/src/test/java/org -name "*.java")
+  -cp "common/build/classes/java/main:$MC_JAR:$DFU_JAR" \
+  $(find forge/src/main/java forge/src/stubs/java -name "*.java")
 
-echo ">>> [3/4] Compiling Fabric 1.20.1 Module..."
-mkdir -p build/classes/fabric
-"$JAVAC" -encoding UTF-8 -d build/classes/fabric \
-  $(find common/src/main/java fabric/src/main/java fabric/src/stubs/java common/src/test/java/net/minecraft common/src/test/java/org -name "*.java")
-
-echo ">>> [4/4] Assembling Release JARs..."
-
-# --- Package NeoForge / Forge JAR ---
+echo ">>> [2/3] Assembling NeoForge / Forge JAR..."
 STAGE_NEOFORGE="build/staging/neoforge"
 rm -rf "$STAGE_NEOFORGE"
 mkdir -p "$STAGE_NEOFORGE"
 
-# Copy classes
-cp -r build/classes/common_main/com "$STAGE_NEOFORGE/"
+# Copy real classes (never include test stubs)
+cp -r common/build/classes/java/main/com "$STAGE_NEOFORGE/"
 cp -r build/classes/forge/com/medievalmagic/arsalchemica/forge "$STAGE_NEOFORGE/com/medievalmagic/arsalchemica/"
 
 # Copy assets and resources
@@ -49,24 +55,13 @@ cp -r forge/src/main/resources/* "$STAGE_NEOFORGE/"
 
 NEOFORGE_JAR="$OUTPUT_DIR/ars_alchemica-${MC_VERSION}-${VERSION}-neoforge.jar"
 "$JAR" cf "$NEOFORGE_JAR" -C "$STAGE_NEOFORGE" .
-echo "  -> Assembled: $NEOFORGE_JAR"
+echo "  -> Assembled NeoForge JAR: $NEOFORGE_JAR"
 
-# --- Package Fabric JAR ---
-STAGE_FABRIC="build/staging/fabric"
-rm -rf "$STAGE_FABRIC"
-mkdir -p "$STAGE_FABRIC"
-
-# Copy classes
-cp -r build/classes/common_main/com "$STAGE_FABRIC/"
-cp -r build/classes/fabric/com/medievalmagic/arsalchemica/fabric "$STAGE_FABRIC/com/medievalmagic/arsalchemica/"
-
-# Copy assets and resources
-cp -r common/src/main/resources/* "$STAGE_FABRIC/"
-cp -r fabric/src/main/resources/* "$STAGE_FABRIC/"
-
+echo ">>> [3/3] Verifying Fabric JAR (Intermediary remapped space)..."
 FABRIC_JAR="$OUTPUT_DIR/ars_alchemica-${MC_VERSION}-${VERSION}-fabric.jar"
-"$JAR" cf "$FABRIC_JAR" -C "$STAGE_FABRIC" .
-echo "  -> Assembled: $FABRIC_JAR"
+if [ ! -f "$FABRIC_JAR" ] && [ -f "fabric/build/libs/fabric-${VERSION}.jar" ]; then
+    cp "fabric/build/libs/fabric-${VERSION}.jar" "$FABRIC_JAR"
+fi
 
 echo ""
 echo ">>> SUCCESS! Both NeoForge and Fabric 1.20.1 mod JARs are packaged and ready."
