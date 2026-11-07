@@ -2,6 +2,8 @@ package net.minecraft.world.level.block;
 
 public class Blocks {
     public static final Block AIR = new Block(Block.Properties.of());
+    public static final Block STONE = new Block(Block.Properties.of());
+    public static final Block COBBLESTONE = new Block(Block.Properties.of());
     public static final Block DEEPSLATE = new Block(Block.Properties.of());
     public static final Block SCULK = new Block(Block.Properties.of());
     public static final Block TUFF = new Block(Block.Properties.of());

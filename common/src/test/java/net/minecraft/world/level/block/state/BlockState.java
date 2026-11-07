@@ -17,6 +17,9 @@ public class BlockState {
 
     public Block getBlock() { return block; }
     public boolean is(Block other) { return this.block == other; }
+    public boolean isAir() { return this.block == net.minecraft.world.level.block.Blocks.AIR; }
+    public boolean isSolidRender(net.minecraft.world.level.Level level, net.minecraft.core.BlockPos pos) { return !isAir(); }
+    public boolean isSolid() { return !isAir(); }
 
     public boolean hasProperty(Property<?> property) {
         return values.containsKey(property) || property.getName().equals("water_level") || property.getName().equals("heat_tier");

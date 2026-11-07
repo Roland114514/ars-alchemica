@@ -1,9 +1,10 @@
 package com.medievalmagic.arsalchemica.api.cauldron;
 
 import com.medievalmagic.arsalchemica.api.aspect.AlchemyAspect;
-import com.medievalmagic.arsalchemica.api.vector.AspectVector;
+import com.medievalmagic.arsalchemica.cauldron.mishap.AlchemicalMishapType;
 import com.medievalmagic.arsalchemica.api.map.AlchemyMap;
 import com.medievalmagic.arsalchemica.api.map.AlchemyMap.HazardZone;
+import com.medievalmagic.arsalchemica.api.vector.AspectVector;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 
@@ -94,6 +95,8 @@ public class CauldronReactionState {
     private double turbidity = 0.0;
     /** 是否已完成退火结晶定型（防止每 tick 重复触发成功结算） */
     private boolean crystallized = false;
+    /** 干烧累积 Ticks (当无水且底部受热时持续攀升，达到 200 ticks 发生干烧爆裂) */
+    private int dryBoilTicks = 0;
 
     // --- 状态机推进核心方法 ---
 
@@ -104,12 +107,26 @@ public class CauldronReactionState {
      * @param heatLevel     当前热源提供的热量阶级
      */
     public void tick(boolean hasHeatSource, HeatLevel heatLevel) {
+        tick(hasHeatSource, heatLevel, 1);
+    }
+
+    /**
+     * 带液面刻度的服务端 Tick 调用。
+     */
+    public void tick(boolean hasHeatSource, HeatLevel heatLevel, int waterLevel) {
         this.activeHeatLevel = hasHeatSource ? heatLevel : HeatLevel.COLD;
 
         // 1. 牛顿冷却与加热定律：dT/dt = k * (T_env - T)
         double targetTemp = this.activeHeatLevel.getTargetTemperature();
         double k = this.activeHeatLevel.getThermalConductivity();
         this.temperature += (targetTemp - this.temperature) * k;
+
+        // 干烧累积判定：无水且持续受热
+        if (waterLevel <= 0 && hasHeatSource && heatLevel != HeatLevel.COLD) {
+            this.dryBoilTicks++;
+        } else {
+            this.dryBoilTicks = Math.max(0, this.dryBoilTicks - 2);
+        }
 
         // 2. 搅拌流体阻尼与圈数统计
         updateStirPhysics();
@@ -188,28 +205,54 @@ public class CauldronReactionState {
     }
 
     /**
-     * 检查当前溶液是否触发灾难性炼金事故或完成结晶。
+     * 清理凝固黑泥废渣。
+     *
+     * @return true 若成功清除了黑泥；false 若当前并非凝固黑泥状态。
      */
-    public MishapResult checkMishap() {
-        if (this.crystallized) {
-            return MishapResult.NONE;
-        }
-
-        // 1. 浑浊度爆表 -> 凝结成废渣黑泥
+    public boolean clearSludge() {
         if (this.turbidity >= 1.0) {
-            return MishapResult.SLUDGE_COAGULATION;
+            this.turbidity = 0.0;
+            this.accumulatedInstability = 0.0;
+            this.currentVector = AspectVector.ZERO;
+            this.dissolvingBuffer = AspectVector.ZERO;
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 深度检查当前状态是否触发具体的细分炼金事故。
+     */
+    public AlchemicalMishapType checkDetailedMishap() {
+        if (this.crystallized) {
+            return AlchemicalMishapType.NONE;
         }
 
-        // 2. 失稳度爆表 -> 根据当前热力学能级决定是毒雾沸溢还是剧烈殉爆
+        // 1. 干烧超载崩解
+        if (this.dryBoilTicks >= 200) {
+            return AlchemicalMishapType.DRY_BOIL_MELTDOWN;
+        }
+
+        // 2. 浑浊度爆表 -> 凝结成废渣黑泥
+        if (this.turbidity >= 1.0) {
+            return AlchemicalMishapType.SLUDGE_COAGULATION;
+        }
+
+        // 3. 高挥发易燃质点爆燃火灾
+        if (this.currentVector.calculateVolatility() > 0.80 && this.accumulatedInstability >= 0.60 && this.temperature >= 120.0) {
+            return AlchemicalMishapType.INFERNAL_CONFLAGRATION;
+        }
+
+        // 4. 失稳度爆表 -> 根据当前热力学能级决定是毒雾沸溢还是剧烈殉爆
         if (this.accumulatedInstability >= 1.0) {
             if (this.temperature >= HeatLevel.ROILING_BOIL.getTargetTemperature() - 10.0) {
-                return MishapResult.ARCANE_EXPLOSION;
+                return AlchemicalMishapType.ARCANE_DETONATION;
             } else {
-                return MishapResult.TOXIC_BOILOVER;
+                return AlchemicalMishapType.TOXIC_MIASMA_OUTBREAK;
             }
         }
 
-        // 3. 判定是否满足正常退火结晶条件：
+        // 5. 判定是否满足正常退火结晶条件：
         // 缓冲池已完全溶解 + 溶液冷却至 45°C 以下 + 处于有效星图节点内 + 纯度达标
         if (this.dissolvingBuffer.getTotalAspectMass() < 0.05 && this.temperature <= 45.0 && this.currentVector.getTotalAspectMass() > 1.0) {
             double x = this.currentVector.getX();
@@ -219,11 +262,26 @@ public class CauldronReactionState {
             Optional<com.medievalmagic.arsalchemica.api.map.AlchemyMapNode> hit = AlchemyMap.getInstance().findHitNode(x, y);
             if (hit.isPresent() && effectivePurity >= hit.get().getMinPurityRequired()) {
                 this.crystallized = true;
-                return MishapResult.CRYSTALLIZE_SUCCESS;
+                return AlchemicalMishapType.CRYSTALLIZE_SUCCESS;
             }
         }
 
-        return MishapResult.NONE;
+        return AlchemicalMishapType.NONE;
+    }
+
+    /**
+     * 兼容老旧接口的快速事故检查。
+     */
+    public MishapResult checkMishap() {
+        AlchemicalMishapType detailed = checkDetailedMishap();
+        return switch (detailed) {
+            case ARCANE_DETONATION, DRY_BOIL_MELTDOWN -> MishapResult.ARCANE_EXPLOSION;
+            case TOXIC_MIASMA_OUTBREAK -> MishapResult.TOXIC_BOILOVER;
+            case INFERNAL_CONFLAGRATION -> MishapResult.ARCANE_EXPLOSION;
+            case SLUDGE_COAGULATION -> MishapResult.SLUDGE_COAGULATION;
+            case CRYSTALLIZE_SUCCESS -> MishapResult.CRYSTALLIZE_SUCCESS;
+            default -> MishapResult.NONE;
+        };
     }
 
     // --- 内部物理演进子例程 ---
@@ -316,6 +374,7 @@ public class CauldronReactionState {
         tag.putDouble("Instability", this.accumulatedInstability);
         tag.putDouble("Turbidity", this.turbidity);
         tag.putBoolean("Crystallized", this.crystallized);
+        tag.putInt("DryBoilTicks", this.dryBoilTicks);
         return tag;
     }
 
@@ -342,11 +401,14 @@ public class CauldronReactionState {
         this.accumulatedInstability = Math.max(0.0, tag.getDouble("Instability"));
         this.turbidity = Math.max(0.0, tag.getDouble("Turbidity"));
         this.crystallized = tag.getBoolean("Crystallized");
+        this.dryBoilTicks = tag.getInt("DryBoilTicks");
     }
 
     // --- Getters & Reset ---
 
     public boolean isCrystallized() { return crystallized; }
+    public int getDryBoilTicks() { return dryBoilTicks; }
+    public boolean isDryBoiling() { return dryBoilTicks > 0; }
 
     public AspectVector getCurrentVector() { return currentVector; }
     public AspectVector getDissolvingBuffer() { return dissolvingBuffer; }

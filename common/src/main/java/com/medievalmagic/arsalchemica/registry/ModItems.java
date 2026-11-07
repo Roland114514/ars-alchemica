@@ -1,6 +1,8 @@
 package com.medievalmagic.arsalchemica.registry;
 
 import com.medievalmagic.arsalchemica.cauldron.AlchemicalStirringRodItem;
+import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSlagItem;
+import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSludgeItem;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
@@ -33,6 +35,8 @@ public final class ModItems {
     private static Supplier<RecipeScrollItem> RECIPE_SCROLL = () -> null;
     private static Supplier<AncientParchmentItem> ANCIENT_PARCHMENT = () -> null;
     private static Supplier<ScholiaFragmentItem> SCHOLIA_FRAGMENT = () -> null;
+    private static Supplier<AlchemicalSlagItem> SLAG = () -> null;
+    private static Supplier<AlchemicalSludgeItem> SLUDGE = () -> null;
 
     public static void bindPotions(
             Supplier<AlchemicalPotionItem> elixirSupplier,
@@ -60,6 +64,14 @@ public final class ModItems {
         RECIPE_SCROLL = Objects.requireNonNull(scrollSupplier, "Recipe scroll supplier cannot be null");
         ANCIENT_PARCHMENT = Objects.requireNonNull(parchmentSupplier, "Ancient parchment supplier cannot be null");
         SCHOLIA_FRAGMENT = Objects.requireNonNull(fragmentSupplier, "Scholia fragment supplier cannot be null");
+    }
+
+    public static void bindMishapItems(
+            Supplier<AlchemicalSlagItem> slagSupplier,
+            Supplier<AlchemicalSludgeItem> sludgeSupplier
+    ) {
+        SLAG = Objects.requireNonNull(slagSupplier, "Slag supplier cannot be null");
+        SLUDGE = Objects.requireNonNull(sludgeSupplier, "Sludge supplier cannot be null");
     }
 
     public static AlchemicalPotionItem getElixir() {
@@ -92,5 +104,13 @@ public final class ModItems {
 
     public static ScholiaFragmentItem getScholiaFragment() {
         return SCHOLIA_FRAGMENT.get();
+    }
+
+    public static AlchemicalSlagItem getSlag() {
+        return SLAG.get();
+    }
+
+    public static AlchemicalSludgeItem getSludge() {
+        return SLUDGE.get();
     }
 }

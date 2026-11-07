@@ -143,5 +143,24 @@
   "hud.ars_alchemica.intuition.map_coord": "以太星图坐标：(%s)",
   "hud.ars_alchemica.intuition.nearby_recipe": "共鸣前瞻：接近【%s】共鸣区",
 
-  "entity.minecraft.villager.ars_alchemica.apothecary": "药剂师"
+  "entity.minecraft.villager.ars_alchemica.apothecary": "药剂师",
+
+  "item.ars_alchemica.alchemical_slag": "炼金铁渣",
+  "item.ars_alchemica.alchemical_sludge": "炼金败物腐蚀黑泥",
+
+  "tooltip.ars_alchemica.slag.desc": "坩埚因以太失控爆裂后崩落的扭曲金属残块。",
+  "tooltip.ars_alchemica.slag.hint": "以太流形已崩溃，可熔炼回收微量铁质。",
+  "tooltip.ars_alchemica.sludge.desc": "从反应失控凝固的坩埚中清理出的恶臭有毒淤泥。",
+  "tooltip.ars_alchemica.sludge.use": "手持右键投掷：在着弹点释放微型腐蚀滞留毒雾 (减速与以太毒蚀)",
+
+  "hud.ars_alchemica.intuition.dry_boil_warn": "⚠ 极度危险：坩埚正处于干烧状态 (%s/%s Ticks)！即将爆裂！",
+  "hud.ars_alchemica.intuition.sludge_warn": "⚠ 反应报废：溶液已彻底凝结为炼金败物黑泥！请使用铁铲清理！",
+
+  "mishap.ars_alchemica.none": "反应平稳",
+  "mishap.ars_alchemica.success": "退火定型成功",
+  "mishap.ars_alchemica.toxic_miasma": "以太剧毒瘴气爆发",
+  "mishap.ars_alchemica.conflagration": "炼狱烈焰蔓延",
+  "mishap.ars_alchemica.sludge": "炼金败物黑泥凝固",
+  "mishap.ars_alchemica.arcane_detonation": "以太裂解大殉爆",
+  "mishap.ars_alchemica.dry_boil_meltdown": "干烧过热爆裂熔毁"
 }

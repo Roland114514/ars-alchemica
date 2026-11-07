@@ -11,6 +11,11 @@ public class ItemEntity extends Entity {
         this.item = item != null ? item : ItemStack.EMPTY;
     }
 
+    public ItemEntity(net.minecraft.world.level.Level level, double x, double y, double z, ItemStack item) {
+        this(item);
+        this.level = level;
+    }
+
     public ItemStack getItem() {
         return item;
     }

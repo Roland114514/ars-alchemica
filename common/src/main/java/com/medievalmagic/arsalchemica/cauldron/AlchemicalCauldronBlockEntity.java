@@ -5,6 +5,8 @@ import com.medievalmagic.arsalchemica.api.cauldron.CauldronReactionState;
 import com.medievalmagic.arsalchemica.api.cauldron.CauldronReactionState.HeatLevel;
 import com.medievalmagic.arsalchemica.api.cauldron.CauldronReactionState.MishapResult;
 import com.medievalmagic.arsalchemica.api.vector.AspectVector;
+import com.medievalmagic.arsalchemica.cauldron.mishap.AlchemicalCatastropheHandler;
+import com.medievalmagic.arsalchemica.cauldron.mishap.AlchemicalMishapType;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalRecipeStepTracker;
 import com.medievalmagic.arsalchemica.grimoire.ScholarIntuitionData;
 import com.medievalmagic.arsalchemica.herb.IAlchemicalHerb;
@@ -76,8 +78,8 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
         HeatLevel heatLevel = detectHeatSource(level, pos.below());
         boolean hasHeat = (heatLevel != HeatLevel.COLD);
 
-        // 2. 演进热力学与微观以太状态机
-        be.reactionState.tick(hasHeat, heatLevel);
+        // 2. 演进热力学与微观以太状态机 (包含干烧计时)
+        be.reactionState.tick(hasHeat, heatLevel, be.waterLevel);
 
         // 3. 更新溶液流体混色
         AspectVector currentVec = be.reactionState.getCurrentVector();
@@ -92,10 +94,10 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
             be.scanAndAbsorbDroppedItems(level, pos);
         }
 
-        // 5. 炼金事故与结晶检查
-        MishapResult mishap = be.reactionState.checkMishap();
-        if (mishap != MishapResult.NONE) {
-            be.handleMishap(level, pos, mishap);
+        // 5. 细分炼金事故与结晶检查
+        AlchemicalMishapType mishap = be.reactionState.checkDetailedMishap();
+        if (mishap != AlchemicalMishapType.NONE) {
+            be.handleDetailedMishap(level, pos, mishap);
         }
 
         // 6. 状态更新与轻量同步
@@ -134,6 +136,27 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
     public InteractionResult onPlayerInteract(Player player, InteractionHand hand, BlockHitResult hit) {
         if (this.level == null) return InteractionResult.PASS;
         ItemStack held = player.getItemInHand(hand);
+
+        // 0. 铁铲清淤沉淀黑泥
+        if (this.reactionState.getTurbidity() >= 1.0) {
+            boolean isShovel = held.getItem() instanceof net.minecraft.world.item.ShovelItem ||
+                    held.getItem().getDescriptionId().toLowerCase(java.util.Locale.ROOT).contains("shovel");
+            if (isShovel || held.is(Items.BUCKET)) {
+                if (this.reactionState.clearSludge()) {
+                    this.fluidColor = DEFAULT_FLUID_COLOR;
+                    if (!player.isCreative() && isShovel) {
+                        held.hurtAndBreak(1, player, p -> p.broadcastBreakEvent(hand));
+                    }
+                    ItemStack sludgeStack = new ItemStack(ModItems.getSludge(), 1);
+                    if (!player.getInventory().add(sludgeStack)) {
+                        player.drop(sludgeStack, false);
+                    }
+                    this.level.playSound(player, this.worldPosition, SoundEvents.SLIME_SQUISH, SoundSource.BLOCKS, 1.0f, 1.0f);
+                    setChanged();
+                    return InteractionResult.sidedSuccess(this.level.isClientSide());
+                }
+            }
+        }
 
         // 1. 水桶注水
         if (held.is(Items.WATER_BUCKET)) {
@@ -304,35 +327,30 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
     }
 
     /**
-     * 处理炼金事故。
+     * 处理具体细分的炼金灾变。
      */
-    private void handleMishap(Level level, BlockPos pos, MishapResult mishap) {
-        switch (mishap) {
-            case TOXIC_BOILOVER -> {
-                // 沸溢有毒滞留云
-                AreaEffectCloud cloud = new AreaEffectCloud(level, pos.getX() + 0.5, pos.getY() + 0.8, pos.getZ() + 0.5);
-                cloud.setRadius(3.5f);
-                cloud.setDuration(200);
-                cloud.addEffect(new MobEffectInstance(ModEffects.getCorrosion(), 100, 1));
-                level.addFreshEntity(cloud);
-                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0f, 0.8f);
-                resetCauldron();
-            }
-            case ARCANE_EXPLOSION -> {
-                // 以太剧烈爆炸反噬
-                level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 2.5f, Level.ExplosionInteraction.BLOCK);
-                resetCauldron();
-            }
-            case SLUDGE_COAGULATION -> {
-                // 凝聚为废渣黑泥
-                this.fluidColor = 0x1A1A1A;
-            }
-            case CRYSTALLIZE_SUCCESS -> {
-                // 成功定型
-                level.playSound(null, pos, SoundEvents.BREWING_STAND_BREW, SoundSource.BLOCKS, 1.0f, 1.5f);
-            }
-            case NONE -> {}
+    public void handleDetailedMishap(Level level, BlockPos pos, AlchemicalMishapType mishap) {
+        AlchemicalCatastropheHandler.executeMishap(level, pos, mishap);
+        if (mishap == AlchemicalMishapType.SLUDGE_COAGULATION) {
+            this.fluidColor = 0x111116;
+            setChanged();
+        } else if (mishap.isCatastrophic()) {
+            resetCauldron();
         }
+    }
+
+    /**
+     * 兼容老旧事故接口。
+     */
+    public void handleMishap(Level level, BlockPos pos, MishapResult mishap) {
+        AlchemicalMishapType type = switch (mishap) {
+            case ARCANE_EXPLOSION -> AlchemicalMishapType.ARCANE_DETONATION;
+            case TOXIC_BOILOVER -> AlchemicalMishapType.TOXIC_MIASMA_OUTBREAK;
+            case SLUDGE_COAGULATION -> AlchemicalMishapType.SLUDGE_COAGULATION;
+            case CRYSTALLIZE_SUCCESS -> AlchemicalMishapType.CRYSTALLIZE_SUCCESS;
+            default -> AlchemicalMishapType.NONE;
+        };
+        handleDetailedMishap(level, pos, type);
     }
 
     public void setWaterLevel(int level) {
@@ -405,7 +423,8 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
                 phase.getTranslationKey(),
                 mapX,
                 mapY,
-                nearbyRecipeKey
+                nearbyRecipeKey,
+                this.reactionState.getDryBoilTicks()
         );
     }
 

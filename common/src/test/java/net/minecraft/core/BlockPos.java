@@ -19,6 +19,7 @@ public class BlockPos {
     public BlockPos above(int n) { return new BlockPos(x, y + n, z); }
     public BlockPos below() { return new BlockPos(x, y - 1, z); }
     public BlockPos below(int n) { return new BlockPos(x, y - n, z); }
+    public BlockPos offset(int dx, int dy, int dz) { return new BlockPos(x + dx, y + dy, z + dz); }
     public BlockPos relative(Direction dir) { return new BlockPos(x + dir.getStepX(), y + dir.getStepY(), z + dir.getStepZ()); }
 
     @Override

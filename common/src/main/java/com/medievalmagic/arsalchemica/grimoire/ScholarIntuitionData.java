@@ -28,8 +28,31 @@ public record ScholarIntuitionData(
         String recipeStepGuidance,
         double mapX,
         double mapY,
-        String nearbyRecipeKey
+        String nearbyRecipeKey,
+        int dryBoilTicks
 ) {
+
+    public ScholarIntuitionData(
+            double temperature,
+            CauldronReactionState.HeatLevel heatLevel,
+            int waterLevel,
+            double mass,
+            double purity,
+            double instability,
+            double turbidity,
+            int clockwiseTurns,
+            int counterClockwiseTurns,
+            int fluidColor,
+            AlchemyAspect dominantAspect,
+            String recipeStepGuidance,
+            double mapX,
+            double mapY,
+            String nearbyRecipeKey
+    ) {
+        this(temperature, heatLevel, waterLevel, mass, purity, instability, turbidity,
+                clockwiseTurns, counterClockwiseTurns, fluidColor, dominantAspect,
+                recipeStepGuidance, mapX, mapY, nearbyRecipeKey, 0);
+    }
 
     public ScholarIntuitionData(
             double temperature,
@@ -47,7 +70,7 @@ public record ScholarIntuitionData(
     ) {
         this(temperature, heatLevel, waterLevel, mass, purity, instability, turbidity,
                 clockwiseTurns, counterClockwiseTurns, fluidColor, dominantAspect,
-                recipeStepGuidance, 0.0, 0.0, null);
+                recipeStepGuidance, 0.0, 0.0, null, 0);
     }
 
     /**
@@ -68,8 +91,16 @@ public record ScholarIntuitionData(
             "step.ars_alchemica.empty_cauldron",
             0.0,
             0.0,
-            null
+            null,
+            0
     );
+
+    /**
+     * 判定当前是否处于干烧爆裂危险预警状态。
+     */
+    public boolean isDryBoilWarning() {
+        return dryBoilTicks >= 40;
+    }
 
     /**
      * 判定当前溶液是否处于失控临界态 (危险警告)。

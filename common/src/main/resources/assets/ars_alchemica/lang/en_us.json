@@ -143,5 +143,24 @@
   "hud.ars_alchemica.intuition.map_coord": "Aether Map Coord: (%s)",
   "hud.ars_alchemica.intuition.nearby_recipe": "Resonance Sensing: Approaching [%s]",
 
-  "entity.minecraft.villager.ars_alchemica.apothecary": "Apothecary"
+  "entity.minecraft.villager.ars_alchemica.apothecary": "Apothecary",
+
+  "item.ars_alchemica.alchemical_slag": "Alchemical Slag",
+  "item.ars_alchemica.alchemical_sludge": "Alchemical Sludge",
+
+  "tooltip.ars_alchemica.slag.desc": "Twisted metal fragments from a crucible shattered by an aetherial explosion.",
+  "tooltip.ars_alchemica.slag.hint": "The ethereal manifold has collapsed; can be smelted for trace iron.",
+  "tooltip.ars_alchemica.sludge.desc": "Foul corrosive mud cleared from a ruined cauldron.",
+  "tooltip.ars_alchemica.sludge.use": "Right-click to throw: Spawns miniature corrosive miasma on impact (Slowness & Corrosion)",
+
+  "hud.ars_alchemica.intuition.dry_boil_warn": "⚠ Extreme Danger: Crucible dry-boiling (%s/%s Ticks)! Meltdown imminent!",
+  "hud.ars_alchemica.intuition.sludge_warn": "⚠ Concoction Ruined: Solution coagulated into sludge! Clear with a shovel!",
+
+  "mishap.ars_alchemica.none": "Stable",
+  "mishap.ars_alchemica.success": "Annealing Succeeded",
+  "mishap.ars_alchemica.toxic_miasma": "Toxic Miasma Outbreak",
+  "mishap.ars_alchemica.conflagration": "Infernal Conflagration",
+  "mishap.ars_alchemica.sludge": "Sludge Coagulation",
+  "mishap.ars_alchemica.arcane_detonation": "Arcane Detonation",
+  "mishap.ars_alchemica.dry_boil_meltdown": "Dry-Boil Meltdown"
 }

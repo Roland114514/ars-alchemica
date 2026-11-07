@@ -80,7 +80,17 @@ public final class ScholarIntuitionHudRenderer {
                     .withStyle(ChatFormatting.GOLD));
         }
 
-        // 6. 当前工序指引
+        // 6. 危险预警：干烧爆裂或黑泥凝固
+        if (data.isDryBoilWarning()) {
+            lines.add(Component.translatable("hud.ars_alchemica.intuition.dry_boil_warn", data.dryBoilTicks(), 200)
+                    .withStyle(ChatFormatting.RED, ChatFormatting.BOLD));
+        }
+        if (data.turbidity() >= 1.0) {
+            lines.add(Component.translatable("hud.ars_alchemica.intuition.sludge_warn")
+                    .withStyle(ChatFormatting.DARK_GREEN, ChatFormatting.BOLD));
+        }
+
+        // 7. 当前工序指引
         lines.add(Component.translatable("hud.ars_alchemica.intuition.guidance",
                 Component.translatable(data.recipeStepGuidance()))
                 .withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));
