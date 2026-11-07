@@ -8,8 +8,11 @@ import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSlagItem;
 import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSludgeItem;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
 import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlock;
+import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlock;
+import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlock;
+import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlockEntity;
 import com.medievalmagic.arsalchemica.potion.AlchemicalCorrosionEffect;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
@@ -115,6 +118,15 @@ public class ArsAlchemicaForge {
     public static final RegistryObject<BlockEntityType<AlchemicalCauldronBlockEntity>> CAULDRON_BE =
             BLOCK_ENTITY_TYPES.register("alchemical_cauldron", () ->
                     BlockEntityType.Builder.of(AlchemicalCauldronBlockEntity::new, CAULDRON_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<MortarBlockEntity>> MORTAR_BE =
+            BLOCK_ENTITY_TYPES.register("mortar", () ->
+                    BlockEntityType.Builder.of(MortarBlockEntity::new, MORTAR_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<HerbPressBlockEntity>> HERB_PRESS_BE =
+            BLOCK_ENTITY_TYPES.register("herb_press", () ->
+                    BlockEntityType.Builder.of(HerbPressBlockEntity::new, HERB_PRESS_BLOCK.get()).build(null));
+    public static final RegistryObject<BlockEntityType<DryingRackBlockEntity>> DRYING_RACK_BE =
+            BLOCK_ENTITY_TYPES.register("drying_rack", () ->
+                    BlockEntityType.Builder.of(DryingRackBlockEntity::new, DRYING_RACK_BLOCK.get()).build(null));
 
     // --- Effects ---
     public static final RegistryObject<AlchemicalCorrosionEffect> CORROSION_EFFECT =
@@ -158,6 +170,7 @@ public class ArsAlchemicaForge {
         ModBlocks.bindCauldron(CAULDRON_BLOCK::get);
         ModBlocks.bindApparatus(MORTAR_BLOCK::get, HERB_PRESS_BLOCK::get, DRYING_RACK_BLOCK::get);
         ModBlockEntities.bindCauldron(CAULDRON_BE::get);
+        ModBlockEntities.bind(MORTAR_BE::get, HERB_PRESS_BE::get, DRYING_RACK_BE::get);
         ModItems.bindApparatusItems(STIRRING_ROD::get, JOURNAL::get);
         ModItems.bindExplorationItems(RECIPE_SCROLL::get, ANCIENT_PARCHMENT::get, SCHOLIA_FRAGMENT::get);
         ModItems.bindMishapItems(SLAG::get, SLUDGE::get);

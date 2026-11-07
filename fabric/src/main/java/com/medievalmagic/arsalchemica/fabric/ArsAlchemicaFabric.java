@@ -8,8 +8,11 @@ import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSlagItem;
 import com.medievalmagic.arsalchemica.cauldron.item.AlchemicalSludgeItem;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
 import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlock;
+import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlock;
+import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlock;
+import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlockEntity;
 import com.medievalmagic.arsalchemica.potion.AlchemicalCorrosionEffect;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
@@ -136,6 +139,21 @@ public class ArsAlchemicaFabric implements ModInitializer {
                 ArsAlchemica.id("alchemical_cauldron"),
                 FabricBlockEntityTypeBuilder.create(AlchemicalCauldronBlockEntity::new, cauldronBlock).build()
         );
+        BlockEntityType<MortarBlockEntity> mortarBe = Registry.register(
+                BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                ArsAlchemica.id("mortar"),
+                FabricBlockEntityTypeBuilder.create(MortarBlockEntity::new, mortarBlock).build()
+        );
+        BlockEntityType<HerbPressBlockEntity> herbPressBe = Registry.register(
+                BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                ArsAlchemica.id("herb_press"),
+                FabricBlockEntityTypeBuilder.create(HerbPressBlockEntity::new, herbPressBlock).build()
+        );
+        BlockEntityType<DryingRackBlockEntity> dryingRackBe = Registry.register(
+                BuiltInRegistries.BLOCK_ENTITY_TYPE,
+                ArsAlchemica.id("drying_rack"),
+                FabricBlockEntityTypeBuilder.create(DryingRackBlockEntity::new, dryingRackBlock).build()
+        );
 
         // --- 5. MobEffects 注册 ---
         AlchemicalCorrosionEffect corrosionEffect = Registry.register(
@@ -148,6 +166,7 @@ public class ArsAlchemicaFabric implements ModInitializer {
         ModBlocks.bindCauldron(() -> cauldronBlock);
         ModBlocks.bindApparatus(() -> mortarBlock, () -> herbPressBlock, () -> dryingRackBlock);
         ModBlockEntities.bindCauldron(() -> cauldronBe);
+        ModBlockEntities.bind(() -> mortarBe, () -> herbPressBe, () -> dryingRackBe);
         ModItems.bindApparatusItems(() -> stirringRod, () -> journal);
         ModItems.bindExplorationItems(() -> recipeScroll, () -> ancientParchment, () -> scholiaFragment);
         ModItems.bindMishapItems(() -> slag, () -> sludge);

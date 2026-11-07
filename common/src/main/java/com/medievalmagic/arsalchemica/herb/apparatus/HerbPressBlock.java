@@ -132,7 +132,7 @@ public class HerbPressBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof HerbPressBlockEntity press) {
+            if (!level.isClientSide() && level.getBlockEntity(pos) instanceof HerbPressBlockEntity press) {
                 ItemStack herb = press.extractAnyRemaining();
                 ItemStack vial = press.extractVialSlot();
                 if (!herb.isEmpty()) Containers.dropItemStack(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, herb);

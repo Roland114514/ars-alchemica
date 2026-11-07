@@ -326,7 +326,7 @@ public abstract class AlchemicalHerbBlock extends BushBlock {
 
         @Override
         public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-            if (!level.isClientSide && entity instanceof LivingEntity living) {
+            if (!level.isClientSide() && entity instanceof LivingEntity living) {
                 living.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1));
             }
             super.entityInside(state, level, pos, entity);

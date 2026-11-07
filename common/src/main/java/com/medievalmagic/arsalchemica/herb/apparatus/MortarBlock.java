@@ -99,7 +99,7 @@ public class MortarBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof MortarBlockEntity mortar && !mortar.isEmpty()) {
+            if (!level.isClientSide() && level.getBlockEntity(pos) instanceof MortarBlockEntity mortar && !mortar.isEmpty()) {
                 ItemStack extracted = mortar.extractItem(); // 原子提取清空，杜绝二次破坏刷物品
                 if (!extracted.isEmpty()) {
                     Containers.dropItemStack(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, extracted);

@@ -80,7 +80,7 @@ public class HerbPressBlockEntity extends BlockEntity {
     }
 
     public void activateLeverPress(BlockState state) {
-        if (this.level == null || this.level.isClientSide || !canActivatePress()) return;
+        if (this.level == null || this.level.isClientSide() || !canActivatePress()) return;
         if (!(this.herbSlot.getItem() instanceof ProcessedHerbItem herbItem)) return;
 
         ServerLevel serverLevel = (ServerLevel) this.level;

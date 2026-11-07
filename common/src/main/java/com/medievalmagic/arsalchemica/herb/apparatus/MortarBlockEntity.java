@@ -97,7 +97,7 @@ public class MortarBlockEntity extends BlockEntity {
      * - > 8 次  ：碳化损毁，变成废渣 (Charred Slag)
      */
     public boolean performGrind(Player player, ItemStack pestle) {
-        if (this.level == null || this.level.isClientSide || isEmpty()) return false;
+        if (this.level == null || this.level.isClientSide() || isEmpty()) return false;
 
         long gameTime = this.level.getGameTime();
         if (Math.abs(gameTime - this.lastGrindTick) < 4L) return false; // 0.2s 物理冷却

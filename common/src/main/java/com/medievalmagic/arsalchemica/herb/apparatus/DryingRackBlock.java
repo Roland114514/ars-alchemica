@@ -100,22 +100,22 @@ public class DryingRackBlock extends BaseEntityBlock {
 
         // 1. 悬挂新鲜草药
         if (rack.canHangHerb(held)) {
-            if (!level.isClientSide && rack.hangHerb(held.split(1))) {
+            if (!level.isClientSide() && rack.hangHerb(held.split(1))) {
                 return InteractionResult.SUCCESS;
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
         // 2. 空手取下草药
         if (held.isEmpty()) {
-            if (!level.isClientSide) {
+            if (!level.isClientSide()) {
                 ItemStack retrieved = rack.takeHerb();
                 if (!retrieved.isEmpty()) {
                     if (!player.getInventory().add(retrieved)) player.drop(retrieved, false);
                     return InteractionResult.SUCCESS;
                 }
             }
-            return InteractionResult.sidedSuccess(level.isClientSide);
+            return InteractionResult.sidedSuccess(level.isClientSide());
         }
 
         return InteractionResult.PASS;
@@ -124,7 +124,7 @@ public class DryingRackBlock extends BaseEntityBlock {
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
-            if (!level.isClientSide && level.getBlockEntity(pos) instanceof DryingRackBlockEntity rack) {
+            if (!level.isClientSide() && level.getBlockEntity(pos) instanceof DryingRackBlockEntity rack) {
                 ItemStack item;
                 while (!(item = rack.takeHerb()).isEmpty()) {
                     Containers.dropItemStack(level, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, item);
@@ -143,7 +143,7 @@ public class DryingRackBlock extends BaseEntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        if (level.isClientSide) return null;
+        if (level.isClientSide()) return null;
         return createTickerHelper(type, ModBlockEntities.getDryingRackType(), DryingRackBlockEntity::serverTick);
     }
 
