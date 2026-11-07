@@ -1,0 +1,29 @@
+# Secrets & Environment
+.env
+*.env.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+.venv/
+env/
+
+# Gradle & Java Modding
+.gradle/
+build/
+run/
+out/
+bin/
+*.class
+*.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.ipr
+*.iws
+
+# OS
+.DS_Store
+Thumbs.db
