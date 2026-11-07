@@ -116,10 +116,15 @@ public class CauldronReactionState {
     public void tick(boolean hasHeatSource, HeatLevel heatLevel, int waterLevel) {
         this.activeHeatLevel = hasHeatSource ? heatLevel : HeatLevel.COLD;
 
-        // 1. 牛顿冷却与加热定律：dT/dt = k * (T_env - T)
+        // 1. 牛顿冷却与加热定律：dT/dt = k * (T_env - T) (包含死区防渐近漂移)
         double targetTemp = this.activeHeatLevel.getTargetTemperature();
         double k = this.activeHeatLevel.getThermalConductivity();
-        this.temperature += (targetTemp - this.temperature) * k;
+        double diff = targetTemp - this.temperature;
+        if (Math.abs(diff) < 0.05) {
+            this.temperature = targetTemp;
+        } else {
+            this.temperature += diff * k;
+        }
 
         // 干烧累积判定：无水且持续受热
         if (waterLevel <= 0 && hasHeatSource && heatLevel != HeatLevel.COLD) {
@@ -433,5 +438,6 @@ public class CauldronReactionState {
         this.accumulatedInstability = 0.0;
         this.turbidity = 0.0;
         this.crystallized = false;
+        this.dryBoilTicks = 0;
     }
 }

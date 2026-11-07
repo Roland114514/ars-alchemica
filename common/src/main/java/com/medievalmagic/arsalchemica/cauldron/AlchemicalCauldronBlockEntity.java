@@ -283,7 +283,7 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
      * 扫描吸收入水掉落物。
      */
     private void scanAndAbsorbDroppedItems(Level level, BlockPos pos) {
-        if (this.waterLevel <= 0) return;
+        if (this.waterLevel <= 0 || this.reactionState.getTurbidity() >= 1.0) return;
         AABB basinBox = new AABB(pos.getX() + 0.15, pos.getY() + 0.2, pos.getZ() + 0.15,
                 pos.getX() + 0.85, pos.getY() + 0.9, pos.getZ() + 0.85);
 
@@ -291,13 +291,14 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
         for (ItemEntity itemEntity : items) {
             if (itemEntity.isAlive()) {
                 ItemStack stack = itemEntity.getItem();
-                if (absorbItemStack(stack)) {
+                if (!stack.isEmpty() && absorbItemStack(stack)) {
                     level.playSound(null, pos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 0.7f, 1.2f);
                     if (stack.isEmpty()) {
                         itemEntity.discard();
                     } else {
                         itemEntity.setItem(stack);
                     }
+                    break; // 单次轮询至多吸收 1 个物品，消除瞬间溢出并保障 Check-Effects-Interactions
                 }
             }
         }
@@ -307,7 +308,7 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
      * 吸收具体物品堆栈并溶解。
      */
     public boolean absorbItemStack(ItemStack stack) {
-        if (stack.isEmpty() || this.waterLevel <= 0) return false;
+        if (stack.isEmpty() || this.waterLevel <= 0 || this.reactionState.getTurbidity() >= 1.0) return false;
 
         AspectVector herbVector = null;
         if (stack.getItem() instanceof ProcessedHerbItem processed) {

@@ -97,9 +97,14 @@ public class AncientParchmentItem extends Item {
             return InteractionResultHolder.fail(held);
         }
 
+        ItemStack targetStack = held;
+        if (!player.isCreative() && held.getCount() > 1) {
+            targetStack = held.split(1);
+        }
+
         // 推进破译进度 (每次研读 +25%)
         int newProgress = Math.min(100, currentProgress + 25);
-        held.getOrCreateTag().putInt(TAG_DECIPHER_PROGRESS, newProgress);
+        targetStack.getOrCreateTag().putInt(TAG_DECIPHER_PROGRESS, newProgress);
 
         if (newProgress >= 100) {
             // 破译完成，彻底解锁古代传奇配方！
@@ -111,7 +116,7 @@ public class AncientParchmentItem extends Item {
                     false
             );
             if (!player.isCreative()) {
-                held.shrink(1);
+                targetStack.shrink(1);
             }
         } else {
             // 仍在研读中
@@ -121,6 +126,11 @@ public class AncientParchmentItem extends Item {
                             .withStyle(ChatFormatting.AQUA),
                     true
             );
+            if (targetStack != held) {
+                if (!player.getInventory().add(targetStack)) {
+                    player.drop(targetStack, false);
+                }
+            }
         }
 
         return InteractionResultHolder.sidedSuccess(held, false);

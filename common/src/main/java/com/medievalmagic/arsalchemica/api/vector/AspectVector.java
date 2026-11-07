@@ -236,7 +236,8 @@ public final class AspectVector {
             double diff = this.components[i] - other.components[i];
             sumSq += diff * diff;
         }
-        return Math.sqrt(sumSq);
+        double res = Math.sqrt(sumSq);
+        return Double.isFinite(res) ? res : 0.0;
     }
 
     /**
@@ -247,7 +248,8 @@ public final class AspectVector {
      */
     public double astralDistanceTo(AspectVector other) {
         Objects.requireNonNull(other, "Target AspectVector cannot be null");
-        return Math.hypot(this.x - other.x, this.y - other.y);
+        double res = Math.hypot(this.x - other.x, this.y - other.y);
+        return Double.isFinite(res) ? res : 0.0;
     }
 
     /**
@@ -277,7 +279,36 @@ public final class AspectVector {
         for (int i = 0; i < AlchemyAspect.COUNT; i++) {
             dot += this.components[i] * other.components[i];
         }
-        return dot;
+        return Double.isFinite(dot) ? dot : 0.0;
+    }
+
+    /**
+     * 计算向量在全空间的欧几里得范数 (L2 Norm / 模长)。
+     */
+    public double norm() {
+        double sumSq = this.x * this.x + this.y * this.y;
+        for (int i = 0; i < AlchemyAspect.COUNT; i++) {
+            sumSq += this.components[i] * this.components[i];
+        }
+        double res = Math.sqrt(sumSq);
+        return (!Double.isFinite(res) || res < EPSILON) ? 0.0 : res;
+    }
+
+    /**
+     * 计算与另一个向量的余弦相似度 [-1.0, 1.0]。
+     * 防御性处理零模长，杜绝除零产生 NaN。
+     */
+    public double cosineSimilarity(AspectVector other) {
+        if (other == null) return 0.0;
+        double n1 = this.norm();
+        double n2 = other.norm();
+        if (n1 < EPSILON || n2 < EPSILON) {
+            return 0.0;
+        }
+        double dot = this.dotProduct(other);
+        double cos = dot / (n1 * n2);
+        if (!Double.isFinite(cos)) return 0.0;
+        return Math.max(-1.0, Math.min(1.0, cos));
     }
 
     // ================= 炼金动力学与高阶属性计算 =================
