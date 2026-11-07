@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "ceiling=true,facing=north": { "model": "ars_alchemica:block/drying_rack_ceiling" },
+    "ceiling=true,facing=east":  { "model": "ars_alchemica:block/drying_rack_ceiling", "y": 90 },
+    "ceiling=true,facing=south": { "model": "ars_alchemica:block/drying_rack_ceiling", "y": 180 },
+    "ceiling=true,facing=west":  { "model": "ars_alchemica:block/drying_rack_ceiling", "y": 270 },
+    "ceiling=false,facing=north": { "model": "ars_alchemica:block/drying_rack_wall" },
+    "ceiling=false,facing=east":  { "model": "ars_alchemica:block/drying_rack_wall", "y": 90 },
+    "ceiling=false,facing=south": { "model": "ars_alchemica:block/drying_rack_wall", "y": 180 },
+    "ceiling=false,facing=west":  { "model": "ars_alchemica:block/drying_rack_wall", "y": 270 }
+  }
+}

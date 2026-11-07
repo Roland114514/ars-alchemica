@@ -1,0 +1,128 @@
+{
+  "credit": "Ars Alchemica Dark Medieval Mod",
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "ars_alchemica:block/mortar_obsidian",
+    "obsidian": "ars_alchemica:block/mortar_obsidian",
+    "inner": "ars_alchemica:block/mortar_inner"
+  },
+  "elements": [
+    {
+      "name": "base_foot",
+      "from": [4, 0, 4],
+      "to": [12, 1, 12],
+      "faces": {
+        "north": {"uv": [4, 15, 12, 16], "texture": "#obsidian"},
+        "east":  {"uv": [4, 15, 12, 16], "texture": "#obsidian"},
+        "south": {"uv": [4, 15, 12, 16], "texture": "#obsidian"},
+        "west":  {"uv": [4, 15, 12, 16], "texture": "#obsidian"},
+        "up":    {"uv": [4, 4, 12, 12],   "texture": "#obsidian"},
+        "down":  {"uv": [4, 4, 12, 12],   "texture": "#obsidian", "cullface": "down"}
+      }
+    },
+    {
+      "name": "lower_body",
+      "from": [3, 1, 3],
+      "to": [13, 3, 13],
+      "faces": {
+        "north": {"uv": [3, 13, 13, 15], "texture": "#obsidian"},
+        "east":  {"uv": [3, 13, 13, 15], "texture": "#obsidian"},
+        "south": {"uv": [3, 13, 13, 15], "texture": "#obsidian"},
+        "west":  {"uv": [3, 13, 13, 15], "texture": "#obsidian"},
+        "up":    {"uv": [3, 3, 13, 13],   "texture": "#obsidian"},
+        "down":  {"uv": [3, 3, 13, 13],   "texture": "#obsidian"}
+      }
+    },
+    {
+      "name": "bowl_north_wall",
+      "from": [2, 3, 2],
+      "to": [14, 7, 4],
+      "faces": {
+        "north": {"uv": [2, 9, 14, 13], "texture": "#obsidian"},
+        "east":  {"uv": [2, 9, 4, 13],  "texture": "#obsidian"},
+        "south": {"uv": [2, 9, 14, 13], "texture": "#inner"},
+        "west":  {"uv": [12, 9, 14, 13], "texture": "#obsidian"},
+        "up":    {"uv": [2, 2, 14, 4],   "texture": "#obsidian"}
+      }
+    },
+    {
+      "name": "bowl_south_wall",
+      "from": [2, 3, 12],
+      "to": [14, 7, 14],
+      "faces": {
+        "north": {"uv": [2, 9, 14, 13], "texture": "#inner"},
+        "east":  {"uv": [12, 9, 14, 13], "texture": "#obsidian"},
+        "south": {"uv": [2, 9, 14, 13], "texture": "#obsidian"},
+        "west":  {"uv": [2, 9, 4, 13],  "texture": "#obsidian"},
+        "up":    {"uv": [2, 12, 14, 14], "texture": "#obsidian"}
+      }
+    },
+    {
+      "name": "bowl_west_wall",
+      "from": [2, 3, 4],
+      "to": [4, 7, 12],
+      "faces": {
+        "east":  {"uv": [4, 9, 12, 13], "texture": "#inner"},
+        "west":  {"uv": [4, 9, 12, 13], "texture": "#obsidian"},
+        "up":    {"uv": [2, 4, 4, 12],   "texture": "#obsidian"}
+      }
+    },
+    {
+      "name": "bowl_east_wall",
+      "from": [12, 3, 4],
+      "to": [14, 7, 12],
+      "faces": {
+        "east":  {"uv": [4, 9, 12, 13], "texture": "#obsidian"},
+        "west":  {"uv": [4, 9, 12, 13], "texture": "#inner"},
+        "up":    {"uv": [12, 4, 14, 12], "texture": "#obsidian"}
+      }
+    },
+    {
+      "name": "bowl_basin_floor",
+      "from": [4, 2.5, 4],
+      "to": [12, 3, 12],
+      "faces": {
+        "up":    {"uv": [4, 4, 12, 12], "texture": "#inner"}
+      }
+    },
+    {
+      "name": "angled_pestle",
+      "from": [7, 3, 7],
+      "to": [9, 10, 9],
+      "rotation": {"origin": [8, 3, 8], "axis": "z", "angle": -22.5},
+      "faces": {
+        "north": {"uv": [7, 6, 9, 13], "texture": "#obsidian"},
+        "east":  {"uv": [7, 6, 9, 13], "texture": "#obsidian"},
+        "south": {"uv": [7, 6, 9, 13], "texture": "#obsidian"},
+        "west":  {"uv": [7, 6, 9, 13], "texture": "#obsidian"},
+        "up":    {"uv": [7, 7, 9, 9],   "texture": "#obsidian"},
+        "down":  {"uv": [7, 7, 9, 9],   "texture": "#obsidian"}
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, 2, 0],
+      "scale": [0.8, 0.8, 0.8]
+    },
+    "ground": {
+      "translation": [0, 3, 0],
+      "scale": [0.6, 0.6, 0.6]
+    },
+    "fixed": {
+      "rotation": [0, 90, 0],
+      "scale": [0.7, 0.7, 0.7]
+    },
+    "thirdperson_righthand": {
+      "rotation": [75, 45, 0],
+      "translation": [0, 2.5, 0],
+      "scale": [0.45, 0.45, 0.45]
+    },
+    "firstperson_righthand": {
+      "rotation": [0, 45, 0],
+      "translation": [0, 3, 0],
+      "scale": [0.55, 0.55, 0.55]
+    }
+  }
+}
