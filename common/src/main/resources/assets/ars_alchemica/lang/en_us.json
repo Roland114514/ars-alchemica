@@ -67,5 +67,32 @@
 
   "effect.ars_alchemica.alchemical_corrosion": "Alchemical Corrosion",
   "death.attack.ars_alchemica.corrosion": "%1$s collapsed from severe alchemical corrosion",
-  "death.attack.ars_alchemica.corrosion.player": "%1$s was dissolved by %2$s's alchemical corrosion"
+  "death.attack.ars_alchemica.corrosion.player": "%1$s was dissolved by %2$s's alchemical corrosion",
+
+  "block.ars_alchemica.alchemical_cauldron": "Alchemical Crucible",
+  "item.ars_alchemica.stirring_rod": "Hardwood Stirring Rod",
+  "item.ars_alchemica.alchemical_journal": "Arcane Scholar's Grimoire",
+
+  "tooltip.ars_alchemica.stirring_rod.desc": "Hydrodynamic manipulation instrument for guiding ethereal flux in cauldrons.",
+  "tooltip.ars_alchemica.stirring_rod.clockwise": "Clockwise (Right-Click): Centripetal vortex, calms aetherial agitation and reduces instability",
+  "tooltip.ars_alchemica.stirring_rod.counter_clockwise": "Counter-Clockwise (Shift + Right-Click): Centrifugal shear, precipitates slag and reduces turbidity",
+  "tooltip.ars_alchemica.journal.desc": "Scholarly tome recording ancient alchemical procedures and herb reactions.",
+  "tooltip.ars_alchemica.journal.dual_wield": "Hold in off-hand while gazing at a crucible to activate Scholar's Intuition HUD",
+
+  "hud.ars_alchemica.intuition.title": "Scholar's Intuition: Thermodynamic Vision",
+  "hud.ars_alchemica.intuition.empty": "Crucible Dormant",
+  "hud.ars_alchemica.intuition.water_level": "Fluid Level: %s / %s Portions",
+  "hud.ars_alchemica.intuition.temperature": "Core Temp: %s",
+  "hud.ars_alchemica.intuition.purity": "Solution Purity: %s",
+  "hud.ars_alchemica.intuition.instability": "Instability: %s",
+  "hud.ars_alchemica.intuition.stirring": "Hydrodynamic Turns: ↻ %s / ↺ %s",
+  "hud.ars_alchemica.intuition.guidance": "Procedure Advice: %s",
+
+  "step.ars_alchemica.empty_cauldron": "Unfilled (Fill with water bucket)",
+  "step.ars_alchemica.fill_water": "Fill with fresh water",
+  "step.ars_alchemica.preheat": "Kindle bottom heat source to reach reaction temperature",
+  "step.ars_alchemica.add_ingredients": "Add milled herbs or raw alchemical reagents",
+  "step.ars_alchemica.stirring": "Stir with rod clockwise/counter-clockwise to integrate",
+  "step.ars_alchemica.stabilize": "High instability, stir clockwise to calm aether",
+  "step.ars_alchemica.extract": "Concoction stabilized, extract with glass bottle"
 }

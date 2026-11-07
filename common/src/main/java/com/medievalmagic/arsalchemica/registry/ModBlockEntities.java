@@ -1,5 +1,6 @@
 package com.medievalmagic.arsalchemica.registry;
 
+import com.medievalmagic.arsalchemica.cauldron.AlchemicalCauldronBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.DryingRackBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.HerbPressBlockEntity;
 import com.medievalmagic.arsalchemica.herb.apparatus.MortarBlockEntity;
@@ -25,9 +26,10 @@ public final class ModBlockEntities {
     private static Supplier<BlockEntityType<MortarBlockEntity>> MORTAR = () -> null;
     private static Supplier<BlockEntityType<HerbPressBlockEntity>> HERB_PRESS = () -> null;
     private static Supplier<BlockEntityType<DryingRackBlockEntity>> DRYING_RACK = () -> null;
+    private static Supplier<BlockEntityType<AlchemicalCauldronBlockEntity>> CAULDRON = () -> null;
 
     /**
-     * 各平台加载器（NeoForge/Fabric）在实体注册阶段调用此方法完成绑定。
+     * 各平台加载器在实体注册阶段调用此方法完成绑定。
      */
     public static void bind(
             Supplier<BlockEntityType<MortarBlockEntity>> mortarSupplier,
@@ -37,6 +39,10 @@ public final class ModBlockEntities {
         MORTAR = Objects.requireNonNull(mortarSupplier, "Mortar supplier cannot be null");
         HERB_PRESS = Objects.requireNonNull(pressSupplier, "Herb press supplier cannot be null");
         DRYING_RACK = Objects.requireNonNull(dryingRackSupplier, "Drying rack supplier cannot be null");
+    }
+
+    public static void bindCauldron(Supplier<BlockEntityType<AlchemicalCauldronBlockEntity>> cauldronSupplier) {
+        CAULDRON = Objects.requireNonNull(cauldronSupplier, "Cauldron supplier cannot be null");
     }
 
     public static BlockEntityType<MortarBlockEntity> getMortarType() {
@@ -49,5 +55,9 @@ public final class ModBlockEntities {
 
     public static BlockEntityType<DryingRackBlockEntity> getDryingRackType() {
         return DRYING_RACK.get();
+    }
+
+    public static BlockEntityType<AlchemicalCauldronBlockEntity> getCauldronType() {
+        return CAULDRON.get();
     }
 }

@@ -67,5 +67,32 @@
 
   "effect.ars_alchemica.alchemical_corrosion": "以太毒蚀",
   "death.attack.ars_alchemica.corrosion": "%1$s 的经脉被以太毒素彻底融蚀崩解",
-  "death.attack.ars_alchemica.corrosion.player": "%1$s 倒在 %2$s 调配的致命炼金剧毒之下"
+  "death.attack.ars_alchemica.corrosion.player": "%1$s 倒在 %2$s 调配的致命炼金剧毒之下",
+
+  "block.ars_alchemica.alchemical_cauldron": "多态温控炼金大坩埚",
+  "item.ars_alchemica.stirring_rod": "硬木炼金搅拌棒",
+  "item.ars_alchemica.alchemical_journal": "秘术学者手记",
+
+  "tooltip.ars_alchemica.stirring_rod.desc": "流体水动力学操控器具，用于调控坩埚内以太能量流向。",
+  "tooltip.ars_alchemica.stirring_rod.clockwise": "顺时针旋转 (右键)：激发生理向心流，平复以太躁动，降低失稳度",
+  "tooltip.ars_alchemica.stirring_rod.counter_clockwise": "逆时针旋转 (Shift+右键)：离心剪切排杂，分离杂质沉淀，降低浑浊度",
+  "tooltip.ars_alchemica.journal.desc": "记录失传炼金工序与草药微观反应的学者典籍。",
+  "tooltip.ars_alchemica.journal.dual_wield": "副手装备时凝视炼金坩埚，开启【学者直觉】微观热力学透视视界",
+
+  "hud.ars_alchemica.intuition.title": "学者直觉：坩埚热力学透视",
+  "hud.ars_alchemica.intuition.empty": "坩埚处于休眠状态",
+  "hud.ars_alchemica.intuition.water_level": "液面刻度：%s / %s 份",
+  "hud.ars_alchemica.intuition.temperature": "核心水温：%s",
+  "hud.ars_alchemica.intuition.purity": "溶液净度：%s",
+  "hud.ars_alchemica.intuition.instability": "失稳蓄积：%s",
+  "hud.ars_alchemica.intuition.stirring": "水动力学搅拌：顺时针 %s 圈 / 逆时针 %s 圈",
+  "hud.ars_alchemica.intuition.guidance": "当前工序建议：%s",
+
+  "step.ars_alchemica.empty_cauldron": "未注水（请使用水桶注入清水）",
+  "step.ars_alchemica.fill_water": "注入清水",
+  "step.ars_alchemica.preheat": "点燃底部热源预热至反应温区",
+  "step.ars_alchemica.add_ingredients": "投放研磨草药或以太原料",
+  "step.ars_alchemica.stirring": "使用搅拌棒顺时针/逆时针搅拌促进融合",
+  "step.ars_alchemica.stabilize": "失稳度偏高，顺时针搅拌平息以太躁动",
+  "step.ars_alchemica.extract": "药力定型，手持空玻璃瓶萃取灵药"
 }

@@ -1,5 +1,7 @@
 package com.medievalmagic.arsalchemica.registry;
 
+import com.medievalmagic.arsalchemica.cauldron.AlchemicalStirringRodItem;
+import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
 import net.minecraft.world.item.Item;
@@ -23,6 +25,8 @@ public final class ModItems {
     private static Supplier<AlchemicalPotionItem> ELIXIR = () -> null;
     private static Supplier<AlchemicalPotionItem> INCENSE = () -> null;
     private static Supplier<BladeOilItem> BLADE_OIL = () -> null;
+    private static Supplier<AlchemicalStirringRodItem> STIRRING_ROD = () -> null;
+    private static Supplier<AlchemicalJournalItem> JOURNAL = () -> null;
 
     public static void bindPotions(
             Supplier<AlchemicalPotionItem> elixirSupplier,
@@ -32,6 +36,14 @@ public final class ModItems {
         ELIXIR = Objects.requireNonNull(elixirSupplier, "Elixir supplier cannot be null");
         INCENSE = Objects.requireNonNull(incenseSupplier, "Incense supplier cannot be null");
         BLADE_OIL = Objects.requireNonNull(bladeOilSupplier, "Blade oil supplier cannot be null");
+    }
+
+    public static void bindApparatusItems(
+            Supplier<AlchemicalStirringRodItem> rodSupplier,
+            Supplier<AlchemicalJournalItem> journalSupplier
+    ) {
+        STIRRING_ROD = Objects.requireNonNull(rodSupplier, "Stirring rod supplier cannot be null");
+        JOURNAL = Objects.requireNonNull(journalSupplier, "Journal supplier cannot be null");
     }
 
     public static AlchemicalPotionItem getElixir() {
@@ -44,5 +56,13 @@ public final class ModItems {
 
     public static BladeOilItem getBladeOil() {
         return BLADE_OIL.get();
+    }
+
+    public static AlchemicalStirringRodItem getStirringRod() {
+        return STIRRING_ROD.get();
+    }
+
+    public static AlchemicalJournalItem getJournal() {
+        return JOURNAL.get();
     }
 }

@@ -18,4 +18,5 @@ public class SoundEvents {
     public static final SoundEvent BOTTLE_EMPTY = new SoundEvent();
     public static final SoundEvent BAMBOO_WOOD_PLACE = new SoundEvent();
     public static final SoundEvent HONEYCOMB_WAX_ON = new SoundEvent();
+    public static final SoundEvent GENERIC_SPLASH = new SoundEvent();
 }

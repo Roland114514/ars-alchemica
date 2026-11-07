@@ -23,6 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Level implements LevelReader {
+    public enum ExplosionInteraction {
+        NONE, BLOCK, MOB, TNT
+    }
+
     public boolean isClientSide = false;
     private long gameTime = 0L;
     private final DamageSources damageSources = new DamageSources();
@@ -65,6 +69,8 @@ public abstract class Level implements LevelReader {
 
     public void playSound(Player player, BlockPos pos, SoundEvent sound, SoundSource source, float volume, float pitch) {}
     public void sendBlockUpdated(BlockPos pos, BlockState oldState, BlockState newState, int flags) {}
+
+    public void explode(Entity source, double x, double y, double z, float radius, ExplosionInteraction interaction) {}
 
     public boolean addFreshEntity(Entity entity) {
         if (entity != null) {

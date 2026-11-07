@@ -18,12 +18,17 @@ public class BlockState {
     public Block getBlock() { return block; }
     public boolean is(Block other) { return this.block == other; }
 
+    public boolean hasProperty(Property<?> property) {
+        return values.containsKey(property) || property.getName().equals("water_level") || property.getName().equals("heat_tier");
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends Comparable<T>> T getValue(Property<T> property) {
         Object val = values.get(property);
         if (val == null) {
             // Default fallbacks
             if (property.getName().equals("age")) return (T) Integer.valueOf(0);
+            if (property.getName().equals("water_level") || property.getName().equals("heat_tier")) return (T) Integer.valueOf(0);
             if (property.getName().equals("blooming") || property.getName().equals("charged") || property.getName().equals("ceiling") || property.getName().equals("pressed")) return (T) Boolean.FALSE;
             if (property.getName().equals("facing")) return (T) net.minecraft.core.Direction.NORTH;
         }
