@@ -36,7 +36,7 @@ public enum ToxicityThreshold {
     }
 
     public static ToxicityThreshold fromRatio(float ratio) {
-        if (Float.isNaN(ratio) || ratio < 0.50f) return SAFE;
+        if (!Float.isFinite(ratio) || ratio < 0.50f) return SAFE;
         if (ratio < 0.75f) return CAUTION;
         if (ratio < 0.90f) return DANGER;
         return OVERDOSE;

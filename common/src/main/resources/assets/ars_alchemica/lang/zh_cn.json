@@ -63,5 +63,9 @@
 
   "message.ars_alchemica.oil.invalid_weapon": "请在另一只手中持有近战兵刃以涂抹剑油。",
   "message.ars_alchemica.oil.applied": "已将炼金剑油均匀涂抹于 %s。",
-  "message.ars_alchemica.oil.depleted": "兵刃上的炼金剑油已消耗殆尽。"
+  "message.ars_alchemica.oil.depleted": "兵刃上的炼金剑油已消耗殆尽。",
+
+  "effect.ars_alchemica.alchemical_corrosion": "以太毒蚀",
+  "death.attack.ars_alchemica.corrosion": "%1$s 的经脉被以太毒素彻底融蚀崩解",
+  "death.attack.ars_alchemica.corrosion.player": "%1$s 倒在 %2$s 调配的致命炼金剧毒之下"
 }

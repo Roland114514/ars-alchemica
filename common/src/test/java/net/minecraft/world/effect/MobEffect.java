@@ -1,6 +1,7 @@
 package net.minecraft.world.effect;
 
 import net.minecraft.ChatFormatting;
+import net.minecraft.world.entity.LivingEntity;
 
 public class MobEffect {
     private final boolean beneficial;
@@ -13,8 +14,25 @@ public class MobEffect {
         this.descriptionId = descriptionId;
     }
 
+    public MobEffect(EffectCategory category, int color) {
+        this.beneficial = (category == EffectCategory.BENEFICIAL);
+        this.color = color;
+        this.descriptionId = "effect.ars_alchemica.custom";
+    }
+
     public MobEffect() {
         this(false, 0, "effect.minecraft.unknown");
+    }
+
+    public void applyEffectTick(LivingEntity entity, int amplifier) {
+    }
+
+    public boolean isDurationEffectTick(int duration, int amplifier) {
+        return false;
+    }
+
+    public int getColor() {
+        return color;
     }
 
     public boolean isBeneficial() {

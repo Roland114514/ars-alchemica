@@ -1,5 +1,6 @@
 package com.medievalmagic.arsalchemica.potion;
 
+import com.medievalmagic.arsalchemica.registry.ModEffects;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -12,6 +13,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.AxeItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
@@ -119,7 +121,8 @@ public class BladeOilItem extends Item {
     public static boolean isValidWeapon(ItemStack stack) {
         if (stack == null || stack.isEmpty()) return false;
         Item item = stack.getItem();
-        return item instanceof SwordItem || item instanceof TieredItem;
+        return item instanceof SwordItem || item instanceof AxeItem
+                || (item instanceof TieredItem && (item.getClass().getSimpleName().contains("Sword") || item.getClass().getSimpleName().contains("Axe")));
     }
 
     public static void applyOilToWeapon(ItemStack oilStack, ItemStack weaponStack) {
@@ -176,7 +179,7 @@ public class BladeOilItem extends Item {
             switch (bane) {
                 case NECROPHAGE -> target.setSecondsOnFire(4);
                 case INSECTOID -> target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 1));
-                case HUMANOID -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1));
+                case HUMANOID -> target.addEffect(new MobEffectInstance(ModEffects.getCorrosion(), 100, 1));
                 case DRACONID -> target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 1));
             }
         } else {

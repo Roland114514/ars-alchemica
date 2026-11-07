@@ -37,6 +37,12 @@ public interface IToxicityData {
         return ToxicityThreshold.fromRatio(getToxicityRatio());
     }
 
+    /** 服务端自然代谢 Tick（包含毒性递减与增益代谢速率平滑回归） */
+    void tickMetabolism();
+
+    /** 玩家死亡重生重置逻辑（杜绝死后无限暴毙死循环） */
+    void resetOnDeath();
+
     /** 标记是否需要向客户端发送二进制同步包 */
     boolean isDirty();
     void setDirty(boolean dirty);

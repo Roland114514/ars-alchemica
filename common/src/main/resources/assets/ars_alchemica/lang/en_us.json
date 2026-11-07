@@ -63,5 +63,9 @@
 
   "message.ars_alchemica.oil.invalid_weapon": "Hold a melee blade in your other hand to apply oil.",
   "message.ars_alchemica.oil.applied": "Coated %s with Alchemical Blade Oil.",
-  "message.ars_alchemica.oil.depleted": "The alchemical oil on your blade has worn off."
+  "message.ars_alchemica.oil.depleted": "The alchemical oil on your blade has worn off.",
+
+  "effect.ars_alchemica.alchemical_corrosion": "Alchemical Corrosion",
+  "death.attack.ars_alchemica.corrosion": "%1$s collapsed from severe alchemical corrosion",
+  "death.attack.ars_alchemica.corrosion.player": "%1$s was dissolved by %2$s's alchemical corrosion"
 }

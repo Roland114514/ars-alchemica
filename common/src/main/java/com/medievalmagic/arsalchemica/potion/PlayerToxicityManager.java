@@ -2,6 +2,7 @@ package com.medievalmagic.arsalchemica.potion;
 
 import com.medievalmagic.arsalchemica.api.toxicity.IToxicityData;
 import com.medievalmagic.arsalchemica.api.toxicity.ToxicityThreshold;
+import com.medievalmagic.arsalchemica.registry.ModEffects;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
@@ -15,7 +16,7 @@ import java.util.function.Function;
 /**
  * 玩家毒性核心管理器与生理代谢调度引擎。
  * <p>
- * 负责驱动服务端 Tick 衰减、过载药效剥夺反转及跨平台网络增量派发。
+ * 负责驱动服务端 Tick 衰减、过载药效剥夺反转、以太毒蚀 Debuff 施加及跨平台网络增量派发。
  * 遵循严格的 Common-First 规范，解耦平台特异性 Capability / Data Attachment 实现。
  * </p>
  *
@@ -49,7 +50,8 @@ public final class PlayerToxicityManager {
      * 执行连续时间代谢衰减及生理阈值症状结算。
      */
     public static void tickPlayer(Player player) {
-        if (player == null || (player.level() != null && player.level().isClientSide()) || player.isCreative()) return;
+        if (player == null || (player.level() != null && player.level().isClientSide())
+                || player.isCreative() || player.isSpectator() || player.isDeadOrDying()) return;
 
         getData(player).ifPresent(data -> {
             float currentTox = data.getToxicity();
@@ -58,14 +60,12 @@ public final class PlayerToxicityManager {
             float prevTox = currentTox;
             ToxicityThreshold prevThreshold = data.getThreshold();
 
-            // 1. 连续代谢衰减: dTox/dt = -metabolismRate
-            if (currentTox > 0.0f) {
-                data.addToxicity(-data.getMetabolismRate());
-            }
+            // 1. 连续代谢衰减与增益代谢率平滑复原
+            data.tickMetabolism();
 
             ToxicityThreshold currentThreshold = data.getThreshold();
 
-            // 2. 每 20 Ticks (1秒) 执行一次生理阈值症状判定与伤害结算，杜绝高频卡顿与秒杀
+            // 2. 每 20 Ticks (1秒) 执行一次生理阈值症状判定，施加专属以太毒蚀 Debuff
             if (player.tickCount % 20 == 0 && data.getToxicity() > 0.0f) {
                 applyPhysiologicalReactions(player, currentThreshold);
             }
@@ -79,6 +79,18 @@ public final class PlayerToxicityManager {
                 syncToClient(player, data);
                 data.setDirty(false);
             }
+        });
+    }
+
+    /**
+     * 玩家死亡或重生事件钩子：清除体内全部毒素积累，避免重生无限暴毙循环。
+     */
+    public static void onPlayerDeathOrRespawn(Player player) {
+        if (player == null) return;
+        getData(player).ifPresent(data -> {
+            data.resetOnDeath();
+            syncToClient(player, data);
+            data.setDirty(false);
         });
     }
 
@@ -97,6 +109,8 @@ public final class PlayerToxicityManager {
             if (boostedMetabolism > data.getMetabolismRate()) {
                 data.setMetabolismRate(boostedMetabolism);
             }
+            // 清除可能存在的以太毒蚀 Debuff
+            player.removeEffect(ModEffects.getCorrosion());
             syncToClient(player, data);
             data.setDirty(false);
         });
@@ -105,19 +119,21 @@ public final class PlayerToxicityManager {
     private static void applyPhysiologicalReactions(Player player, ToxicityThreshold threshold) {
         switch (threshold) {
             case SAFE, CAUTION -> {
-                // 安全期或警觉期（轻度暗角警觉，不附加强制负面效果）
+                // 安全期或警觉期（轻度暗角微晕，不施加侵蚀 Debuff）
             }
             case DANGER -> {
-                // 中毒期 (75% ~ 90%): 视野晃动与神经迟缓
+                // 中毒期 (75% ~ 90%): 施加 0 级以太毒蚀 (模仿剧毒，生命值 > 1.0f 结算)，伴随眩晕与迟缓
+                player.addEffect(new MobEffectInstance(ModEffects.getCorrosion(), 60, 0, false, true, true));
                 player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0, false, false, true));
                 player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 0, false, false, true));
             }
             case OVERDOSE -> {
-                // 休克崩解 (> 90%): 剥夺所有有益药水增益，反转为凋零与剧毒，并造成真实炼金反噬伤害
+                // 休克崩解 (> 90%): 剥夺所有正面增益，施加致死性 1 级以太毒蚀，直击生命本源
                 purgeBeneficialEffects(player);
-                player.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 1, false, true, true));
-                player.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 1, false, true, true));
-                player.hurt(player.damageSources().magic(), 2.5f);
+                player.addEffect(new MobEffectInstance(ModEffects.getCorrosion(), 60, 1, false, true, true));
+                player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 120, 1, false, true, true));
+                // 同时直接执行单次过载反噬爆发伤害
+                player.hurt(AlchemicalDamageSources.corrosion(player.level()), 2.5f);
             }
         }
     }

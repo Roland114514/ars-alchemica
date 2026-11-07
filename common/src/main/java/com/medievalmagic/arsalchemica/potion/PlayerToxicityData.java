@@ -5,7 +5,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 
 /**
- * 玩家毒性状态标准 POJO 实现。具备严格的数值过滤（NaN/越界防护）。
+ * 玩家毒性状态标准 POJO 实现。具备严格的数值过滤（NaN/Infinity/越界防护）。
  *
  * @author Ars Alchemica Architecture Team
  * @version 1.0.0
@@ -27,7 +27,7 @@ public class PlayerToxicityData implements IToxicityData {
 
     @Override
     public void setToxicity(float value) {
-        if (Float.isNaN(value)) value = 0.0f;
+        if (!Float.isFinite(value)) value = 0.0f;
         float clamped = Mth.clamp(value, 0.0f, this.maxToxicity);
         if (Math.abs(this.toxicity - clamped) > 1e-4f) {
             this.toxicity = clamped;
@@ -37,7 +37,7 @@ public class PlayerToxicityData implements IToxicityData {
 
     @Override
     public void addToxicity(float delta) {
-        if (Float.isNaN(delta) || Math.abs(delta) < 1e-5f) return;
+        if (!Float.isFinite(delta) || Math.abs(delta) < 1e-5f) return;
         setToxicity(this.toxicity + delta);
     }
 
@@ -48,7 +48,7 @@ public class PlayerToxicityData implements IToxicityData {
 
     @Override
     public void setMaxToxicity(float max) {
-        if (Float.isNaN(max) || max < 1.0f) max = 1.0f;
+        if (!Float.isFinite(max) || max < 1.0f) max = 1.0f;
         if (Math.abs(this.maxToxicity - max) > 1e-4f) {
             this.maxToxicity = max;
             this.toxicity = Mth.clamp(this.toxicity, 0.0f, this.maxToxicity);
@@ -63,8 +63,27 @@ public class PlayerToxicityData implements IToxicityData {
 
     @Override
     public void setMetabolismRate(float rate) {
-        if (Float.isNaN(rate) || rate < 0.0f) rate = 0.0f;
+        if (!Float.isFinite(rate) || rate < 0.0f) rate = 0.0f;
         this.metabolismRate = rate;
+    }
+
+    @Override
+    public void tickMetabolism() {
+        // 1. 连续代谢衰减
+        if (this.toxicity > 0.0f) {
+            addToxicity(-this.metabolismRate);
+        }
+        // 2. 解毒剂/增益代谢率缓慢回退至基础值 (防止永久高倍代谢 Bug)
+        if (this.metabolismRate > DEFAULT_METABOLISM_RATE) {
+            this.metabolismRate = Math.max(DEFAULT_METABOLISM_RATE, this.metabolismRate - 0.00005f);
+        }
+    }
+
+    @Override
+    public void resetOnDeath() {
+        this.toxicity = 0.0f;
+        this.metabolismRate = DEFAULT_METABOLISM_RATE;
+        this.dirty = true;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.medievalmagic.arsalchemica.potion;
 
 import com.medievalmagic.arsalchemica.api.aspect.AlchemyAspect;
 import com.medievalmagic.arsalchemica.api.vector.AspectVector;
+import com.medievalmagic.arsalchemica.registry.ModEffects;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffect;
@@ -70,8 +71,8 @@ public final class DynamicPotionResolver {
             baseAmplifier = Math.min(4, baseAmplifier + 1); // 极高挥发度激发额外爆发
         }
 
-        // 质量决定持续时间基数，挥发性越高释放越快（持续时间越短）
-        int baseDurationTicks = Math.max(40, (int) (mass * 20.0 * (1.25 - (volatility * 0.25))));
+        // 质量与挥发性决定持续时间基数 (Ticks)，基准在 1 ~ 4 分钟之间平滑展开
+        int baseDurationTicks = Math.max(200, (int) ((1200 + mass * 120.0) * (1.35 - (volatility * 0.35))));
 
         for (AlchemyAspect aspect : AlchemyAspect.VALUES) {
             double amount = vector.getAmount(aspect);
@@ -143,7 +144,7 @@ public final class DynamicPotionResolver {
             case TERRA -> highVolatility ? MobEffects.DAMAGE_RESISTANCE : MobEffects.DAMAGE_RESISTANCE;
             case AER -> highVolatility ? MobEffects.MOVEMENT_SPEED : MobEffects.MOVEMENT_SPEED;
             case VITA -> highVolatility ? MobEffects.REGENERATION : MobEffects.REGENERATION;
-            case MORTIS -> highVolatility ? MobEffects.POISON : MobEffects.POISON;
+            case MORTIS -> ModEffects.getCorrosion();
             case AETHER -> MobEffects.NIGHT_VISION;
             case SULFUR -> MobEffects.DAMAGE_BOOST;
             case MERCURIUS -> MobEffects.MOVEMENT_SPEED;

@@ -11,10 +11,13 @@ public class Player extends LivingEntity {
     private ItemStack mainHandItem = ItemStack.EMPTY;
     private ItemStack offHandItem = ItemStack.EMPTY;
     private Component lastClientMessage = null;
+    private boolean spectator = false;
 
     public Inventory getInventory() { return inventory; }
     public Abilities getAbilities() { return abilities; }
     public boolean isCreative() { return abilities.instabuild; }
+    public boolean isSpectator() { return spectator; }
+    public void setSpectator(boolean spectator) { this.spectator = spectator; }
 
     public ItemStack getItemInHand(InteractionHand hand) {
         return hand == InteractionHand.MAIN_HAND ? mainHandItem : offHandItem;
