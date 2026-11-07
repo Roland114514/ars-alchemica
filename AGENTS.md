@@ -12,3 +12,19 @@
   - 邻近 Capability 必须缓存，仅在 `neighborChanged` 时失效刷新。
   - 网络包同步采用轻量化 Delta 同步，杜绝直接全量序列化 NBT。
 - **双语本地化**：所有注册项、GUI 标题、Tooltip 描述必须同时同步生成 `zh_cn.json` 与 `en_us.json`。
+
+## 3. 资源完整性与内容可见性闭环 (Resource Completeness & In-Game Visibility)
+- **必须注册创造模式物品栏标签页 (Creative Tabs)**：
+  - 每次新增任何物品或方块，必须同时在所有平台（NeoForge/Forge 和 Fabric）注册对应的专属创造模式物品栏（`CreativeModeTab`），并将所有新增物品（`Item` / `BlockItem`）按逻辑顺序注入标签页！
+  - 绝对杜绝“仅注册物品却未加入创造标签页”，导致玩家进入创造模式时找不到任何新物品。
+- **必须提供战利品表 (Loot Tables)**：
+  - 每一个注册的方块必须在 `data/<modid>/loot_tables/blocks/` 下提供标准掉落表（默认掉落自身，支持精准采集与爆炸衰减）。
+  - 探索类稀有物品（如配方残卷、古代羊皮纸）必须提供地牢/遗迹宝箱注入或专属箱子战利品表（`loot_tables/chests/`）。
+- **必须提供标准配方 (Recipes)**：
+  - 所有器械、工具、消耗品必须在 `data/<modid>/recipes/` 下提供原版工作台合成（`crafting_shaped` / `crafting_shapeless`）、熔炼（`smelting` / `blasting`）等配方，形成可玩闭环。
+- **必须配置标签 (Tags)**：
+  - 方块必须配置原版挖掘工具标签（`minecraft:mineable/pickaxe`、`minecraft:mineable/axe`）及挖掘等级（`minecraft:needs_stone_tool`、`minecraft:needs_iron_tool` 等）。
+  - 物品必须配置合理的分类标签（`potions`、`oils`、`apparatus` 等）。
+- **材质与模型闭环 (Zero Missing Models/Textures)**：
+  - 所有注册物品必须提供对应的 `assets/<modid>/models/item/*.json` 与像素贴图，杜绝紫黑缺失材质方块或隐形物品。
+

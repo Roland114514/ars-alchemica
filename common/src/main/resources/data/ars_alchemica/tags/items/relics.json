@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "ars_alchemica:alchemical_journal",
+    "ars_alchemica:recipe_scroll",
+    "ars_alchemica:ancient_parchment",
+    "ars_alchemica:scholia_fragment"
+  ]
+}

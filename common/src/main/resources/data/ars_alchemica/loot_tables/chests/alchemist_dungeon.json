@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "min": 2,
+        "max": 4
+      },
+      "bonus_rolls": 1.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "ars_alchemica:ancient_parchment",
+          "weight": 15
+        },
+        {
+          "type": "minecraft:item",
+          "name": "ars_alchemica:scholia_fragment",
+          "weight": 35,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 2,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "ars_alchemica:recipe_scroll",
+          "weight": 25
+        },
+        {
+          "type": "minecraft:item",
+          "name": "ars_alchemica:alchemical_slag",
+          "weight": 25,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -84,3 +84,46 @@ For 1.20.5+:
 - Write DataGen providers in `common` or shared data module.
 - Extend `RecipeProvider`, `BlockStateModelProvider`, `ItemModelProvider`, and `LootTableProvider`.
 - Trigger via Gradle task `./gradlew runData` / `./gradlew neoforge:runData`.
+
+---
+
+## 6. In-Game Content Visibility & Multi-Loader Creative Tabs
+
+Every time items or blocks are added to the mod, **they must be registered to a dedicated `CreativeModeTab` across all loaders**:
+
+### NeoForge / Forge 1.20.1
+```java
+public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
+        DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
+
+public static final RegistryObject<CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
+        "main",
+        () -> CreativeModeTab.builder()
+                .title(Component.translatable("itemGroup." + MOD_ID + ".main"))
+                .icon(() -> new ItemStack(MY_ICON_ITEM.get()))
+                .displayItems((parameters, output) -> {
+                    output.accept(MY_ITEM.get());
+                    output.accept(MY_BLOCK_ITEM.get());
+                })
+                .build()
+);
+```
+
+### Fabric 1.20.1
+```java
+CreativeModeTab mainTab = FabricItemGroup.builder()
+        .title(Component.translatable("itemGroup." + MOD_ID + ".main"))
+        .icon(() -> new ItemStack(myIconItem))
+        .displayItems((parameters, output) -> {
+            output.accept(myItem);
+            output.accept(myBlockItem);
+        })
+        .build();
+Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(MOD_ID, "main"), mainTab);
+```
+
+### Mandatory Datapack Coverage
+1. **Loot Tables**: Every block must have `loot_tables/blocks/<name>.json`.
+2. **Recipes**: All machinery, tools, and consumables must have `recipes/<name>.json`.
+3. **Tags**: Blocks must be in `mineable/pickaxe` or `mineable/axe` and tool tier tags. Items must have functional tags.
+

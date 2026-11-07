@@ -21,9 +21,13 @@ import com.medievalmagic.arsalchemica.registry.ModBlockEntities;
 import com.medievalmagic.arsalchemica.registry.ModBlocks;
 import com.medievalmagic.arsalchemica.registry.ModEffects;
 import com.medievalmagic.arsalchemica.registry.ModItems;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,6 +60,8 @@ public class ArsAlchemicaForge {
             DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, ArsAlchemica.MOD_ID);
     public static final DeferredRegister<MobEffect> MOB_EFFECTS =
             DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, ArsAlchemica.MOD_ID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
+            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, ArsAlchemica.MOD_ID);
 
     // --- Blocks ---
     public static final RegistryObject<AlchemicalCauldronBlock> CAULDRON_BLOCK =
@@ -114,6 +120,30 @@ public class ArsAlchemicaForge {
     public static final RegistryObject<AlchemicalCorrosionEffect> CORROSION_EFFECT =
             MOB_EFFECTS.register("alchemical_corrosion", AlchemicalCorrosionEffect::new);
 
+    // --- Creative Mode Tab ---
+    public static final RegistryObject<CreativeModeTab> MAIN_TAB = CREATIVE_MODE_TABS.register(
+            "main",
+            () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, -1)
+                    .title(Component.translatable("itemGroup.ars_alchemica.main"))
+                    .icon(() -> new ItemStack(CAULDRON_ITEM.get()))
+                    .displayItems((parameters, output) -> {
+                        output.accept(CAULDRON_ITEM.get());
+                        output.accept(MORTAR_ITEM.get());
+                        output.accept(HERB_PRESS_ITEM.get());
+                        output.accept(DRYING_RACK_ITEM.get());
+                        output.accept(STIRRING_ROD.get());
+                        output.accept(JOURNAL.get());
+                        output.accept(RECIPE_SCROLL.get());
+                        output.accept(ANCIENT_PARCHMENT.get());
+                        output.accept(SCHOLIA_FRAGMENT.get());
+                        output.accept(SLAG.get());
+                        output.accept(SLUDGE.get());
+                        output.accept(ELIXIR.get());
+                        output.accept(INCENSE.get());
+                        output.accept(BLADE_OIL.get());
+                    })
+                    .build());
+
     public ArsAlchemicaForge() {
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -122,6 +152,7 @@ public class ArsAlchemicaForge {
         ITEMS.register(modBus);
         BLOCK_ENTITY_TYPES.register(modBus);
         MOB_EFFECTS.register(modBus);
+        CREATIVE_MODE_TABS.register(modBus);
 
         // 绑定 Common 跨平台中心
         ModBlocks.bindCauldron(CAULDRON_BLOCK::get);

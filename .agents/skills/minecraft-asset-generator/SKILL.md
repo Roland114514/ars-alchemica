@@ -92,12 +92,57 @@ Whenever registering an item, block, creative tab, tooltip, or GUI container, **
 
 ---
 
-## 4. Blockbench & GeckoLib / AzureLib Guidelines
+## 5. Data Assets: Loot Tables, Recipes, and Tags Standards
 
-For custom animated entities, bosses, or animated multiblock machines:
-1. Use **Blockbench** with the GeckoLib / AzureLib plugin.
-2. Export as:
-   - `<name>.geo.json` (Bone hierarchy and pivot points)
-   - `<name>.animation.json` (Keyframe animations: idle, walk, attack, active)
-   - `<name>.png` (Texture map)
-3. Ensure root bone is centered at `[0, 0, 0]` to avoid desynced hitboxes.
+Whenever any block or item is introduced, corresponding data JSON files must be created immediately under `src/main/resources/data/<modid>/` and `data/minecraft/tags/`:
+
+### 1. Block Loot Table (`data/<modid>/loot_tables/blocks/<block>.json`)
+```json
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "<modid>:<block>"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ]
+    }
+  ]
+}
+```
+
+### 2. Crafting Recipe (`data/<modid>/recipes/<recipe>.json`)
+```json
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ABA",
+    " C ",
+    "AAA"
+  ],
+  "key": {
+    "A": { "item": "minecraft:iron_ingot" },
+    "B": { "item": "minecraft:amethyst_shard" },
+    "C": { "tag": "minecraft:planks" }
+  },
+  "result": {
+    "item": "<modid>:<item>",
+    "count": 1
+  }
+}
+```
+
+### 3. Tool & Mining Tags (`data/minecraft/tags/blocks/mineable/...`)
+- `mineable/pickaxe.json`: list stone/metal apparatus blocks.
+- `mineable/axe.json`: list wooden apparatus blocks.
+- `needs_stone_tool.json` / `needs_iron_tool.json`: mining tier prerequisites.
+

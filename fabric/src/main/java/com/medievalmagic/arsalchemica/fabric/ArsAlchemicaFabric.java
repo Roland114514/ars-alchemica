@@ -21,11 +21,15 @@ import com.medievalmagic.arsalchemica.registry.ModBlocks;
 import com.medievalmagic.arsalchemica.registry.ModEffects;
 import com.medievalmagic.arsalchemica.registry.ModItems;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.object.builder.v1.block.entity.FabricBlockEntityTypeBuilder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
@@ -65,13 +69,13 @@ public class ArsAlchemicaFabric implements ModInitializer {
         );
 
         // --- 2. Block Items 注册 ---
-        Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("alchemical_cauldron"),
+        BlockItem cauldronItem = Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("alchemical_cauldron"),
                 new BlockItem(cauldronBlock, new Item.Properties()));
-        Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("mortar"),
+        BlockItem mortarItem = Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("mortar"),
                 new BlockItem(mortarBlock, new Item.Properties()));
-        Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("herb_press"),
+        BlockItem herbPressItem = Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("herb_press"),
                 new BlockItem(herbPressBlock, new Item.Properties()));
-        Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("drying_rack"),
+        BlockItem dryingRackItem = Registry.register(BuiltInRegistries.ITEM, ArsAlchemica.id("drying_rack"),
                 new BlockItem(dryingRackBlock, new Item.Properties()));
 
         // --- 3. Items 注册 ---
@@ -149,5 +153,28 @@ public class ArsAlchemicaFabric implements ModInitializer {
         ModItems.bindMishapItems(() -> slag, () -> sludge);
         ModItems.bindPotions(() -> elixir, () -> incense, () -> bladeOil);
         ModEffects.bindCorrosion(() -> corrosionEffect);
+
+        // --- 7. CreativeModeTab 注册 ---
+        CreativeModeTab mainTab = FabricItemGroup.builder()
+                .title(Component.translatable("itemGroup.ars_alchemica.main"))
+                .icon(() -> new ItemStack(cauldronItem))
+                .displayItems((parameters, output) -> {
+                    output.accept(cauldronItem);
+                    output.accept(mortarItem);
+                    output.accept(herbPressItem);
+                    output.accept(dryingRackItem);
+                    output.accept(stirringRod);
+                    output.accept(journal);
+                    output.accept(recipeScroll);
+                    output.accept(ancientParchment);
+                    output.accept(scholiaFragment);
+                    output.accept(slag);
+                    output.accept(sludge);
+                    output.accept(elixir);
+                    output.accept(incense);
+                    output.accept(bladeOil);
+                })
+                .build();
+        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, ArsAlchemica.id("main"), mainTab);
     }
 }

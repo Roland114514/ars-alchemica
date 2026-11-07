@@ -16,6 +16,10 @@ public class DeferredRegister<T> {
         return new DeferredRegister<>(reg, modId);
     }
 
+    public static <B> DeferredRegister<B> create(net.minecraft.resources.ResourceKey<? extends net.minecraft.core.Registry<B>> key, String modId) {
+        return new DeferredRegister<>(null, modId);
+    }
+
     public <I extends T> RegistryObject<I> register(String name, Supplier<? extends I> sup) {
         return new RegistryObject<>(sup);
     }

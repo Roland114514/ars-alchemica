@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ars_alchemica:alchemical_cauldron",
+    "ars_alchemica:mortar",
+    "ars_alchemica:herb_press",
+    "ars_alchemica:drying_rack",
+    "ars_alchemica:stirring_rod"
+  ]
+}
