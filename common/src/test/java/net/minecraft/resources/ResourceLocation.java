@@ -23,6 +23,15 @@ public class ResourceLocation {
     public String getNamespace() { return namespace; }
     public String getPath() { return path; }
 
+    public static ResourceLocation tryParse(String location) {
+        if (location == null || location.isBlank()) return null;
+        try {
+            return new ResourceLocation(location);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     @Override
     public String toString() {
         return namespace + ":" + path;

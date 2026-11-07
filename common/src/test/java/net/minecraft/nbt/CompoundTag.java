@@ -52,6 +52,7 @@ public class CompoundTag {
     public boolean contains(String key, int tagType) { return tags.containsKey(key); }
     public void remove(String key) { tags.remove(key); }
     public boolean isEmpty() { return tags.isEmpty(); }
+    public java.util.Set<String> getAllKeys() { return tags.keySet(); }
 
     public CompoundTag copy() {
         CompoundTag copy = new CompoundTag();

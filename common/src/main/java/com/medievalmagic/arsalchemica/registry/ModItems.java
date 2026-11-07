@@ -4,6 +4,9 @@ import com.medievalmagic.arsalchemica.cauldron.AlchemicalStirringRodItem;
 import com.medievalmagic.arsalchemica.grimoire.AlchemicalJournalItem;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
 import com.medievalmagic.arsalchemica.potion.BladeOilItem;
+import com.medievalmagic.arsalchemica.recipe.item.AncientParchmentItem;
+import com.medievalmagic.arsalchemica.recipe.item.RecipeScrollItem;
+import com.medievalmagic.arsalchemica.recipe.item.ScholiaFragmentItem;
 import net.minecraft.world.item.Item;
 
 import java.util.Objects;
@@ -27,6 +30,9 @@ public final class ModItems {
     private static Supplier<BladeOilItem> BLADE_OIL = () -> null;
     private static Supplier<AlchemicalStirringRodItem> STIRRING_ROD = () -> null;
     private static Supplier<AlchemicalJournalItem> JOURNAL = () -> null;
+    private static Supplier<RecipeScrollItem> RECIPE_SCROLL = () -> null;
+    private static Supplier<AncientParchmentItem> ANCIENT_PARCHMENT = () -> null;
+    private static Supplier<ScholiaFragmentItem> SCHOLIA_FRAGMENT = () -> null;
 
     public static void bindPotions(
             Supplier<AlchemicalPotionItem> elixirSupplier,
@@ -44,6 +50,16 @@ public final class ModItems {
     ) {
         STIRRING_ROD = Objects.requireNonNull(rodSupplier, "Stirring rod supplier cannot be null");
         JOURNAL = Objects.requireNonNull(journalSupplier, "Journal supplier cannot be null");
+    }
+
+    public static void bindExplorationItems(
+            Supplier<RecipeScrollItem> scrollSupplier,
+            Supplier<AncientParchmentItem> parchmentSupplier,
+            Supplier<ScholiaFragmentItem> fragmentSupplier
+    ) {
+        RECIPE_SCROLL = Objects.requireNonNull(scrollSupplier, "Recipe scroll supplier cannot be null");
+        ANCIENT_PARCHMENT = Objects.requireNonNull(parchmentSupplier, "Ancient parchment supplier cannot be null");
+        SCHOLIA_FRAGMENT = Objects.requireNonNull(fragmentSupplier, "Scholia fragment supplier cannot be null");
     }
 
     public static AlchemicalPotionItem getElixir() {
@@ -64,5 +80,17 @@ public final class ModItems {
 
     public static AlchemicalJournalItem getJournal() {
         return JOURNAL.get();
+    }
+
+    public static RecipeScrollItem getRecipeScroll() {
+        return RECIPE_SCROLL.get();
+    }
+
+    public static AncientParchmentItem getAncientParchment() {
+        return ANCIENT_PARCHMENT.get();
+    }
+
+    public static ScholiaFragmentItem getScholiaFragment() {
+        return SCHOLIA_FRAGMENT.get();
     }
 }

@@ -64,12 +64,23 @@ public final class ScholarIntuitionHudRenderer {
                 String.format(Locale.ROOT, "%.2f", data.instability()))
                 .withStyle(instabStyle));
 
-        // 4. 水动力学搅拌记录
+        // 4. 水动力学搅拌记录与以太星图坐标
         lines.add(Component.translatable("hud.ars_alchemica.intuition.stirring",
                 data.clockwiseTurns(), data.counterClockwiseTurns())
                 .withStyle(ChatFormatting.YELLOW));
 
-        // 5. 当前工序指引
+        lines.add(Component.translatable("hud.ars_alchemica.intuition.map_coord",
+                String.format(Locale.ROOT, "%.1f, %.1f", data.mapX(), data.mapY()))
+                .withStyle(ChatFormatting.DARK_AQUA));
+
+        // 5. 邻近共鸣配方预感提示
+        if (data.nearbyRecipeKey() != null) {
+            lines.add(Component.translatable("hud.ars_alchemica.intuition.nearby_recipe",
+                    Component.translatable(data.nearbyRecipeKey()))
+                    .withStyle(ChatFormatting.GOLD));
+        }
+
+        // 6. 当前工序指引
         lines.add(Component.translatable("hud.ars_alchemica.intuition.guidance",
                 Component.translatable(data.recipeStepGuidance()))
                 .withStyle(ChatFormatting.WHITE, ChatFormatting.ITALIC));

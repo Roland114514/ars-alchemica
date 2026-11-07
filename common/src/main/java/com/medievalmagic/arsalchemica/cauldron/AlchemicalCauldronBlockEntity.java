@@ -11,12 +11,18 @@ import com.medievalmagic.arsalchemica.herb.IAlchemicalHerb;
 import com.medievalmagic.arsalchemica.herb.apparatus.ProcessedHerbItem;
 import com.medievalmagic.arsalchemica.potion.AlchemicalDamageSources;
 import com.medievalmagic.arsalchemica.potion.AlchemicalPotionItem;
+import com.medievalmagic.arsalchemica.recipe.AlchemicalRecipe;
+import com.medievalmagic.arsalchemica.recipe.AlchemicalRecipeRegistry;
+import com.medievalmagic.arsalchemica.recipe.knowledge.PlayerKnowledgeManager;
+import com.medievalmagic.arsalchemica.recipe.knowledge.PlayerRecipeKnowledge;
 import com.medievalmagic.arsalchemica.registry.ModBlockEntities;
 import com.medievalmagic.arsalchemica.registry.ModEffects;
 import com.medievalmagic.arsalchemica.registry.ModItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -162,9 +168,61 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
                 double mass = currentVec.getTotalAspectMass();
 
                 if (mass > 0.2) {
-                    // 萃取生成动态复合灵药
                     double purity = currentVec.calculatePurity() * (1.0 - this.reactionState.getTurbidity());
-                    potionResult = AlchemicalPotionItem.create(ModItems.getElixir(), currentVec, mass, purity, 1.0);
+                    double x = currentVec.getX();
+                    double y = currentVec.getY();
+                    HeatLevel heat = this.reactionState.getActiveHeatLevel();
+                    int cw = this.reactionState.getClockwiseTurns();
+                    int ccw = this.reactionState.getCounterClockwiseTurns();
+
+                    java.util.Optional<AlchemicalRecipe> matchOpt = AlchemicalRecipeRegistry.getInstance()
+                            .findMatchingRecipe(x, y, heat, cw, ccw, purity);
+
+                    if (matchOpt.isPresent()) {
+                        AlchemicalRecipe recipe = matchOpt.get();
+                        PlayerRecipeKnowledge knowledge = PlayerKnowledgeManager.getKnowledge(player);
+
+                        if (recipe.isAncient()) {
+                            double chance = knowledge.calculateAncientSuccessChance(recipe, purity);
+                            double roll = this.level.random.nextDouble();
+                            if (roll > chance) {
+                                // 古代炼制反噬爆炸
+                                handleMishap(this.level, this.worldPosition, MishapResult.ARCANE_EXPLOSION);
+                                player.displayClientMessage(
+                                        Component.translatable("message.ars_alchemica.ancient_craft_failed",
+                                                Component.translatable(recipe.getTranslationKey()))
+                                                .withStyle(ChatFormatting.RED, ChatFormatting.BOLD),
+                                        false
+                                );
+                                return InteractionResult.sidedSuccess(this.level.isClientSide());
+                            } else {
+                                potionResult = recipe.createResult(mass, purity);
+                                this.level.playSound(null, this.worldPosition, SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.BLOCKS, 1.0f, 1.0f);
+                                player.displayClientMessage(
+                                        Component.translatable("message.ars_alchemica.ancient_craft_success",
+                                                Component.translatable(recipe.getTranslationKey()))
+                                                .withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD),
+                                        false
+                                );
+                            }
+                        } else {
+                            potionResult = recipe.createResult(mass, purity);
+                        }
+
+                        // 顿悟配方
+                        if (knowledge.unlockRecipe(recipe.getRecipeId())) {
+                            this.level.playSound(null, this.worldPosition, SoundEvents.PLAYER_LEVELUP, SoundSource.BLOCKS, 1.0f, 1.2f);
+                            player.displayClientMessage(
+                                    Component.translatable("message.ars_alchemica.eureka_discovery",
+                                            Component.translatable(recipe.getTranslationKey()))
+                                            .withStyle(ChatFormatting.LIGHT_PURPLE, ChatFormatting.BOLD),
+                                    false
+                            );
+                        }
+                    } else {
+                        // 萃取生成常规连续动态复合灵药
+                        potionResult = AlchemicalPotionItem.create(ModItems.getElixir(), currentVec, mass, purity, 1.0);
+                    }
                 } else {
                     // 未溶解任何以太元素，纯水返还
                     potionResult = new ItemStack(Items.POTION);
@@ -322,6 +380,16 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
                 totalTurns
         );
 
+        double mapX = vec.getX();
+        double mapY = vec.getY();
+        String nearbyRecipeKey = null;
+        if (mass > 0.5) {
+            java.util.Optional<AlchemicalRecipe> nearest = AlchemicalRecipeRegistry.getInstance().findNearestRecipe(mapX, mapY);
+            if (nearest.isPresent() && nearest.get().distanceTo(mapX, mapY) <= 12.0) {
+                nearbyRecipeKey = nearest.get().getTranslationKey();
+            }
+        }
+
         return new ScholarIntuitionData(
                 this.reactionState.getTemperature(),
                 this.reactionState.getActiveHeatLevel(),
@@ -334,7 +402,10 @@ public class AlchemicalCauldronBlockEntity extends BlockEntity {
                 this.reactionState.getCounterClockwiseTurns(),
                 this.fluidColor,
                 dominant,
-                phase.getTranslationKey()
+                phase.getTranslationKey(),
+                mapX,
+                mapY,
+                nearbyRecipeKey
         );
     }
 

@@ -25,8 +25,30 @@ public record ScholarIntuitionData(
         int counterClockwiseTurns,
         int fluidColor,
         AlchemyAspect dominantAspect,
-        String recipeStepGuidance
+        String recipeStepGuidance,
+        double mapX,
+        double mapY,
+        String nearbyRecipeKey
 ) {
+
+    public ScholarIntuitionData(
+            double temperature,
+            CauldronReactionState.HeatLevel heatLevel,
+            int waterLevel,
+            double mass,
+            double purity,
+            double instability,
+            double turbidity,
+            int clockwiseTurns,
+            int counterClockwiseTurns,
+            int fluidColor,
+            AlchemyAspect dominantAspect,
+            String recipeStepGuidance
+    ) {
+        this(temperature, heatLevel, waterLevel, mass, purity, instability, turbidity,
+                clockwiseTurns, counterClockwiseTurns, fluidColor, dominantAspect,
+                recipeStepGuidance, 0.0, 0.0, null);
+    }
 
     /**
      * 空溶液/未激活坩埚的默认回退快照。
@@ -43,7 +65,10 @@ public record ScholarIntuitionData(
             0,
             0x385DC6,
             null,
-            "step.ars_alchemica.empty_cauldron"
+            "step.ars_alchemica.empty_cauldron",
+            0.0,
+            0.0,
+            null
     );
 
     /**

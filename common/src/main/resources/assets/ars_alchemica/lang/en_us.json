@@ -94,5 +94,54 @@
   "step.ars_alchemica.add_ingredients": "Add milled herbs or raw alchemical reagents",
   "step.ars_alchemica.stirring": "Stir with rod clockwise/counter-clockwise to integrate",
   "step.ars_alchemica.stabilize": "High instability, stir clockwise to calm aether",
-  "step.ars_alchemica.extract": "Concoction stabilized, extract with glass bottle"
+  "step.ars_alchemica.extract": "Concoction stabilized, extract with glass bottle",
+
+  "item.ars_alchemica.recipe_scroll": "Alchemical Recipe Scroll",
+  "item.ars_alchemica.ancient_parchment": "Lost Ancient Parchment",
+  "item.ars_alchemica.scholia_fragment": "Ancient Scholia Fragment",
+
+  "recipe.ars_alchemica.draught_of_vitality": "Draught of Vitality",
+  "recipe.ars_alchemica.cat_eyes_elixir": "Cat's Eyes Elixir",
+  "recipe.ars_alchemica.swift_step_elixir": "Swift Step Elixir",
+  "recipe.ars_alchemica.ignis_ward_elixir": "Ignis Ward Elixir",
+  "recipe.ars_alchemica.necro_bane_oil": "Necrophage Oil",
+  "recipe.ars_alchemica.phoenix_rebirth_elixir": "Phoenix Rebirth Elixir",
+  "recipe.ars_alchemica.void_strike_oil": "Void Strike Blade Oil",
+
+  "rarity.ars_alchemica.common": "Common",
+  "rarity.ars_alchemica.uncommon": "Uncommon",
+  "rarity.ars_alchemica.rare": "Rare",
+  "rarity.ars_alchemica.legendary": "Mythic Ancient",
+
+  "tooltip.ars_alchemica.scroll.recipe": "Recorded Recipe: %s",
+  "tooltip.ars_alchemica.scroll.rarity": "Tier: %s",
+  "tooltip.ars_alchemica.scroll.blank": "Blank Parchment",
+  "tooltip.ars_alchemica.scroll.use_hint": "Right-click to study: Permanently records into Scholar's Grimoire",
+
+  "tooltip.ars_alchemica.ancient_parchment.desc": "Lost ancient parchment unearthed from the depths of primeval ruins.",
+  "tooltip.ars_alchemica.ancient_parchment.target": "Cipher Mystery: %s",
+  "tooltip.ars_alchemica.ancient_parchment.deciphered": "Status: Fully Deciphered (100%)",
+  "tooltip.ars_alchemica.ancient_parchment.progress": "Decipher Progress: %s%%",
+  "tooltip.ars_alchemica.ancient_parchment.hint": "Right-click to study and decipher cryptic ancient runes",
+
+  "tooltip.ars_alchemica.scholia.desc": "Scholarly annotations and critical notes on ancient mythic recipes.",
+  "tooltip.ars_alchemica.scholia.target": "Target Recipe: %s",
+  "tooltip.ars_alchemica.scholia.benefit": "Study Benefit: Permanently increases concoction success rate by %s",
+  "tooltip.ars_alchemica.scholia.use_hint": "Right-click to advance scholarly mastery (up to Tier 5)",
+
+  "message.ars_alchemica.recipe_already_known": "You have already recorded and mastered this recipe in your grimoire.",
+  "message.ars_alchemica.recipe_learned": "✦ Eureka! Successfully studied and recorded recipe [%s]!",
+  "message.ars_alchemica.ancient_already_deciphered": "This ancient parchment [%s] has already been deciphered.",
+  "message.ars_alchemica.ancient_decipher_complete": "✦ Mythic Awakening: Lost ancient recipe [%s] fully deciphered and inscribed!",
+  "message.ars_alchemica.ancient_decipher_step": "Studying ancient text... Decipher progress advanced to %s%%",
+  "message.ars_alchemica.mastery_already_maxed": "Your scholarly mastery of ancient recipe [%s] has reached perfection.",
+  "message.ars_alchemica.mastery_increased": "✦ Scholia Studied: Ancient recipe [%s] mastery raised to Tier %s/%s! Stability greatly enhanced.",
+  "message.ars_alchemica.ancient_craft_failed": "⚠ Severe Instability! Ancient concoction [%s] collapsed into an arcane explosion!",
+  "message.ars_alchemica.ancient_craft_success": "★ Mythic Crystallization: Successfully awakened lost ancient recipe [%s]!",
+  "message.ars_alchemica.eureka_discovery": "✦ Eureka Discovery: Unveiled new recipe [%s] through physical crucible experimentation!",
+
+  "hud.ars_alchemica.intuition.map_coord": "Aether Map Coord: (%s)",
+  "hud.ars_alchemica.intuition.nearby_recipe": "Resonance Sensing: Approaching [%s]",
+
+  "entity.minecraft.villager.ars_alchemica.apothecary": "Apothecary"
 }

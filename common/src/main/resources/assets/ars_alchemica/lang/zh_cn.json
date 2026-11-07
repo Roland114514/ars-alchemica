@@ -94,5 +94,54 @@
   "step.ars_alchemica.add_ingredients": "投放研磨草药或以太原料",
   "step.ars_alchemica.stirring": "使用搅拌棒顺时针/逆时针搅拌促进融合",
   "step.ars_alchemica.stabilize": "失稳度偏高，顺时针搅拌平息以太躁动",
-  "step.ars_alchemica.extract": "药力定型，手持空玻璃瓶萃取灵药"
+  "step.ars_alchemica.extract": "药力定型，手持空玻璃瓶萃取灵药",
+
+  "item.ars_alchemica.recipe_scroll": "炼金手稿配方卷轴",
+  "item.ars_alchemica.ancient_parchment": "失传古代残卷羊皮纸",
+  "item.ars_alchemica.scholia_fragment": "古代学术注脚残页",
+
+  "recipe.ars_alchemica.draught_of_vitality": "生机灵药",
+  "recipe.ars_alchemica.cat_eyes_elixir": "猫眼夜视灵药",
+  "recipe.ars_alchemica.swift_step_elixir": "迅疾灵药",
+  "recipe.ars_alchemica.ignis_ward_elixir": "烈火御守灵药",
+  "recipe.ars_alchemica.necro_bane_oil": "尸鬼特攻剑油",
+  "recipe.ars_alchemica.phoenix_rebirth_elixir": "凤凰涅槃秘药",
+  "recipe.ars_alchemica.void_strike_oil": "虚空穿刺剑油",
+
+  "rarity.ars_alchemica.common": "普通",
+  "rarity.ars_alchemica.uncommon": "罕见",
+  "rarity.ars_alchemica.rare": "稀有",
+  "rarity.ars_alchemica.legendary": "神话古代",
+
+  "tooltip.ars_alchemica.scroll.recipe": "记载配方：%s",
+  "tooltip.ars_alchemica.scroll.rarity": "工艺等阶：%s",
+  "tooltip.ars_alchemica.scroll.blank": "空白手稿",
+  "tooltip.ars_alchemica.scroll.use_hint": "手持右键研读：永久收录入副手《学者手记》",
+
+  "tooltip.ars_alchemica.ancient_parchment.desc": "从远古遗迹深处出土的失传神话秘方残卷。",
+  "tooltip.ars_alchemica.ancient_parchment.target": "推演秘方：%s",
+  "tooltip.ars_alchemica.ancient_parchment.deciphered": "破译状态：已完全破译 (100%)",
+  "tooltip.ars_alchemica.ancient_parchment.progress": "破译进度：%s%%",
+  "tooltip.ars_alchemica.ancient_parchment.hint": "手持右键潜心研读以逐步破译古代密语",
+
+  "tooltip.ars_alchemica.scholia.desc": "针对古代神话秘药的深度学术批注与校勘笔记。",
+  "tooltip.ars_alchemica.scholia.target": "指定配方：%s",
+  "tooltip.ars_alchemica.scholia.benefit": "研读效果：永久提升该古代配方炼成成功率 %s",
+  "tooltip.ars_alchemica.scholia.use_hint": "手持右键阅读以精进学者造诣 (最高 5 阶)",
+
+  "message.ars_alchemica.recipe_already_known": "你已在《学者手记》中收录并掌握此配方。",
+  "message.ars_alchemica.recipe_learned": "✦ 灵光闪现：成功研读并收录配方【%s】！",
+  "message.ars_alchemica.ancient_already_deciphered": "该古代残卷【%s】已被彻底破译收录。",
+  "message.ars_alchemica.ancient_decipher_complete": "✦ 传奇觉醒：失传古代秘方【%s】破译完成！已铭刻入学者手记。",
+  "message.ars_alchemica.ancient_decipher_step": "研读古卷残页……破译进度推进至 %s%%",
+  "message.ars_alchemica.mastery_already_maxed": "你对古代秘方【%s】的造诣已臻至化境 (已达上限)。",
+  "message.ars_alchemica.mastery_increased": "✦ 学术注脚研读：古代秘方【%s】造诣提升至第 %s/%s 阶！稳定性大增。",
+  "message.ars_alchemica.ancient_craft_failed": "⚠ 极度失稳！古代秘方【%s】调配失败，以太反噬殉爆！",
+  "message.ars_alchemica.ancient_craft_success": "★ 神话定型：成功唤醒失传古代传奇秘方【%s】！",
+  "message.ars_alchemica.eureka_discovery": "✦ 顿悟探索：通过物理实验自发发现全新配方【%s】！",
+
+  "hud.ars_alchemica.intuition.map_coord": "以太星图坐标：(%s)",
+  "hud.ars_alchemica.intuition.nearby_recipe": "共鸣前瞻：接近【%s】共鸣区",
+
+  "entity.minecraft.villager.ars_alchemica.apothecary": "药剂师"
 }

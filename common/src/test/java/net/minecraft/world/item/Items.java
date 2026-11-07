@@ -7,4 +7,6 @@ public class Items {
     public static final Item WATER_BUCKET = new Item("item.minecraft.water_bucket");
     public static final Item BUCKET = new Item("item.minecraft.bucket");
     public static final Item POTION = new Item("item.minecraft.potion");
+    public static final Item EMERALD = new Item("item.minecraft.emerald");
+    public static final Item WHEAT = new Item("item.minecraft.wheat");
 }

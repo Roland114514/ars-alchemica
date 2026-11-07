@@ -48,6 +48,13 @@ public class ItemStack {
 
     public Item getItem() { return item; }
     public int getCount() { return count; }
+
+    public ItemStack copy() {
+        if (isEmpty()) return EMPTY;
+        ItemStack stack = new ItemStack(item, count);
+        if (tag != null) stack.tag = tag.copy();
+        return stack;
+    }
     public void setCount(int count) { this.count = count; }
 
     public CompoundTag getTag() { return tag; }

@@ -31,6 +31,7 @@ public abstract class Level implements LevelReader {
     private long gameTime = 0L;
     private final DamageSources damageSources = new DamageSources();
     private final List<Entity> entities = new ArrayList<>();
+    public final net.minecraft.util.RandomSource random = net.minecraft.util.RandomSource.create();
 
     public boolean isClientSide() { return isClientSide; }
     public long getGameTime() { return gameTime; }

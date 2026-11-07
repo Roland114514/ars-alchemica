@@ -19,4 +19,8 @@ public class SoundEvents {
     public static final SoundEvent BAMBOO_WOOD_PLACE = new SoundEvent();
     public static final SoundEvent HONEYCOMB_WAX_ON = new SoundEvent();
     public static final SoundEvent GENERIC_SPLASH = new SoundEvent();
+    public static final SoundEvent PLAYER_LEVELUP = new SoundEvent();
+    public static final SoundEvent UI_TOAST_CHALLENGE_COMPLETE = new SoundEvent();
+    public static final SoundEvent BOOK_PAGE_TURN = new SoundEvent();
+    public static final SoundEvent ENCHANTMENT_TABLE_USE = new SoundEvent();
 }
